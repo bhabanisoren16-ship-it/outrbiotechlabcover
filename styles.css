@@ -4,22 +4,29 @@
    ========================================================================== */
 
 :root {
-    /* UI Theme Colors */
-    --bg-dark: #090d16;
-    --bg-card: rgba(21, 29, 48, 0.7);
-    --bg-card-hover: rgba(30, 41, 59, 0.8);
-    --border-color: rgba(255, 255, 255, 0.08);
-    --border-focus: #3b82f6;
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-    --accent-blue: #3b82f6;
-    --accent-indigo: #6366f1;
+    /* UI Theme Colors: Academic Crimson & Warm Gold (OUTR Seal Inspired) */
+    --bg-dark: #0e0a0d;
+    --bg-surface: #150f14;
+    --bg-card: rgba(28, 18, 26, 0.82);
+    --bg-card-hover: rgba(44, 28, 40, 0.92);
+    --border-color: rgba(245, 158, 11, 0.16);
+    --border-focus: #f59e0b;
+    --text-main: #fefce8;
+    --text-muted: #cbd5e1;
+    --accent-crimson: #be123c;
+    --accent-crimson-hover: #9f1239;
+    --accent-crimson-dark: #881337;
+    --accent-gold: #f59e0b;
+    --accent-gold-hover: #d97706;
+    --accent-gold-light: #fbbf24;
+    --accent-blue: #be123c; /* Compatibility alias mapped to Academic Crimson */
+    --accent-indigo: #9f1239;
     --accent-emerald: #10b981;
     --accent-amber: #f59e0b;
     --radius-lg: 14px;
     --radius-md: 10px;
     --radius-sm: 6px;
-    --shadow-ui: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+    --shadow-ui: 0 10px 30px -5px rgba(0, 0, 0, 0.6);
 
     /* A4 Dimensions (Standard 96 DPI / Canvas Scale) */
     --a4-width: 794px;
@@ -55,8 +62,8 @@ body {
 .app-header {
     height: 64px;
     flex-shrink: 0;
-    background: rgba(15, 23, 42, 0.85);
-    backdrop-filter: blur(12px);
+    background: rgba(22, 15, 21, 0.92);
+    backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--border-color);
     display: flex;
     align-items: center;
@@ -78,6 +85,8 @@ body {
     border-radius: 50%;
     background: #fff;
     padding: 2px;
+    border: 1px solid var(--accent-gold);
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.25);
 }
 
 .brand-text h1 {
@@ -88,7 +97,8 @@ body {
 }
 
 .brand-text h1 span {
-    color: var(--accent-blue);
+    color: var(--accent-gold);
+    text-shadow: 0 0 12px rgba(245, 158, 11, 0.3);
 }
 
 .brand-text p {
@@ -118,13 +128,15 @@ body {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo));
+    background: linear-gradient(135deg, var(--accent-crimson), var(--accent-crimson-dark));
     color: #fff;
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    box-shadow: 0 4px 14px rgba(190, 18, 60, 0.35);
 }
 
 .btn-primary:hover {
-    opacity: 0.92;
+    background: linear-gradient(135deg, var(--accent-crimson-hover), #70102b);
+    box-shadow: 0 6px 18px rgba(190, 18, 60, 0.5);
     transform: translateY(-1px);
 }
 
@@ -140,13 +152,15 @@ body {
 }
 
 .btn-secondary {
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.05);
     border-color: var(--border-color);
     color: var(--text-main);
 }
 
 .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(245, 158, 11, 0.12);
+    border-color: var(--accent-gold);
+    color: #fff;
 }
 
 .btn-outline {
@@ -220,13 +234,13 @@ body {
 }
 
 .badge {
-    background: rgba(59, 130, 246, 0.15);
-    color: var(--accent-blue);
+    background: rgba(245, 158, 11, 0.12);
+    color: var(--accent-gold);
     font-size: 0.7rem;
     font-weight: 600;
     padding: 2px 8px;
     border-radius: 12px;
-    border: 1px solid rgba(59, 130, 246, 0.3);
+    border: 1px solid rgba(245, 158, 11, 0.35);
 }
 
 /* Quick Presets Strip */
@@ -250,19 +264,26 @@ body {
 
 .chip {
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border-color);
+    border: 1px solid rgba(245, 158, 11, 0.2);
     color: var(--text-muted);
     font-size: 0.75rem;
-    padding: 4px 10px;
+    padding: 5px 12px;
     border-radius: 20px;
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
-.chip:hover, .chip.active {
-    background: var(--accent-blue);
+.chip:hover {
+    border-color: var(--accent-gold);
     color: #fff;
-    border-color: var(--accent-blue);
+    background: rgba(245, 158, 11, 0.12);
+}
+
+.chip.active {
+    background: linear-gradient(135deg, var(--accent-crimson), var(--accent-crimson-dark));
+    color: #fff;
+    border-color: var(--accent-gold);
+    box-shadow: 0 2px 10px rgba(190, 18, 60, 0.45);
 }
 
 /* Form Styling */
@@ -280,22 +301,28 @@ body {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    transition: border-color 0.2s ease;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
 }
 
 .form-card:hover {
-    border-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(245, 158, 11, 0.3);
+    background: var(--bg-card-hover);
 }
 
 .card-title {
     display: flex;
     align-items: center;
     gap: 8px;
-    color: var(--accent-blue);
+    color: var(--accent-gold);
     font-size: 0.9rem;
     font-weight: 600;
-    padding-bottom: 4px;
-    border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+    padding-bottom: 6px;
+    border-bottom: 1px dashed rgba(245, 158, 11, 0.16);
+}
+
+.card-title i {
+    color: var(--accent-gold);
 }
 
 .card-title h3 {
@@ -318,27 +345,28 @@ body {
 .form-group input,
 .form-group select,
 .form-group textarea {
-    background: rgba(0, 0, 0, 0.25);
-    border: 1px solid var(--border-color);
+    background: rgba(14, 10, 14, 0.65);
+    border: 1px solid rgba(245, 158, 11, 0.22);
     border-radius: var(--radius-sm);
-    padding: 8px 12px;
+    padding: 9px 12px;
     font-size: 0.85rem;
-    color: #fff;
+    color: #fefce8;
     font-family: inherit;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
+    background: rgba(22, 14, 21, 0.95);
     border-color: var(--border-focus);
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+    box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.28);
 }
 
 .form-group select option {
-    background: #0f172a;
-    color: #fff;
+    background: #1a1118;
+    color: #fefce8;
 }
 
 .grid-2 {
@@ -382,7 +410,7 @@ body {
 
 .preview-area {
     flex: 1;
-    background: #060911;
+    background: #0c080b;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -391,7 +419,8 @@ body {
 
 .preview-toolbar {
     height: 48px;
-    background: rgba(15, 23, 42, 0.6);
+    background: rgba(22, 15, 21, 0.95);
+    backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border-color);
     display: flex;
     align-items: center;
@@ -405,6 +434,10 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
+}
+
+.preview-info i {
+    color: var(--accent-gold);
 }
 
 .zoom-controls {
@@ -425,10 +458,13 @@ body {
     justify-content: center;
     cursor: pointer;
     font-size: 0.75rem;
+    transition: all 0.15s ease;
 }
 
 .zoom-btn:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(245, 158, 11, 0.15);
+    border-color: var(--accent-gold);
+    color: #fff;
 }
 
 .zoom-level {
@@ -445,7 +481,7 @@ body {
     align-items: flex-start;
     justify-content: center;
     padding: 40px;
-    background: radial-gradient(circle at center, rgba(30, 41, 59, 0.3) 0%, rgba(6, 9, 17, 1) 100%);
+    background: radial-gradient(circle at center, rgba(60, 25, 45, 0.35) 0%, rgba(14, 10, 14, 1) 100%);
 }
 
 .paper-viewport::-webkit-scrollbar {
@@ -709,12 +745,12 @@ body {
     position: fixed;
     bottom: 24px;
     right: 24px;
-    background: #0f172a;
-    color: #fff;
+    background: #1c131a;
+    color: #fefce8;
     padding: 12px 20px;
     border-radius: var(--radius-md);
-    border: 1px solid var(--accent-blue);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--accent-gold);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 0 15px rgba(245, 158, 11, 0.2);
     font-size: 0.875rem;
     font-weight: 500;
     transform: translateY(100px);
@@ -741,7 +777,7 @@ body {
 .mobile-nav-bar {
     display: none;
     flex-shrink: 0;
-    background: rgba(15, 23, 42, 0.95);
+    background: rgba(21, 15, 20, 0.96);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border-color);
     padding: 8px 12px;
@@ -767,19 +803,20 @@ body {
 }
 
 .mobile-tab-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(245, 158, 11, 0.1);
     color: #fff;
 }
 
 .mobile-tab-btn.active {
-    background: var(--accent-blue);
+    background: linear-gradient(135deg, var(--accent-crimson), var(--accent-crimson-dark));
     color: #ffffff;
-    border-color: var(--accent-blue);
-    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.35);
+    border-color: var(--accent-gold);
+    box-shadow: 0 2px 10px rgba(190, 18, 60, 0.45);
 }
 
 .mobile-tab-btn .tab-badge {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(245, 158, 11, 0.25);
+    color: #fbbf24;
     font-size: 0.65rem;
     padding: 1px 5px;
     border-radius: 4px;
@@ -793,7 +830,7 @@ body {
     left: 0;
     right: 0;
     padding: 12px 16px;
-    background: rgba(9, 13, 22, 0.94);
+    background: rgba(21, 15, 20, 0.96);
     backdrop-filter: blur(16px);
     border-top: 1px solid var(--border-color);
     gap: 10px;
@@ -814,9 +851,9 @@ body {
     align-items: center;
     gap: 6px;
     margin-right: 8px;
-    background: rgba(59, 130, 246, 0.15);
-    color: var(--accent-blue);
-    border: 1px solid rgba(59, 130, 246, 0.3);
+    background: rgba(190, 18, 60, 0.18);
+    color: var(--accent-gold);
+    border: 1px solid rgba(245, 158, 11, 0.35);
     padding: 5px 10px;
     font-weight: 500;
     border-radius: var(--radius-sm);
@@ -824,7 +861,7 @@ body {
 }
 
 .mobile-back-btn:hover {
-    background: var(--accent-blue);
+    background: linear-gradient(135deg, var(--accent-crimson), var(--accent-crimson-dark));
     color: #fff;
 }
 
@@ -914,7 +951,7 @@ body {
         position: sticky;
         top: 0;
         z-index: 40;
-        background: rgba(15, 23, 42, 0.96);
+        background: rgba(21, 15, 20, 0.96);
         backdrop-filter: blur(12px);
         border-bottom: 1px solid var(--border-color);
     }
