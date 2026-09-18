@@ -45,8 +45,7 @@
                 </button>
                 <button class="btn btn-success" id="downloadPdfBtn" title="Download clean A4 PDF">
                     <i class="fa-solid fa-file-pdf"></i>
-                    <span class="btn-text-full">Download PDF</span>
-                    <span class="btn-text-short">PDF</span>
+                    <span>Download PDF</span>
                 </button>
                 <button class="btn btn-primary" id="downloadPngBtn" title="Download image PNG">
                     <i class="fa-solid fa-file-image"></i>
@@ -61,25 +60,21 @@
 
         <!-- Mobile View Mode Switcher Bar (Visible on mobile/tablet <= 900px) -->
         <nav class="mobile-nav-bar" id="mobileNavBar" aria-label="Mobile View Navigation">
-            <button type="button" class="mobile-tab-btn active" id="tabPreviewBtn" data-target="preview">
-                <i class="fa-solid fa-eye"></i>
-                <span class="tab-label">Preview Page</span>
-                <span class="tab-badge">A4</span>
-            </button>
-            <button type="button" class="mobile-tab-btn" id="tabDesktopBtn" data-target="desktop">
-                <i class="fa-solid fa-desktop"></i>
-                <span class="tab-label">Little Desktop</span>
-            </button>
-            <button type="button" class="mobile-tab-btn" id="tabFormBtn" data-target="form">
+            <button type="button" class="mobile-tab-btn active" id="tabFormBtn" data-target="form">
                 <i class="fa-solid fa-pen-to-square"></i>
-                <span class="tab-label">Edit Details</span>
+                <span>Edit Details</span>
+            </button>
+            <button type="button" class="mobile-tab-btn" id="tabPreviewBtn" data-target="preview">
+                <i class="fa-solid fa-eye"></i>
+                <span>Preview Page</span>
+                <span class="tab-badge">A4</span>
             </button>
         </nav>
 
         <!-- Main Workspace Area -->
         <main class="workspace">
             <!-- Sidebar Controls -->
-            <aside class="sidebar mobile-hidden" id="sidebar">
+            <aside class="sidebar" id="sidebar">
                 <div class="sidebar-header">
                     <h2><i class="fa-solid fa-pen-to-square"></i> Cover Page Details</h2>
                     <span class="badge">Real-time Sync</span>
@@ -222,11 +217,7 @@
                     <div class="mobile-bottom-bar" id="mobileBottomBar">
                         <button type="button" class="btn btn-secondary mobile-preview-switch-btn" id="mobilePreviewSwitchBtn">
                             <i class="fa-solid fa-eye"></i>
-                            <span>Preview</span>
-                        </button>
-                        <button type="button" class="btn btn-secondary mobile-desktop-switch-btn" id="mobileDesktopSwitchBtn">
-                            <i class="fa-solid fa-desktop"></i>
-                            <span>Little Desktop</span>
+                            <span>View Preview</span>
                         </button>
                         <button type="button" class="btn btn-success mobile-download-pdf-btn" id="mobileDownloadPdfBtn">
                             <i class="fa-solid fa-file-pdf"></i>
@@ -236,16 +227,12 @@
                 </form>
             </aside>
 
-            <!-- Live A4 Page Preview Area (Default active on mobile) -->
-            <section class="preview-area mobile-active" id="previewArea">
+            <!-- Live A4 Page Preview Area -->
+            <section class="preview-area" id="previewArea">
                 <div class="preview-toolbar">
                     <button type="button" class="btn-small mobile-back-btn" id="mobileBackToFormBtn" title="Back to Form Editor">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                        <span>Edit</span>
-                    </button>
-                    <button type="button" class="btn-small mobile-desktop-toolbar-btn" id="mobileDesktopToolbarBtn" title="Switch to Little Desktop View">
-                        <i class="fa-solid fa-desktop"></i>
-                        <span>Desktop</span>
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>Edit Details</span>
                     </button>
                     <div class="preview-info">
                         <i class="fa-solid fa-file-lines"></i>
@@ -257,11 +244,6 @@
                         <button class="zoom-btn" id="zoomInBtn" title="Zoom In"><i class="fa-solid fa-plus"></i></button>
                         <button class="zoom-btn" id="zoomFitBtn" title="Fit to Screen"><i class="fa-solid fa-compress"></i></button>
                     </div>
-                </div>
-
-                <div class="little-desktop-badge" id="littleDesktopBadge">
-                    <i class="fa-solid fa-desktop"></i>
-                    <span>Little Desktop Mode: Edit fields above, live preview updates below</span>
                 </div>
 
                 <div class="paper-viewport" id="paperViewport">
