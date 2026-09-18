@@ -313,10 +313,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function autoFit() {
         if (!paperViewport) return;
         const isMobile = window.innerWidth <= 900;
-        const padding = isMobile ? 24 : 80;
-        const viewportWidth = paperViewport.clientWidth - padding;
+        let vpWidth = paperViewport.clientWidth;
+        if (!vpWidth || vpWidth <= 0) {
+            vpWidth = window.innerWidth;
+        }
+        const padding = isMobile ? 16 : 80;
+        const availableWidth = Math.max(260, vpWidth - padding);
         const sheetWidth = 794;
-        const autoScale = Math.min(1.0, Math.max(0.2, viewportWidth / sheetWidth));
+        const autoScale = Math.min(1.0, Math.max(0.2, availableWidth / sheetWidth));
         setZoom(autoScale);
     }
 
@@ -344,7 +348,9 @@ document.addEventListener('DOMContentLoaded', () => {
             tabPreviewBtn?.classList.add('active');
             sidebar?.classList.add('mobile-hidden');
             previewArea?.classList.add('mobile-active');
-            setTimeout(autoFit, 60);
+            requestAnimationFrame(() => {
+                setTimeout(autoFit, 40);
+            });
         } else {
             tabPreviewBtn?.classList.remove('active');
             tabFormBtn?.classList.add('active');
@@ -377,6 +383,9 @@ document.addEventListener('DOMContentLoaded', () => {
         wrapper.style.overflow = 'hidden';
 
         const clone = coverSheet.cloneNode(true);
+        clone.style.position = 'relative';
+        clone.style.left = '0';
+        clone.style.top = '0';
         clone.style.transform = 'none';
         clone.style.margin = '0';
         clone.style.boxShadow = 'none';
