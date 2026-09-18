@@ -364,6 +364,22 @@ body {
     box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.28);
 }
 
+.form-group input[readonly] {
+    background: rgba(255, 255, 255, 0.035);
+    border-color: rgba(245, 158, 11, 0.14);
+    color: var(--text-muted);
+    cursor: not-allowed;
+    user-select: none;
+    letter-spacing: 0.4px;
+}
+
+.form-group input[readonly]:focus {
+    outline: none;
+    border-color: rgba(245, 158, 11, 0.14);
+    box-shadow: none;
+    background: rgba(255, 255, 255, 0.035);
+}
+
 .form-group select option {
     background: #1a1118;
     color: #fefce8;
