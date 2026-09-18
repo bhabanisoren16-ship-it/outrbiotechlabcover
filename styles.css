@@ -429,21 +429,14 @@ body {
 }
 
 .preview-info {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.preview-info i {
-    color: var(--accent-gold);
+    display: none !important;
 }
 
 .zoom-controls {
     display: flex;
     align-items: center;
     gap: 8px;
+    margin-left: auto;
 }
 
 .zoom-btn {
