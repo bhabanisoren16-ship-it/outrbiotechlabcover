@@ -74,9 +74,9 @@ document.addEventListener('DOMContentLoaded', () => {
             degreeBranch: 'B.TECH BIOTECHNOLOGY',
             semester: '3RD SEMESTER',
             submittedByLabel: 'SUBMITTED BY :',
-            studentName: 'STUDENT NAME',
-            regNo: '25XXXXXX',
-            group: '1',
+            studentName: '',
+            regNo: '',
+            group: '',
             submittedTo: '',
             department: 'DEPARTMENT OF BIOTECHNOLOGY',
             university: 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH',
@@ -88,9 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
             degreeBranch: 'B.TECH COMPUTER SCIENCE & ENGINEERING',
             semester: '3RD SEMESTER',
             submittedByLabel: 'SUBMITTED BY :',
-            studentName: 'YOUR NAME HERE',
-            regNo: '25010001',
-            group: '1',
+            studentName: '',
+            regNo: '',
+            group: '',
             submittedTo: '',
             department: 'DEPARTMENT OF COMPUTER SCIENCE & ENGINEERING',
             university: 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH',
@@ -102,9 +102,9 @@ document.addEventListener('DOMContentLoaded', () => {
             degreeBranch: 'B.TECH MECHANICAL ENGINEERING',
             semester: '4TH SEMESTER',
             submittedByLabel: 'SUBMITTED BY :',
-            studentName: 'YOUR NAME HERE',
-            regNo: '25030001',
-            group: '2',
+            studentName: '',
+            regNo: '',
+            group: '',
             submittedTo: '',
             department: 'DEPARTMENT OF MECHANICAL ENGINEERING',
             university: 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH',
@@ -116,9 +116,9 @@ document.addEventListener('DOMContentLoaded', () => {
             degreeBranch: 'B.TECH ELECTRICAL ENGINEERING',
             semester: '5TH SEMESTER',
             submittedByLabel: 'SUBMITTED BY :',
-            studentName: 'YOUR NAME HERE',
-            regNo: '25020001',
-            group: '1',
+            studentName: '',
+            regNo: '',
+            group: '',
             submittedTo: '',
             department: 'DEPARTMENT OF ELECTRICAL ENGINEERING',
             university: 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH',
@@ -130,9 +130,9 @@ document.addEventListener('DOMContentLoaded', () => {
             degreeBranch: 'B.TECH CIVIL ENGINEERING',
             semester: '5TH SEMESTER',
             submittedByLabel: 'SUBMITTED BY :',
-            studentName: 'YOUR NAME HERE',
-            regNo: '25040001',
-            group: '1',
+            studentName: '',
+            regNo: '',
+            group: '',
             submittedTo: '',
             department: 'DEPARTMENT OF CIVIL ENGINEERING',
             university: 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH',
@@ -144,9 +144,9 @@ document.addEventListener('DOMContentLoaded', () => {
             degreeBranch: 'B.TECH INFORMATION TECHNOLOGY',
             semester: '4TH SEMESTER',
             submittedByLabel: 'SUBMITTED BY :',
-            studentName: 'YOUR NAME HERE',
-            regNo: '25050001',
-            group: '1',
+            studentName: '',
+            regNo: '',
+            group: '',
             submittedTo: '',
             department: 'DEPARTMENT OF INFORMATION TECHNOLOGY',
             university: 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH',
@@ -194,8 +194,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const logoSize = parseInt(logoScaleInput.value, 10) || 230;
         prevLogo.style.width = `${logoSize}px`;
-
-        saveToLocalStorage();
     }
 
     // Attach Input Event Listeners
@@ -244,10 +242,10 @@ document.addEventListener('DOMContentLoaded', () => {
         docTypeInput.value = preset.docType;
         degreeBranchInput.value = preset.degreeBranch;
         semesterInput.value = preset.semester;
-        submittedByLabelInput.value = preset.submittedByLabel;
-        studentNameInput.value = preset.studentName;
-        regNoInput.value = preset.regNo;
-        groupInput.value = preset.group;
+        submittedByLabelInput.value = preset.submittedByLabel || 'SUBMITTED BY :';
+        if (preset.studentName) studentNameInput.value = preset.studentName;
+        if (preset.regNo) regNoInput.value = preset.regNo;
+        if (preset.group) groupInput.value = preset.group;
         submittedToInput.value = preset.submittedTo || '';
         departmentInput.value = preset.department;
         universityInput.value = preset.university;
@@ -527,57 +525,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2500);
     }
 
-    function saveToLocalStorage() {
-        const formData = {
-            labName: labNameInput.value,
-            docType: docTypeInput.value,
-            degreeBranch: degreeBranchInput.value,
-            semester: semesterInput.value,
-            submittedByLabel: submittedByLabelInput.value,
-            studentName: studentNameInput.value,
-            regNo: regNoInput.value,
-            group: groupInput.value,
-            submittedTo: submittedToInput.value,
-            department: departmentInput.value,
-            university: universityInput.value,
-            address: addressInput.value,
-            borderStyle: borderStyleSelect.value,
-            fontFamily: fontFamilySelect.value,
-            logoScale: logoScaleInput.value
-        };
-        localStorage.setItem('outr_cover_data', JSON.stringify(formData));
+    // Always clear storage so every visitor starts completely fresh without previous changes
+    try {
+        localStorage.removeItem('outr_cover_data');
+    } catch (e) {
+        // Safe fallback for restricted storage environments
     }
 
-    function loadFromLocalStorage() {
-        const saved = localStorage.getItem('outr_cover_data');
-        if (saved) {
-            try {
-                const data = JSON.parse(saved);
-                if (data.studentName && data.studentName.includes('BHABANI')) data.studentName = 'STUDENT NAME';
-                if (data.regNo && data.regNo === '25110046') data.regNo = '25XXXXXX';
-
-                if (data.labName !== undefined) labNameInput.value = data.labName;
-                if (data.docType !== undefined) docTypeInput.value = data.docType;
-                if (data.degreeBranch !== undefined) degreeBranchInput.value = data.degreeBranch;
-                if (data.semester !== undefined) semesterInput.value = data.semester;
-                if (data.submittedByLabel !== undefined) submittedByLabelInput.value = data.submittedByLabel;
-                if (data.studentName !== undefined) studentNameInput.value = data.studentName;
-                if (data.regNo !== undefined) regNoInput.value = data.regNo;
-                if (data.group !== undefined) groupInput.value = data.group;
-                if (data.submittedTo !== undefined) submittedToInput.value = data.submittedTo;
-                if (data.department !== undefined) departmentInput.value = data.department;
-                if (data.university !== undefined) universityInput.value = data.university;
-                if (data.address !== undefined) addressInput.value = data.address;
-                if (data.borderStyle !== undefined) borderStyleSelect.value = data.borderStyle;
-                if (data.fontFamily !== undefined) fontFamilySelect.value = data.fontFamily;
-                if (data.logoScale !== undefined) logoScaleInput.value = data.logoScale;
-            } catch (e) {
-                console.error('Failed to parse local storage data:', e);
-            }
-        }
-    }
-
-    // Initialize
-    loadFromLocalStorage();
+    // Initialize fresh preview
     updatePreview();
 });
