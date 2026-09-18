@@ -444,34 +444,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     downloadPdfBtn.addEventListener('click', () => {
-        showToast('Generating high-resolution PDF...');
+        showToast('Generating clean A4 PDF...');
         
         const { wrapper, clone } = createExportWrapper();
         const labFileName = (labNameInput.value.trim() || 'OUTR_Lab').replace(/[^a-zA-Z0-9]/g, '_');
 
-        const opt = {
-            margin: 0,
-            filename: `${labFileName}_Cover_Page.pdf`,
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: {
-                scale: 2,
-                useCORS: true,
-                logging: false,
-                width: 794,
-                height: 1123,
-                scrollX: 0,
-                scrollY: 0
-            },
-            jsPDF: {
+        html2canvas(clone, {
+            scale: 2,
+            useCORS: true,
+            logging: false,
+            width: 794,
+            height: 1123,
+            scrollX: 0,
+            scrollY: 0
+        }).then(canvas => {
+            if (document.body.contains(wrapper)) document.body.removeChild(wrapper);
+
+            const imgData = canvas.toDataURL('image/jpeg', 0.98);
+            const jsPdfConstructor = (window.jspdf && window.jspdf.jsPDF) ? window.jspdf.jsPDF : window.jsPDF;
+            const pdf = new jsPdfConstructor({
+                orientation: 'portrait',
                 unit: 'mm',
                 format: 'a4',
-                orientation: 'portrait'
-            }
-        };
+                compress: true
+            });
 
-        html2pdf().set(opt).from(clone).save().then(() => {
-            if (document.body.contains(wrapper)) document.body.removeChild(wrapper);
-            showToast('PDF downloaded! Details cleared for privacy.');
+            // Exactly 1 page: maps 794x1123 canvas to standard A4 (210mm x 297mm)
+            pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
+            pdf.save(`${labFileName}_Cover_Page.pdf`);
+
+            showToast('PDF downloaded (1 page)! Details cleared for privacy.');
             setTimeout(autoClearAfterDownload, 1200);
         }).catch((err) => {
             if (document.body.contains(wrapper)) document.body.removeChild(wrapper);
