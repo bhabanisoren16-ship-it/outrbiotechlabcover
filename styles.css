@@ -364,16 +364,19 @@ body {
     box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.28);
 }
 
-.form-group input[readonly] {
+.form-group input[readonly],
+.form-group textarea[readonly] {
     background: rgba(255, 255, 255, 0.035);
     border-color: rgba(245, 158, 11, 0.14);
     color: var(--text-muted);
     cursor: not-allowed;
     user-select: none;
     letter-spacing: 0.4px;
+    resize: none;
 }
 
-.form-group input[readonly]:focus {
+.form-group input[readonly]:focus,
+.form-group textarea[readonly]:focus {
     outline: none;
     border-color: rgba(245, 158, 11, 0.14);
     box-shadow: none;
