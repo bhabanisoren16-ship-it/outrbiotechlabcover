@@ -58,6 +58,19 @@
             </div>
         </header>
 
+        <!-- Mobile View Mode Switcher Bar (Visible on mobile/tablet <= 900px) -->
+        <nav class="mobile-nav-bar" id="mobileNavBar" aria-label="Mobile View Navigation">
+            <button type="button" class="mobile-tab-btn active" id="tabFormBtn" data-target="form">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <span>Edit Details</span>
+            </button>
+            <button type="button" class="mobile-tab-btn" id="tabPreviewBtn" data-target="preview">
+                <i class="fa-solid fa-eye"></i>
+                <span>Preview Page</span>
+                <span class="tab-badge">A4</span>
+            </button>
+        </nav>
+
         <!-- Main Workspace Area -->
         <main class="workspace">
             <!-- Sidebar Controls -->
@@ -199,12 +212,28 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Mobile Bottom Floating Action Bar -->
+                    <div class="mobile-bottom-bar" id="mobileBottomBar">
+                        <button type="button" class="btn btn-secondary mobile-preview-switch-btn" id="mobilePreviewSwitchBtn">
+                            <i class="fa-solid fa-eye"></i>
+                            <span>View Preview</span>
+                        </button>
+                        <button type="button" class="btn btn-success mobile-download-pdf-btn" id="mobileDownloadPdfBtn">
+                            <i class="fa-solid fa-file-pdf"></i>
+                            <span>Download PDF</span>
+                        </button>
+                    </div>
                 </form>
             </aside>
 
             <!-- Live A4 Page Preview Area -->
-            <section class="preview-area">
+            <section class="preview-area" id="previewArea">
                 <div class="preview-toolbar">
+                    <button type="button" class="btn-small mobile-back-btn" id="mobileBackToFormBtn" title="Back to Form Editor">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>Edit Details</span>
+                    </button>
                     <div class="preview-info">
                         <i class="fa-solid fa-file-lines"></i>
                         <span>A4 Paper Preview (210mm × 297mm)</span>
@@ -218,8 +247,9 @@
                 </div>
 
                 <div class="paper-viewport" id="paperViewport">
-                    <!-- The A4 Sheet DOM Container -->
-                    <div class="a4-sheet" id="coverSheet">
+                    <div class="a4-sheet-wrapper" id="sheetWrapper">
+                        <!-- The A4 Sheet DOM Container -->
+                        <div class="a4-sheet" id="coverSheet">
                         <div class="page-border double-classic" id="pageBorder">
                             <div class="cover-content" id="coverContent">
                                 
@@ -255,6 +285,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
                 </div>
             </section>
         </main>
