@@ -732,6 +732,11 @@ body {
    Responsive Mobile & Desktop System
    ========================================================================== */
 
+/* Button text switch for compact mobile header */
+.btn-text-short {
+    display: none;
+}
+
 /* Mobile Nav Bar & Floating Switchers (Hidden on Desktop by default) */
 .mobile-nav-bar {
     display: none;
@@ -841,7 +846,7 @@ body {
     }
 }
 
-/* Tablet Portrait & Mobile Dual-View Mode (<= 900px) */
+/* Tablet Portrait & Mobile Unified Continuous View (<= 900px) */
 @media (max-width: 900px) {
     .app-container {
         height: 100vh;
@@ -856,36 +861,48 @@ body {
     .mobile-nav-bar {
         display: flex;
         flex-shrink: 0;
+        position: sticky;
+        top: 0;
+        z-index: 90;
     }
 
     .workspace {
         flex-direction: column;
-        overflow: hidden;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
         position: relative;
         flex: 1 1 0;
         min-height: 0;
+        scroll-behavior: smooth;
     }
 
-    /* Tab-based switching on mobile */
+    /* Unified continuous scroll layout: Both Edit Details form AND Preview Page are displayed together */
     .sidebar {
         width: 100%;
-        flex: 1 1 0;
-        min-height: 0;
+        flex: 0 0 auto;
+        min-height: auto;
+        height: auto;
         border-right: none;
-        padding: 16px 16px 24px 16px;
-        overflow-y: auto;
+        border-bottom: 2px solid var(--border-color);
+        padding: 16px 14px 20px 14px;
+        overflow: visible;
+        display: block !important;
     }
 
     .sidebar.mobile-hidden {
-        display: none !important;
+        display: block !important;
     }
 
     .preview-area {
         width: 100%;
-        flex: 1 1 0;
-        min-height: 0;
-        display: none;
+        flex: 0 0 auto;
+        min-height: 520px;
+        height: auto;
+        display: flex !important;
         flex-direction: column;
+        overflow: visible;
+        background: var(--bg-surface);
+        padding-bottom: 48px;
     }
 
     .preview-area.mobile-active {
@@ -894,6 +911,12 @@ body {
 
     .preview-toolbar {
         flex-shrink: 0;
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        background: rgba(15, 23, 42, 0.96);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border-color);
     }
 
     .mobile-bottom-bar {
@@ -906,11 +929,36 @@ body {
     }
 
     .paper-viewport {
+        height: auto;
+        min-height: 480px;
+        padding: 16px 8px 40px 8px;
+        overflow: visible;
+    }
+}
+
+/* Tablet & Phone Landscape Mode: Side-by-side view */
+@media (max-width: 900px) and (orientation: landscape) {
+    .workspace {
+        flex-direction: row;
+        overflow: hidden;
+    }
+    .sidebar {
+        width: 46%;
+        height: 100%;
         flex: 1 1 0;
-        min-height: 0;
-        padding: 16px 8px 32px 8px;
+        overflow-y: auto;
+        border-right: 1px solid var(--border-color);
+        border-bottom: none;
+    }
+    .preview-area {
+        width: 54%;
+        height: 100%;
+        flex: 1 1 0;
+        overflow: hidden;
+    }
+    .paper-viewport {
+        height: 100%;
         overflow: auto;
-        -webkit-overflow-scrolling: touch;
     }
 }
 
@@ -951,8 +999,17 @@ body {
         display: none;
     }
 
+    .btn-text-full {
+        display: none !important;
+    }
+
+    .btn-text-short {
+        display: inline !important;
+        font-weight: 600;
+    }
+
     .header-actions .btn-success {
-        padding: 6px 12px;
+        padding: 6px 11px;
         font-size: 0.8rem;
     }
 

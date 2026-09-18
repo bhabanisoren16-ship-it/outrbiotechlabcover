@@ -339,24 +339,47 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(autoFit, 200);
 
     // ==========================================================================
-    // Mobile View Tab Switcher (Form Details vs A4 Preview)
+    // Mobile View Navigation (Smooth Scroll between Form & Preview)
     // ==========================================================================
+
+    const workspace = document.querySelector('.workspace');
 
     function switchMobileTab(target) {
         if (target === 'preview') {
             tabFormBtn?.classList.remove('active');
             tabPreviewBtn?.classList.add('active');
-            sidebar?.classList.add('mobile-hidden');
-            previewArea?.classList.add('mobile-active');
+            if (window.innerWidth <= 900) {
+                previewArea?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
             requestAnimationFrame(() => {
                 setTimeout(autoFit, 40);
             });
         } else {
             tabPreviewBtn?.classList.remove('active');
             tabFormBtn?.classList.add('active');
-            sidebar?.classList.remove('mobile-hidden');
-            previewArea?.classList.remove('mobile-active');
+            if (window.innerWidth <= 900) {
+                if (workspace) {
+                    workspace.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    sidebar?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
         }
+    }
+
+    // Scroll-spy to highlight active tab when user scrolls
+    if (workspace) {
+        workspace.addEventListener('scroll', () => {
+            if (window.innerWidth > 900) return;
+            const previewTop = previewArea?.offsetTop || 600;
+            if (workspace.scrollTop >= previewTop - 150) {
+                tabFormBtn?.classList.remove('active');
+                tabPreviewBtn?.classList.add('active');
+            } else {
+                tabPreviewBtn?.classList.remove('active');
+                tabFormBtn?.classList.add('active');
+            }
+        }, { passive: true });
     }
 
     tabFormBtn?.addEventListener('click', () => switchMobileTab('form'));
