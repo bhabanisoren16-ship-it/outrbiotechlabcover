@@ -113,7 +113,18 @@
                             </div>
                             <div class="form-group">
                                 <label for="semesterInput">Semester</label>
-                                <input type="text" id="semesterInput" placeholder="e.g. 3RD SEMESTER" value="3RD SEMESTER">
+                                <select id="semesterInput">
+                                    <option value="1ST SEMESTER">1ST SEMESTER</option>
+                                    <option value="2ND SEMESTER">2ND SEMESTER</option>
+                                    <option value="3RD SEMESTER" selected>3RD SEMESTER</option>
+                                    <option value="4TH SEMESTER">4TH SEMESTER</option>
+                                    <option value="5TH SEMESTER">5TH SEMESTER</option>
+                                    <option value="6TH SEMESTER">6TH SEMESTER</option>
+                                    <option value="7TH SEMESTER">7TH SEMESTER</option>
+                                    <option value="8TH SEMESTER">8TH SEMESTER</option>
+                                    <option value="custom">Other / Custom...</option>
+                                </select>
+                                <input type="text" id="customSemesterInput" placeholder="Enter custom semester" style="display: none; margin-top: 8px;">
                             </div>
                         </div>
                     </div>

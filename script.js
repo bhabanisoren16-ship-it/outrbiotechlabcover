@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const docTypeInput = document.getElementById('docTypeInput');
     const degreeBranchInput = document.getElementById('degreeBranchInput');
     const semesterInput = document.getElementById('semesterInput');
+    const customSemesterInput = document.getElementById('customSemesterInput');
     const submittedByLabelInput = document.getElementById('submittedByLabelInput');
     const studentNameInput = document.getElementById('studentNameInput');
     const regNoInput = document.getElementById('regNoInput');
@@ -170,7 +171,14 @@ document.addEventListener('DOMContentLoaded', () => {
         prevLabName.textContent = labNameInput.value.trim() || 'LAB NAME';
         prevDocType.textContent = docTypeInput.value.trim() || 'LAB RECORD';
         prevDegreeBranch.textContent = degreeBranchInput.value.trim() || 'BRANCH';
-        prevSemester.textContent = semesterInput.value.trim() || 'SEMESTER';
+
+        if (semesterInput.value === 'custom') {
+            customSemesterInput.style.display = 'block';
+            prevSemester.textContent = customSemesterInput.value.trim() || '3RD SEMESTER';
+        } else {
+            customSemesterInput.style.display = 'none';
+            prevSemester.textContent = semesterInput.value.trim() || '3RD SEMESTER';
+        }
 
         prevSubmittedByLabel.textContent = submittedByLabelInput.value.trim() || 'SUBMITTED BY :';
         
@@ -244,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Attach Input Event Listeners
     const inputs = [
-        labNameInput, docTypeInput, degreeBranchInput, semesterInput,
+        labNameInput, docTypeInput, degreeBranchInput, semesterInput, customSemesterInput,
         submittedByLabelInput, studentNameInput, regNoInput, groupInput, sectionInput,
         submittedToInput, departmentInput, universityInput, addressInput,
         borderStyleSelect, fontFamilySelect, logoScaleInput
@@ -307,7 +315,15 @@ document.addEventListener('DOMContentLoaded', () => {
         labNameInput.value = preset.labName;
         docTypeInput.value = preset.docType;
         degreeBranchInput.value = preset.degreeBranch;
-        semesterInput.value = preset.semester;
+        if (Array.from(semesterInput.options).some(opt => opt.value === preset.semester)) {
+            semesterInput.value = preset.semester;
+            customSemesterInput.style.display = 'none';
+            customSemesterInput.value = '';
+        } else {
+            semesterInput.value = 'custom';
+            customSemesterInput.style.display = 'block';
+            customSemesterInput.value = preset.semester;
+        }
         submittedByLabelInput.value = preset.submittedByLabel || 'SUBMITTED BY :';
         if (preset.studentName) studentNameInput.value = preset.studentName;
         if (preset.regNo) regNoInput.value = preset.regNo;
@@ -343,7 +359,9 @@ document.addEventListener('DOMContentLoaded', () => {
         labNameInput.value = '';
         docTypeInput.value = 'LAB RECORD';
         degreeBranchInput.value = '';
-        semesterInput.value = '';
+        semesterInput.value = '3RD SEMESTER';
+        customSemesterInput.value = '';
+        customSemesterInput.style.display = 'none';
         submittedByLabelInput.value = 'SUBMITTED BY :';
         studentNameInput.value = '';
         regNoInput.value = '';
