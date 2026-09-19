@@ -321,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
         groupInput.value = '';
         sectionInput.value = '';
         submittedToInput.value = '';
-        departmentInput.value = 'DEPARTMENT OF ';
+        departmentInput.value = '';
         universityInput.value = 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH';
         addressInput.value = 'Techno Campus, Ghatikia, Bhubaneswar, 751029';
         
