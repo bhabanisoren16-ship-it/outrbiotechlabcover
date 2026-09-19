@@ -169,7 +169,17 @@ document.addEventListener('DOMContentLoaded', () => {
         // Sync text content
         prevLabName.textContent = labNameInput.value.trim() || 'LAB NAME';
         prevDocType.textContent = docTypeInput.value.trim() || 'LAB RECORD';
-        prevDegreeBranch.textContent = degreeBranchInput.value.trim() || 'BRANCH';
+
+        const branchVal = degreeBranchInput.value.trim();
+        let formattedBranch = 'B.TECH';
+        if (branchVal && branchVal.toUpperCase() !== 'BRANCH NAME') {
+            const cleanBranch = branchVal.replace(/^B\.?\s*TECH\s*/i, '').trim();
+            formattedBranch = cleanBranch ? `B.TECH ${cleanBranch.toUpperCase()}` : 'B.TECH';
+        } else {
+            formattedBranch = 'B.TECH';
+        }
+        prevDegreeBranch.textContent = formattedBranch;
+
         prevSemester.textContent = semesterInput.value.trim();
 
         prevSubmittedByLabel.textContent = submittedByLabelInput.value.trim() || 'SUBMITTED BY :';
@@ -306,7 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         labNameInput.value = preset.labName;
         docTypeInput.value = preset.docType;
-        degreeBranchInput.value = preset.degreeBranch;
+        degreeBranchInput.value = preset.degreeBranch.replace(/^B\.?\s*TECH\s*/i, '').trim();
         semesterInput.value = preset.semester;
         submittedByLabelInput.value = preset.submittedByLabel || 'SUBMITTED BY :';
         if (preset.studentName) studentNameInput.value = preset.studentName;
