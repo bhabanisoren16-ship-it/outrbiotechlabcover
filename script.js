@@ -221,9 +221,9 @@ document.addEventListener('DOMContentLoaded', () => {
         let formattedDept = 'DEPARTMENT OF BIOTECHNOLOGY';
         if (deptVal) {
             const cleanDept = deptVal.replace(/^DEPARTMENT\s+OF\s+/i, '').replace(/^DEPARTMENT\s+/i, '').trim();
-            formattedDept = cleanDept ? `DEPARTMENT OF ${cleanDept.toUpperCase()}` : 'DEPARTMENT OF ';
+            formattedDept = cleanDept ? `DEPARTMENT OF ${cleanDept.toUpperCase()}` : 'DEPARTMENT OF BIOTECHNOLOGY';
         } else {
-            formattedDept = 'DEPARTMENT OF ';
+            formattedDept = 'DEPARTMENT OF BIOTECHNOLOGY';
         }
         prevDepartment.textContent = formattedDept;
         prevUniversity.textContent = universityInput.value.trim() || 'UNIVERSITY NAME';
