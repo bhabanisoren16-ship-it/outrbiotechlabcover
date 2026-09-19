@@ -531,7 +531,7 @@ body {
     color: #000000;
     font-family: 'Times New Roman', Times, serif;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.1);
-    padding: 0.6cm !important; /* Outer border from edge: 0.6 cm */
+    padding: 0.9cm !important; /* Outer border from edge: moved towards inside (0.9 cm) */
     box-sizing: border-box !important;
     user-select: none;
 }
@@ -1216,7 +1216,7 @@ body {
         max-height: 297mm !important;
         transform: scale(1) !important;
         box-shadow: none !important;
-        padding: 8mm !important;
+        padding: 0.9cm !important;
         margin: 0 auto !important;
         page-break-after: avoid !important;
         page-break-before: avoid !important;
