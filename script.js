@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const PRESETS = {
         photo: {
             labName: 'BIOCHEMISTRY LAB',
-            docType: 'RECORD',
+            docType: 'LAB RECORD',
             degreeBranch: 'B.TECH BIOTECHNOLOGY',
             semester: '3RD SEMESTER',
             submittedByLabel: 'SUBMITTED BY :',
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         cse: {
             labName: 'DATA STRUCTURES & ALGORITHMS LAB',
-            docType: 'RECORD',
+            docType: 'LAB RECORD',
             degreeBranch: 'B.TECH COMPUTER SCIENCE & ENGINEERING',
             semester: '3RD SEMESTER',
             submittedByLabel: 'SUBMITTED BY :',
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         mech: {
             labName: 'FLUID MECHANICS LAB',
-            docType: 'RECORD',
+            docType: 'LAB RECORD',
             degreeBranch: 'B.TECH MECHANICAL ENGINEERING',
             semester: '4TH SEMESTER',
             submittedByLabel: 'SUBMITTED BY :',
@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         ee: {
             labName: 'POWER ELECTRONICS LAB',
-            docType: 'RECORD',
+            docType: 'LAB RECORD',
             degreeBranch: 'B.TECH ELECTRICAL ENGINEERING',
             semester: '5TH SEMESTER',
             submittedByLabel: 'SUBMITTED BY :',
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         civil: {
             labName: 'GEOTECHNICAL ENGINEERING LAB',
-            docType: 'RECORD',
+            docType: 'LAB RECORD',
             degreeBranch: 'B.TECH CIVIL ENGINEERING',
             semester: '5TH SEMESTER',
             submittedByLabel: 'SUBMITTED BY :',
@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         it: {
             labName: 'DATABASE MANAGEMENT SYSTEMS LAB',
-            docType: 'RECORD',
+            docType: 'LAB RECORD',
             degreeBranch: 'B.TECH INFORMATION TECHNOLOGY',
             semester: '4TH SEMESTER',
             submittedByLabel: 'SUBMITTED BY :',
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function updatePreview() {
         // Sync text content
         prevLabName.textContent = labNameInput.value.trim() || 'LAB NAME';
-        prevDocType.textContent = docTypeInput.value.trim() || 'RECORD';
+        prevDocType.textContent = docTypeInput.value.trim() || 'LAB RECORD';
         prevDegreeBranch.textContent = degreeBranchInput.value.trim() || 'BRANCH';
         prevSemester.textContent = semesterInput.value.trim() || 'SEMESTER';
 
@@ -310,7 +310,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     resetBtn.addEventListener('click', () => {
         labNameInput.value = '';
-        docTypeInput.value = 'RECORD';
+        docTypeInput.value = 'LAB RECORD';
         degreeBranchInput.value = '';
         semesterInput.value = '';
         submittedByLabelInput.value = 'SUBMITTED BY :';
