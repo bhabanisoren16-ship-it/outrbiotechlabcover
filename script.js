@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Sync text content
         prevLabName.textContent = labNameInput.value.trim() || 'LAB NAME';
         prevDocType.textContent = docTypeInput.value.trim() || 'RECORD';
-        prevDegreeBranch.textContent = degreeBranchInput.value.trim() || 'DEGREE & BRANCH';
+        prevDegreeBranch.textContent = degreeBranchInput.value.trim() || 'BRANCH';
         prevSemester.textContent = semesterInput.value.trim() || 'SEMESTER';
 
         prevSubmittedByLabel.textContent = submittedByLabelInput.value.trim() || 'SUBMITTED BY :';
