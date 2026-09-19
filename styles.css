@@ -635,6 +635,7 @@ body {
     letter-spacing: 0.6px;
     margin-bottom: 12px;
     line-height: 1.2;
+    min-height: 1.2em;
 }
 
 .doc-type {

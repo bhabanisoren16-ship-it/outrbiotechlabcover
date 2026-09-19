@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updatePreview() {
         // Sync text content
-        prevLabName.textContent = labNameInput.value.trim() || 'LAB NAME';
+        prevLabName.textContent = labNameInput.value.trim() || '';
         prevDocType.textContent = docTypeInput.value.trim() || 'RECORD';
         prevDegreeBranch.textContent = degreeBranchInput.value.trim() || 'DEGREE & BRANCH';
         prevSemester.textContent = semesterInput.value.trim() || 'SEMESTER';
