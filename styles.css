@@ -531,8 +531,8 @@ body {
     color: #000000;
     font-family: 'Times New Roman', Times, serif;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.1);
-    padding: 24px;
-    box-sizing: border-box;
+    padding: 0.6cm !important; /* Outer border from edge: 0.6 cm */
+    box-sizing: border-box !important;
     user-select: none;
 }
 
@@ -542,7 +542,7 @@ body {
     height: 100%;
     box-sizing: border-box;
     position: relative;
-    padding: 4px; /* Outer frame margin */
+    padding: 0.18cm; /* Inner border from outer border: 0.15–0.2 cm */
 }
 
 /* Photo Exact Double Border: Outer thick (3px) + Inner thin (1px) */
@@ -553,11 +553,11 @@ body {
 .page-border.double-classic .cover-content {
     border: 1px solid #000000;
     height: 100%;
-    padding: 50px 40px 40px 40px;
+    padding: 2.0cm 30px 1.6cm 30px; /* Top border → LAB NAME: 2.0cm, Address → bottom border: 1.6cm */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     box-sizing: border-box;
 }
 
@@ -569,11 +569,11 @@ body {
 .page-border.single .cover-content {
     border: none;
     height: 100%;
-    padding: 50px 40px 40px 40px;
+    padding: 2.0cm 30px 1.6cm 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     box-sizing: border-box;
 }
 
@@ -585,11 +585,11 @@ body {
 .page-border.thick-thin .cover-content {
     border: 2px solid #000000;
     height: 100%;
-    padding: 50px 40px 40px 40px;
+    padding: 2.0cm 30px 1.6cm 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     box-sizing: border-box;
 }
 
@@ -601,11 +601,11 @@ body {
 .page-border.none .cover-content {
     border: none;
     height: 100%;
-    padding: 50px 40px 40px 40px;
+    padding: 2.0cm 30px 1.6cm 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     box-sizing: border-box;
 }
 
@@ -624,7 +624,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10px;
+    margin: 0;
 }
 
 .lab-title {
@@ -633,7 +633,7 @@ body {
     text-transform: uppercase;
     color: #000;
     letter-spacing: 0.6px;
-    margin-bottom: 12px;
+    margin: 0 0 0.6cm 0; /* LAB NAME → RECORD: ≈ 0.6 cm */
     line-height: 1.2;
     min-height: 1.2em;
 }
@@ -644,7 +644,8 @@ body {
     text-transform: uppercase;
     color: #000;
     letter-spacing: 0.5px;
-    margin-bottom: 24px;
+    margin: 0 0 0.9cm 0; /* RECORD → B.TECH BIOTECHNOLOGY: ≈ 0.9 cm */
+    line-height: 1.2;
 }
 
 .degree-branch {
@@ -653,7 +654,8 @@ body {
     text-transform: uppercase;
     color: #000;
     letter-spacing: 0.5px;
-    margin-bottom: 14px;
+    margin: 0 0 0.7cm 0; /* B.TECH → 3RD SEMESTER: ≈ 0.7 cm */
+    line-height: 1.2;
 }
 
 .semester {
@@ -662,7 +664,8 @@ body {
     text-transform: uppercase;
     color: #000;
     letter-spacing: 0.5px;
-    margin-bottom: 10px;
+    margin: 0 0 1.8cm 0; /* Reduced spacing between 3RD SEMESTER and SUBMITTED BY */
+    line-height: 1.2;
 }
 
 /* Student Info Section (Centered Block matching photo) */
@@ -670,7 +673,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 20px 0;
+    margin: 0;
     width: 100%;
 }
 
@@ -680,7 +683,8 @@ body {
     text-transform: uppercase;
     color: #000;
     letter-spacing: 0.5px;
-    margin-bottom: 14px;
+    margin: 0 0 0.6cm 0; /* SUBMITTED BY → NAME: ≈ 0.6 cm */
+    line-height: 1.2;
 }
 
 .info-row {
@@ -689,8 +693,8 @@ body {
     text-transform: uppercase;
     color: #000;
     letter-spacing: 0.5px;
-    margin-bottom: 8px;
-    line-height: 1.4;
+    margin: 0 0 0.6cm 0; /* NAME → REGD NO. → GROUP: ≈ 0.6 cm */
+    line-height: 1.2;
 }
 
 .info-row.hidden {
@@ -702,15 +706,18 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 15px 0 25px 0;
-    min-height: 180px;
+    margin-top: 0.6cm; /* With 0.6cm margin from last info-row = 1.2cm (GROUP → top of logo: ≈ 1.0–1.2 cm) */
+    margin-bottom: 1.2cm; /* Reduced distance: Logo bottom → DEPARTMENT NAME: 1.2 cm */
+    min-height: auto;
 }
 
 .university-logo {
-    width: 230px;
-    height: auto;
-    max-height: 260px;
+    width: 4.5cm !important; /* Logo size: ≈ 4.5 × 4.5 cm */
+    height: 4.5cm !important;
+    max-width: 4.5cm !important;
+    max-height: 4.5cm !important;
     object-fit: contain;
+    display: block;
 }
 
 /* Footer Section Typography */
@@ -719,7 +726,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 15px;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .department-name {
@@ -728,7 +736,9 @@ body {
     text-transform: uppercase;
     color: #000;
     letter-spacing: 0.6px;
-    margin-bottom: 24px;
+    margin-top: 0;
+    margin-bottom: 0.8cm; /* DEPARTMENT NAME → University name: ≈ 0.8 cm */
+    line-height: 1.2;
 }
 
 .university-name {
@@ -737,8 +747,9 @@ body {
     text-transform: uppercase;
     color: #000;
     letter-spacing: 0.8px;
-    line-height: 1.35;
-    margin-bottom: 16px;
+    line-height: 1.25;
+    margin-top: 0;
+    margin-bottom: 0.35cm; /* Reduced gap between college name and address */
     max-width: 90%;
 }
 
@@ -747,7 +758,9 @@ body {
     font-weight: 400;
     color: #000;
     letter-spacing: 0.2px;
-    margin-top: 6px;
+    margin-top: 0;
+    margin-bottom: 0; /* Address → bottom border: 1.6 cm (via padding-bottom: 1.6cm) */
+    line-height: 1.2;
 }
 
 /* ==========================================================================

@@ -226,8 +226,9 @@ document.addEventListener('DOMContentLoaded', () => {
         pageBorder.className = `page-border ${borderStyleSelect.value}`;
         coverSheet.style.fontFamily = fontFamilySelect.value;
         
-        const logoSize = parseInt(logoScaleInput.value, 10) || 230;
+        const logoSize = parseInt(logoScaleInput.value, 10) || 170;
         prevLogo.style.width = `${logoSize}px`;
+        prevLogo.style.height = `${logoSize}px`;
     }
 
     // Attach Input Event Listeners
