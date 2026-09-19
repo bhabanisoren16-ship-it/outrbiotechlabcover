@@ -113,18 +113,17 @@
                             </div>
                             <div class="form-group">
                                 <label for="semesterInput">Semester</label>
-                                <select id="semesterInput">
-                                    <option value="1ST SEMESTER">1ST SEMESTER</option>
-                                    <option value="2ND SEMESTER">2ND SEMESTER</option>
-                                    <option value="3RD SEMESTER" selected>3RD SEMESTER</option>
-                                    <option value="4TH SEMESTER">4TH SEMESTER</option>
-                                    <option value="5TH SEMESTER">5TH SEMESTER</option>
-                                    <option value="6TH SEMESTER">6TH SEMESTER</option>
-                                    <option value="7TH SEMESTER">7TH SEMESTER</option>
-                                    <option value="8TH SEMESTER">8TH SEMESTER</option>
-                                    <option value="custom">Other / Custom...</option>
-                                </select>
-                                <input type="text" id="customSemesterInput" placeholder="Enter custom semester" style="display: none; margin-top: 8px;">
+                                <input type="text" id="semesterInput" list="semesterList" placeholder="e.g. 3RD SEMESTER" value="">
+                                <datalist id="semesterList">
+                                    <option value="1ST SEMESTER">
+                                    <option value="2ND SEMESTER">
+                                    <option value="3RD SEMESTER">
+                                    <option value="4TH SEMESTER">
+                                    <option value="5TH SEMESTER">
+                                    <option value="6TH SEMESTER">
+                                    <option value="7TH SEMESTER">
+                                    <option value="8TH SEMESTER">
+                                </datalist>
                             </div>
                         </div>
                     </div>
@@ -271,7 +270,7 @@
                                     <h1 class="lab-title" id="prevLabName">LAB NAME</h1>
                                     <h2 class="doc-type" id="prevDocType">LAB RECORD</h2>
                                     <h3 class="degree-branch" id="prevDegreeBranch">B.TECH BIOTECHNOLOGY</h3>
-                                    <h4 class="semester" id="prevSemester">3RD SEMESTER</h4>
+                                    <h4 class="semester" id="prevSemester"></h4>
                                 </div>
 
                                 <!-- Middle Student Info Section -->

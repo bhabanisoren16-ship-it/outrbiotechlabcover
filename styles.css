@@ -724,6 +724,7 @@ body {
     letter-spacing: 0.5px;
     margin: 0 0 1.35cm 0; /* Slightly reduced spacing between 3RD SEMESTER and SUBMITTED BY: 1.35 cm */
     line-height: 1.2;
+    min-height: 1.2em;
 }
 
 /* Student Info Section (Centered Block matching photo) */
