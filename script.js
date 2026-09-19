@@ -469,12 +469,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function createExportWrapper() {
         const wrapper = document.createElement('div');
         wrapper.style.position = 'fixed';
-        wrapper.style.left = '0';
+        wrapper.style.left = '-99999px';
         wrapper.style.top = '0';
         wrapper.style.width = '794px';
         wrapper.style.height = '1123px';
-        wrapper.style.zIndex = '-999999';
-        wrapper.style.opacity = '0';
+        wrapper.style.zIndex = '99999';
+        wrapper.style.opacity = '1';
+        wrapper.style.visibility = 'visible';
         wrapper.style.pointerEvents = 'none';
         wrapper.style.background = '#ffffff';
         wrapper.style.overflow = 'hidden';
@@ -488,6 +489,10 @@ document.addEventListener('DOMContentLoaded', () => {
         clone.style.boxShadow = 'none';
         clone.style.width = '794px';
         clone.style.height = '1123px';
+        clone.style.backgroundColor = '#ffffff';
+        clone.style.webkitFontSmoothing = 'antialiased';
+        clone.style.mozOsxFontSmoothing = 'grayscale';
+        clone.style.textRendering = 'optimizeLegibility';
 
         wrapper.appendChild(clone);
         document.body.appendChild(wrapper);
@@ -519,15 +524,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     downloadPdfBtn.addEventListener('click', () => {
-        showToast('Generating clean A4 PDF...');
+        showToast('Generating high-resolution A4 PDF (300+ DPI)...');
         
         const { wrapper, clone } = createExportWrapper();
         const labFileName = (labNameInput.value.trim() || 'OUTR_Lab').replace(/[^a-zA-Z0-9]/g, '_');
 
         html2canvas(clone, {
-            scale: 2,
+            scale: 3.5,
             useCORS: true,
+            allowTaint: true,
             logging: false,
+            backgroundColor: '#ffffff',
+            imageTimeout: 0,
             width: 794,
             height: 1123,
             scrollX: 0,
@@ -535,7 +543,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }).then(canvas => {
             if (document.body.contains(wrapper)) document.body.removeChild(wrapper);
 
-            const imgData = canvas.toDataURL('image/jpeg', 0.98);
+            // Lossless PNG at 300+ DPI provides pristine, crisp vector-like text & sharp borders without JPEG artifacts
+            const imgData = canvas.toDataURL('image/png');
             const jsPdfConstructor = (window.jspdf && window.jspdf.jsPDF) ? window.jspdf.jsPDF : window.jsPDF;
             const pdf = new jsPdfConstructor({
                 orientation: 'portrait',
@@ -545,10 +554,10 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             // Exactly 1 page: maps 794x1123 canvas to standard A4 (210mm x 297mm)
-            pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
+            pdf.addImage(imgData, 'PNG', 0, 0, 210, 297, undefined, 'FAST');
             pdf.save(`${labFileName}_Cover_Page.pdf`);
 
-            showToast('PDF downloaded (1 page)! Details cleared for privacy.');
+            showToast('High-resolution PDF downloaded (1 page)! Details cleared for privacy.');
             setTimeout(autoClearAfterDownload, 1200);
         }).catch((err) => {
             if (document.body.contains(wrapper)) document.body.removeChild(wrapper);
@@ -558,14 +567,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     downloadPngBtn.addEventListener('click', () => {
-        showToast('Rendering PNG image...');
+        showToast('Rendering high-resolution PNG image (300+ DPI)...');
         
         const { wrapper, clone } = createExportWrapper();
 
         html2canvas(clone, {
-            scale: 2.5,
+            scale: 3.5,
             useCORS: true,
+            allowTaint: true,
             logging: false,
+            backgroundColor: '#ffffff',
+            imageTimeout: 0,
             width: 794,
             height: 1123,
             scrollX: 0,
@@ -577,7 +589,7 @@ document.addEventListener('DOMContentLoaded', () => {
             link.download = `${labFileName}_Cover_Page.png`;
             link.href = canvas.toDataURL('image/png');
             link.click();
-            showToast('PNG image downloaded! Details cleared for privacy.');
+            showToast('High-resolution PNG downloaded! Details cleared for privacy.');
             setTimeout(autoClearAfterDownload, 1200);
         }).catch(err => {
             if (document.body.contains(wrapper)) document.body.removeChild(wrapper);
