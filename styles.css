@@ -4,29 +4,32 @@
    ========================================================================== */
 
 :root {
-    /* UI Theme Colors: Royal Academic Navy & Gold (OUTR Seal Inspired) */
-    --bg-dark: #0d1527;
-    --bg-surface: #142038;
-    --bg-card: rgba(20, 34, 60, 0.82);
-    --bg-card-hover: rgba(30, 48, 82, 0.92);
-    --border-color: rgba(245, 158, 11, 0.22);
-    --border-focus: #f59e0b;
+    /* UI Theme Colors: Two-Color Gradient (#004AAD & #5DE0E6) */
+    --color-primary-blue: #004AAD;
+    --color-primary-cyan: #5DE0E6;
+    --bg-dark: #001f4d;
+    --bg-surface: #002d6b;
+    --bg-card: rgba(0, 42, 98, 0.65);
+    --bg-card-hover: rgba(0, 52, 120, 0.75);
+    --border-color: rgba(93, 224, 230, 0.25);
+    --border-focus: #5DE0E6;
     --text-main: #f8fafc;
-    --text-muted: #94a3b8;
+    --text-muted: #cbd5e1;
     --accent-crimson: #be123c;
     --accent-crimson-hover: #9f1239;
     --accent-crimson-dark: #881337;
-    --accent-gold: #f59e0b;
-    --accent-gold-hover: #d97706;
-    --accent-gold-light: #fbbf24;
-    --accent-blue: #3b82f6;
+    --accent-gold: #fbbf24;
+    --accent-gold-hover: #f59e0b;
+    --accent-gold-light: #fef08a;
+    --accent-blue: #004AAD;
+    --accent-cyan: #5DE0E6;
     --accent-indigo: #6366f1;
     --accent-emerald: #10b981;
     --accent-amber: #f59e0b;
     --radius-lg: 14px;
     --radius-md: 10px;
     --radius-sm: 6px;
-    --shadow-ui: 0 10px 30px -5px rgba(0, 0, 0, 0.6);
+    --shadow-ui: 0 10px 30px -5px rgba(0, 20, 50, 0.6);
 
     /* A4 Dimensions (Standard 96 DPI / Canvas Scale) */
     --a4-width: 794px;
@@ -41,7 +44,7 @@
 
 body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background-color: var(--bg-dark);
+    background: linear-gradient(135deg, #004AAD 0%, #5DE0E6 100%) no-repeat fixed;
     color: var(--text-main);
     min-height: 100vh;
     overflow-x: hidden;
@@ -62,7 +65,7 @@ body {
 .app-header {
     height: 64px;
     flex-shrink: 0;
-    background: rgba(13, 21, 39, 0.94);
+    background: rgba(0, 36, 85, 0.88);
     backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--border-color);
     display: flex;
@@ -85,8 +88,8 @@ body {
     border-radius: 50%;
     background: #fff;
     padding: 2px;
-    border: 1px solid var(--accent-gold);
-    box-shadow: 0 0 10px rgba(245, 158, 11, 0.25);
+    border: 1px solid var(--accent-cyan);
+    box-shadow: 0 0 10px rgba(93, 224, 230, 0.35);
 }
 
 .brand-text h1 {
@@ -97,8 +100,8 @@ body {
 }
 
 .brand-text h1 span {
-    color: var(--accent-gold);
-    text-shadow: 0 0 12px rgba(245, 158, 11, 0.3);
+    color: var(--accent-cyan);
+    text-shadow: 0 0 12px rgba(93, 224, 230, 0.4);
 }
 
 .brand-text p {
@@ -203,7 +206,8 @@ body {
 /* Sidebar Controls */
 .sidebar {
     width: 440px;
-    background: var(--bg-dark);
+    background: rgba(0, 24, 60, 0.88);
+    backdrop-filter: blur(16px);
     border-right: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
@@ -238,13 +242,13 @@ body {
 }
 
 .badge {
-    background: rgba(245, 158, 11, 0.12);
-    color: var(--accent-gold);
+    background: rgba(93, 224, 230, 0.15);
+    color: var(--accent-cyan);
     font-size: 0.7rem;
     font-weight: 600;
     padding: 2px 8px;
     border-radius: 12px;
-    border: 1px solid rgba(245, 158, 11, 0.35);
+    border: 1px solid rgba(93, 224, 230, 0.35);
 }
 
 /* Quick Presets Strip */
@@ -299,6 +303,7 @@ body {
 
 .form-card {
     background: var(--bg-card);
+    backdrop-filter: blur(10px);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
     padding: 16px;
@@ -306,11 +311,11 @@ body {
     flex-direction: column;
     gap: 12px;
     transition: all 0.2s ease;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 4px 16px rgba(0, 20, 50, 0.35);
 }
 
 .form-card:hover {
-    border-color: rgba(245, 158, 11, 0.3);
+    border-color: rgba(93, 224, 230, 0.45);
     background: var(--bg-card-hover);
 }
 
@@ -318,15 +323,15 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    color: var(--accent-gold);
+    color: var(--accent-cyan);
     font-size: 0.9rem;
     font-weight: 600;
     padding-bottom: 6px;
-    border-bottom: 1px dashed rgba(245, 158, 11, 0.16);
+    border-bottom: 1px dashed rgba(93, 224, 230, 0.22);
 }
 
 .card-title i {
-    color: var(--accent-gold);
+    color: var(--accent-cyan);
 }
 
 .card-title h3 {
@@ -353,12 +358,12 @@ body {
     width: 100%;
     min-width: 0;
     box-sizing: border-box;
-    background: rgba(13, 21, 39, 0.75);
-    border: 1px solid rgba(245, 158, 11, 0.25);
+    background: rgba(0, 22, 54, 0.75);
+    border: 1px solid var(--border-color);
     border-radius: var(--radius-sm);
     padding: 7px 10px;
     font-size: 0.82rem;
-    color: #fefce8;
+    color: #f8fafc;
     font-family: inherit;
     transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
@@ -371,15 +376,15 @@ body {
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    background: rgba(18, 30, 54, 0.95);
+    background: rgba(0, 36, 88, 0.95);
     border-color: var(--border-focus);
-    box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.28);
+    box-shadow: 0 0 0 2px rgba(93, 224, 230, 0.35);
 }
 
 .form-group input[readonly],
 .form-group textarea[readonly] {
     background: rgba(255, 255, 255, 0.035);
-    border-color: rgba(245, 158, 11, 0.14);
+    border-color: rgba(93, 224, 230, 0.15);
     color: var(--text-muted);
     cursor: not-allowed;
     user-select: none;
@@ -390,14 +395,14 @@ body {
 .form-group input[readonly]:focus,
 .form-group textarea[readonly]:focus {
     outline: none;
-    border-color: rgba(245, 158, 11, 0.14);
+    border-color: rgba(93, 224, 230, 0.15);
     box-shadow: none;
     background: rgba(255, 255, 255, 0.035);
 }
 
 .form-group select option {
-    background: #142038;
-    color: #fefce8;
+    background: #002252;
+    color: #f8fafc;
 }
 
 /* Input with Fixed Prefix */
@@ -407,8 +412,8 @@ body {
     width: 100%;
     min-width: 0;
     box-sizing: border-box;
-    background: rgba(13, 21, 39, 0.75);
-    border: 1px solid rgba(245, 158, 11, 0.25);
+    background: rgba(0, 22, 54, 0.75);
+    border: 1px solid var(--border-color);
     border-radius: var(--radius-sm);
     overflow: hidden;
     transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
@@ -416,19 +421,19 @@ body {
 
 .input-prefix-group:focus-within {
     border-color: var(--border-focus);
-    box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.28);
-    background: rgba(18, 30, 54, 0.95);
+    box-shadow: 0 0 0 2px rgba(93, 224, 230, 0.35);
+    background: rgba(0, 36, 88, 0.95);
 }
 
 .input-prefix-group .input-prefix {
     display: inline-flex;
     align-items: center;
     padding: 7px 9px;
-    background: rgba(255, 255, 255, 0.03);
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
-    color: var(--text-secondary);
+    background: rgba(93, 224, 230, 0.12);
+    border-right: 1px solid rgba(93, 224, 230, 0.25);
+    color: var(--accent-cyan);
     font-size: 0.78rem;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0.4px;
     white-space: nowrap;
     user-select: none;
@@ -499,7 +504,7 @@ body {
 
 .preview-area {
     flex: 1;
-    background: #0a1120;
+    background: transparent;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -508,7 +513,7 @@ body {
 
 .preview-toolbar {
     height: 48px;
-    background: rgba(13, 21, 39, 0.94);
+    background: rgba(0, 36, 85, 0.82);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border-color);
     display: flex;
@@ -544,8 +549,8 @@ body {
 }
 
 .zoom-btn:hover {
-    background: rgba(245, 158, 11, 0.15);
-    border-color: var(--accent-gold);
+    background: rgba(93, 224, 230, 0.2);
+    border-color: var(--accent-cyan);
     color: #fff;
 }
 
@@ -563,7 +568,8 @@ body {
     align-items: flex-start;
     justify-content: center;
     padding: 40px;
-    background: radial-gradient(circle at 50% 35%, #1e3354 0%, #111f34 55%, #0a1322 100%);
+    background: linear-gradient(135deg, #004AAD 0%, #5DE0E6 100%);
+    background-attachment: fixed;
 }
 
 .paper-viewport::-webkit-scrollbar {
