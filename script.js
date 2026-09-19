@@ -218,12 +218,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const deptVal = departmentInput.value.trim();
-        let formattedDept = 'DEPARTMENT OF BRANCH NAME';
-        if (deptVal) {
+        let formattedDept = 'DEPARTMENT OF';
+        if (deptVal && deptVal.toUpperCase() !== 'BRANCH NAME') {
             const cleanDept = deptVal.replace(/^DEPARTMENT\s+OF\s+/i, '').replace(/^DEPARTMENT\s+/i, '').trim();
-            formattedDept = cleanDept ? `DEPARTMENT OF ${cleanDept.toUpperCase()}` : 'DEPARTMENT OF BRANCH NAME';
+            formattedDept = cleanDept && cleanDept.toUpperCase() !== 'BRANCH NAME'
+                ? `DEPARTMENT OF ${cleanDept.toUpperCase()}`
+                : 'DEPARTMENT OF';
         } else {
-            formattedDept = 'DEPARTMENT OF BRANCH NAME';
+            formattedDept = 'DEPARTMENT OF';
         }
         prevDepartment.textContent = formattedDept;
         prevUniversity.textContent = universityInput.value.trim() || 'UNIVERSITY NAME';
@@ -265,9 +267,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const branchVal = degreeBranchInput.value.trim();
             if (branchVal) {
                 const cleanBranch = branchVal.replace(/^(B\.?\s*TECH|M\.?\s*TECH|B\.?\s*SC|M\.?\s*SC|MCA|BCA|PH\.?\s*D)(\s+(IN|OF))?\s*/i, '').trim();
-                departmentInput.value = cleanBranch ? cleanBranch.toUpperCase() : 'BRANCH NAME';
+                departmentInput.value = cleanBranch ? cleanBranch.toUpperCase() : '';
             } else {
-                departmentInput.value = 'BRANCH NAME';
+                departmentInput.value = '';
             }
             updatePreview();
         }
@@ -348,7 +350,7 @@ document.addEventListener('DOMContentLoaded', () => {
         groupInput.value = '';
         sectionInput.value = '';
         submittedToInput.value = '';
-        departmentInput.value = 'BRANCH NAME';
+        departmentInput.value = '';
         departmentEditedManually = false;
         universityInput.value = 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH';
         addressInput.value = 'Techno Campus, Ghatikia, Bhubaneswar, 751029';
