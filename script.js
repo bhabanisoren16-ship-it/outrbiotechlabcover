@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const studentNameInput = document.getElementById('studentNameInput');
     const regNoInput = document.getElementById('regNoInput');
     const groupInput = document.getElementById('groupInput');
+    const sectionInput = document.getElementById('sectionInput');
     const submittedToInput = document.getElementById('submittedToInput');
     const departmentInput = document.getElementById('departmentInput');
     const universityInput = document.getElementById('universityInput');
@@ -34,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const prevStudentName = document.getElementById('prevStudentName');
     const prevRegNo = document.getElementById('prevRegNo');
     const prevGroup = document.getElementById('prevGroup');
+    const prevSection = document.getElementById('prevSection');
     const prevSubmittedTo = document.getElementById('prevSubmittedTo');
     const prevLogo = document.getElementById('prevLogo');
     const prevDepartment = document.getElementById('prevDepartment');
@@ -77,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
             studentName: '',
             regNo: '',
             group: '',
+            section: '',
             submittedTo: '',
             department: 'DEPARTMENT OF BIOTECHNOLOGY',
             university: 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH',
@@ -91,6 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
             studentName: '',
             regNo: '',
             group: '',
+            section: '',
             submittedTo: '',
             department: 'DEPARTMENT OF COMPUTER SCIENCE & ENGINEERING',
             university: 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH',
@@ -105,6 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
             studentName: '',
             regNo: '',
             group: '',
+            section: '',
             submittedTo: '',
             department: 'DEPARTMENT OF MECHANICAL ENGINEERING',
             university: 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH',
@@ -119,6 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
             studentName: '',
             regNo: '',
             group: '',
+            section: '',
             submittedTo: '',
             department: 'DEPARTMENT OF ELECTRICAL ENGINEERING',
             university: 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH',
@@ -133,6 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
             studentName: '',
             regNo: '',
             group: '',
+            section: '',
             submittedTo: '',
             department: 'DEPARTMENT OF CIVIL ENGINEERING',
             university: 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH',
@@ -147,6 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
             studentName: '',
             regNo: '',
             group: '',
+            section: '',
             submittedTo: '',
             department: 'DEPARTMENT OF INFORMATION TECHNOLOGY',
             university: 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH',
@@ -174,7 +182,33 @@ document.addEventListener('DOMContentLoaded', () => {
         prevRegNo.textContent = regVal ? (regVal.toUpperCase().startsWith('REGD') ? regVal : `REGD NO.: ${regVal}`) : 'REGD NO.: ';
         
         const groupVal = groupInput.value.trim();
-        prevGroup.textContent = groupVal ? (groupVal.toUpperCase().startsWith('GROUP') ? groupVal : `GROUP: ${groupVal}`) : 'GROUP: ';
+        let formattedGroup = 'GROUP: ';
+        if (groupVal) {
+            if (!groupVal.toUpperCase().startsWith('GROUP')) {
+                formattedGroup = `GROUP: ${groupVal}`;
+            } else if (/^GROUP\s*[A-Z0-9]/i.test(groupVal)) {
+                formattedGroup = groupVal.replace(/^GROUP\s*/i, 'GROUP: ');
+            } else {
+                formattedGroup = groupVal;
+            }
+        }
+        prevGroup.textContent = formattedGroup;
+
+        const sectionVal = sectionInput.value.trim();
+        if (sectionVal) {
+            let formattedSection = sectionVal;
+            if (!sectionVal.toUpperCase().startsWith('SECTION')) {
+                formattedSection = `SECTION: ${sectionVal}`;
+            } else if (/^SECTION\s*[A-Z0-9]/i.test(sectionVal)) {
+                formattedSection = sectionVal.replace(/^SECTION\s*/i, 'SECTION: ');
+            } else {
+                formattedSection = sectionVal;
+            }
+            prevSection.textContent = formattedSection;
+            prevSection.classList.remove('hidden');
+        } else {
+            prevSection.classList.add('hidden');
+        }
 
         const subToVal = submittedToInput.value.trim();
         if (subToVal) {
@@ -199,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Attach Input Event Listeners
     const inputs = [
         labNameInput, docTypeInput, degreeBranchInput, semesterInput,
-        submittedByLabelInput, studentNameInput, regNoInput, groupInput,
+        submittedByLabelInput, studentNameInput, regNoInput, groupInput, sectionInput,
         submittedToInput, departmentInput, universityInput, addressInput,
         borderStyleSelect, fontFamilySelect, logoScaleInput
     ];
@@ -246,6 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (preset.studentName) studentNameInput.value = preset.studentName;
         if (preset.regNo) regNoInput.value = preset.regNo;
         if (preset.group) groupInput.value = preset.group;
+        if (preset.section) sectionInput.value = preset.section;
         submittedToInput.value = preset.submittedTo || '';
         departmentInput.value = preset.department;
         universityInput.value = preset.university;
@@ -284,6 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
         studentNameInput.value = '';
         regNoInput.value = '';
         groupInput.value = '';
+        sectionInput.value = '';
         submittedToInput.value = '';
         departmentInput.value = 'DEPARTMENT OF ';
         universityInput.value = 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH';
@@ -424,6 +460,7 @@ document.addEventListener('DOMContentLoaded', () => {
         studentNameInput.value = '';
         regNoInput.value = '';
         groupInput.value = '';
+        sectionInput.value = '';
         submittedToInput.value = '';
         
         // Reset logo if custom logo was uploaded
