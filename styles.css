@@ -113,6 +113,10 @@ body {
 }
 
 /* Buttons */
+#loadPhotoPresetBtn {
+    display: none !important;
+}
+
 .btn {
     display: inline-flex;
     align-items: center;
@@ -712,10 +716,10 @@ body {
 }
 
 .university-logo {
-    width: 4.5cm !important; /* Logo size: ≈ 4.5 × 4.5 cm */
-    height: 4.5cm !important;
-    max-width: 4.5cm !important;
-    max-height: 4.5cm !important;
+    width: 5.8cm !important; /* Logo size: increased to ≈ 5.8 × 5.8 cm */
+    height: 5.8cm !important;
+    max-width: 5.8cm !important;
+    max-height: 5.8cm !important;
     object-fit: contain;
     display: block;
 }

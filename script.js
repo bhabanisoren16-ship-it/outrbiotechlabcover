@@ -46,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const downloadPdfBtn = document.getElementById('downloadPdfBtn');
     const downloadPngBtn = document.getElementById('downloadPngBtn');
     const printBtn = document.getElementById('printBtn');
-    const loadPhotoPresetBtn = document.getElementById('loadPhotoPresetBtn');
     const resetBtn = document.getElementById('resetBtn');
     const toast = document.getElementById('toast');
 
@@ -226,9 +225,11 @@ document.addEventListener('DOMContentLoaded', () => {
         pageBorder.className = `page-border ${borderStyleSelect.value}`;
         coverSheet.style.fontFamily = fontFamilySelect.value;
         
-        const logoSize = parseInt(logoScaleInput.value, 10) || 170;
-        prevLogo.style.width = `${logoSize}px`;
-        prevLogo.style.height = `${logoSize}px`;
+        const logoSize = parseInt(logoScaleInput.value, 10) || 220;
+        prevLogo.style.setProperty('width', `${logoSize}px`, 'important');
+        prevLogo.style.setProperty('height', `${logoSize}px`, 'important');
+        prevLogo.style.setProperty('max-width', `${logoSize}px`, 'important');
+        prevLogo.style.setProperty('max-height', `${logoSize}px`, 'important');
     }
 
     // Attach Input Event Listeners
@@ -305,10 +306,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const key = chip.getAttribute('data-preset');
             applyPreset(key);
         });
-    });
-
-    loadPhotoPresetBtn.addEventListener('click', () => {
-        applyPreset('photo');
     });
 
     resetBtn.addEventListener('click', () => {
