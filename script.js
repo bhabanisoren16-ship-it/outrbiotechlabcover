@@ -218,12 +218,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const deptVal = departmentInput.value.trim();
-        let formattedDept = 'DEPARTMENT OF BIOTECHNOLOGY';
+        let formattedDept = 'DEPARTMENT OF BRANCH NAME';
         if (deptVal) {
             const cleanDept = deptVal.replace(/^DEPARTMENT\s+OF\s+/i, '').replace(/^DEPARTMENT\s+/i, '').trim();
-            formattedDept = cleanDept ? `DEPARTMENT OF ${cleanDept.toUpperCase()}` : 'DEPARTMENT OF BIOTECHNOLOGY';
+            formattedDept = cleanDept ? `DEPARTMENT OF ${cleanDept.toUpperCase()}` : 'DEPARTMENT OF BRANCH NAME';
         } else {
-            formattedDept = 'DEPARTMENT OF BIOTECHNOLOGY';
+            formattedDept = 'DEPARTMENT OF BRANCH NAME';
         }
         prevDepartment.textContent = formattedDept;
         prevUniversity.textContent = universityInput.value.trim() || 'UNIVERSITY NAME';
@@ -251,6 +251,26 @@ document.addEventListener('DOMContentLoaded', () => {
     inputs.forEach(input => {
         input.addEventListener('input', updatePreview);
         input.addEventListener('change', updatePreview);
+    });
+
+    // Smart sync: when user enters/changes Branch (e.g. B.TECH COMPUTER SCIENCE & ENGINEERING),
+    // automatically sync the Department field if the user hasn't manually overridden it.
+    let departmentEditedManually = false;
+    departmentInput.addEventListener('input', () => {
+        departmentEditedManually = true;
+    });
+
+    degreeBranchInput.addEventListener('input', () => {
+        if (!departmentEditedManually || departmentInput.value.trim() === 'BRANCH NAME' || departmentInput.value.trim() === '') {
+            const branchVal = degreeBranchInput.value.trim();
+            if (branchVal) {
+                const cleanBranch = branchVal.replace(/^(B\.?\s*TECH|M\.?\s*TECH|B\.?\s*SC|M\.?\s*SC|MCA|BCA|PH\.?\s*D)(\s+(IN|OF))?\s*/i, '').trim();
+                departmentInput.value = cleanBranch ? cleanBranch.toUpperCase() : 'BRANCH NAME';
+            } else {
+                departmentInput.value = 'BRANCH NAME';
+            }
+            updatePreview();
+        }
     });
 
     // Custom Logo Upload Handler
@@ -293,6 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (preset.section) sectionInput.value = preset.section;
         submittedToInput.value = preset.submittedTo || '';
         departmentInput.value = preset.department;
+        departmentEditedManually = true;
         universityInput.value = preset.university;
         addressInput.value = preset.address;
 
@@ -327,7 +348,8 @@ document.addEventListener('DOMContentLoaded', () => {
         groupInput.value = '';
         sectionInput.value = '';
         submittedToInput.value = '';
-        departmentInput.value = 'BIOTECHNOLOGY';
+        departmentInput.value = 'BRANCH NAME';
+        departmentEditedManually = false;
         universityInput.value = 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH';
         addressInput.value = 'Techno Campus, Ghatikia, Bhubaneswar, 751029';
         
