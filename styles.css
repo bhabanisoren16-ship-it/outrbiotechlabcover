@@ -65,9 +65,10 @@ body {
 .app-header {
     height: 64px;
     flex-shrink: 0;
-    background: rgba(0, 36, 85, 0.88);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border-color);
+    background: rgba(0, 32, 76, 0.45);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -206,9 +207,10 @@ body {
 /* Sidebar Controls */
 .sidebar {
     width: 440px;
-    background: rgba(0, 24, 60, 0.88);
-    backdrop-filter: blur(16px);
-    border-right: 1px solid var(--border-color);
+    background: rgba(0, 24, 60, 0.42);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
     display: flex;
     flex-direction: column;
     overflow-y: auto;
@@ -220,7 +222,7 @@ body {
     width: 6px;
 }
 .sidebar::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 3px;
 }
 
@@ -229,7 +231,7 @@ body {
     align-items: center;
     justify-content: space-between;
     padding-bottom: 12px;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .sidebar-header h2 {
@@ -239,16 +241,18 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
 }
 
 .badge {
-    background: rgba(93, 224, 230, 0.15);
-    color: var(--accent-cyan);
+    background: rgba(93, 224, 230, 0.22);
+    color: #ffffff;
     font-size: 0.7rem;
     font-weight: 600;
     padding: 2px 8px;
     border-radius: 12px;
-    border: 1px solid rgba(93, 224, 230, 0.35);
+    border: 1px solid rgba(93, 224, 230, 0.5);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 /* Quick Presets Strip */
@@ -302,36 +306,40 @@ body {
 }
 
 .form-card {
-    background: var(--bg-card);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--border-color);
+    background: rgba(0, 32, 78, 0.50);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.22);
     border-radius: var(--radius-md);
     padding: 16px;
     display: flex;
     flex-direction: column;
     gap: 12px;
     transition: all 0.2s ease;
-    box-shadow: 0 4px 16px rgba(0, 20, 50, 0.35);
+    box-shadow: 0 8px 28px rgba(0, 20, 50, 0.35);
 }
 
 .form-card:hover {
-    border-color: rgba(93, 224, 230, 0.45);
-    background: var(--bg-card-hover);
+    border-color: rgba(93, 224, 230, 0.55);
+    background: rgba(0, 42, 98, 0.62);
+    box-shadow: 0 10px 32px rgba(0, 30, 75, 0.45), 0 0 14px rgba(93, 224, 230, 0.2);
 }
 
 .card-title {
     display: flex;
     align-items: center;
     gap: 8px;
-    color: var(--accent-cyan);
+    color: #ffffff;
     font-size: 0.9rem;
     font-weight: 600;
     padding-bottom: 6px;
-    border-bottom: 1px dashed rgba(93, 224, 230, 0.22);
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
 }
 
 .card-title i {
     color: var(--accent-cyan);
+    filter: drop-shadow(0 0 6px rgba(93, 224, 230, 0.45));
 }
 
 .card-title h3 {
@@ -349,7 +357,7 @@ body {
 .form-group label {
     font-size: 0.78rem;
     font-weight: 500;
-    color: var(--text-muted);
+    color: #cbd5e1;
 }
 
 .form-group input,
@@ -358,12 +366,12 @@ body {
     width: 100%;
     min-width: 0;
     box-sizing: border-box;
-    background: rgba(0, 22, 54, 0.75);
-    border: 1px solid var(--border-color);
+    background: rgba(0, 18, 46, 0.60);
+    border: 1px solid rgba(255, 255, 255, 0.22);
     border-radius: var(--radius-sm);
     padding: 7px 10px;
     font-size: 0.82rem;
-    color: #f8fafc;
+    color: #ffffff;
     font-family: inherit;
     transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
@@ -376,16 +384,16 @@ body {
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    background: rgba(0, 36, 88, 0.95);
+    background: rgba(0, 30, 75, 0.88);
     border-color: var(--border-focus);
-    box-shadow: 0 0 0 2px rgba(93, 224, 230, 0.35);
+    box-shadow: 0 0 0 2px rgba(93, 224, 230, 0.38);
 }
 
 .form-group input[readonly],
 .form-group textarea[readonly] {
-    background: rgba(255, 255, 255, 0.035);
-    border-color: rgba(93, 224, 230, 0.15);
-    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: #94a3b8;
     cursor: not-allowed;
     user-select: none;
     letter-spacing: 0.4px;
@@ -395,9 +403,9 @@ body {
 .form-group input[readonly]:focus,
 .form-group textarea[readonly]:focus {
     outline: none;
-    border-color: rgba(93, 224, 230, 0.15);
+    border-color: rgba(255, 255, 255, 0.15);
     box-shadow: none;
-    background: rgba(255, 255, 255, 0.035);
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .form-group select option {
@@ -412,8 +420,8 @@ body {
     width: 100%;
     min-width: 0;
     box-sizing: border-box;
-    background: rgba(0, 22, 54, 0.75);
-    border: 1px solid var(--border-color);
+    background: rgba(0, 18, 46, 0.60);
+    border: 1px solid rgba(255, 255, 255, 0.22);
     border-radius: var(--radius-sm);
     overflow: hidden;
     transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
@@ -421,16 +429,16 @@ body {
 
 .input-prefix-group:focus-within {
     border-color: var(--border-focus);
-    box-shadow: 0 0 0 2px rgba(93, 224, 230, 0.35);
-    background: rgba(0, 36, 88, 0.95);
+    box-shadow: 0 0 0 2px rgba(93, 224, 230, 0.38);
+    background: rgba(0, 30, 75, 0.88);
 }
 
 .input-prefix-group .input-prefix {
     display: inline-flex;
     align-items: center;
     padding: 7px 9px;
-    background: rgba(93, 224, 230, 0.12);
-    border-right: 1px solid rgba(93, 224, 230, 0.25);
+    background: rgba(93, 224, 230, 0.18);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
     color: var(--accent-cyan);
     font-size: 0.78rem;
     font-weight: 600;
@@ -513,9 +521,10 @@ body {
 
 .preview-toolbar {
     height: 48px;
-    background: rgba(0, 36, 85, 0.82);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border-color);
+    background: rgba(0, 32, 76, 0.40);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -534,8 +543,8 @@ body {
 }
 
 .zoom-btn {
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid var(--border-color);
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     color: var(--text-main);
     width: 28px;
     height: 28px;
@@ -549,14 +558,14 @@ body {
 }
 
 .zoom-btn:hover {
-    background: rgba(93, 224, 230, 0.2);
+    background: rgba(93, 224, 230, 0.3);
     border-color: var(--accent-cyan);
     color: #fff;
 }
 
 .zoom-level {
     font-size: 0.75rem;
-    color: var(--text-muted);
+    color: #e2e8f0;
     min-width: 45px;
     text-align: center;
 }
@@ -568,7 +577,7 @@ body {
     align-items: flex-start;
     justify-content: center;
     padding: 40px;
-    background: linear-gradient(90deg, #5DE0E6 0%, #004AAD 100%);
+    background: transparent;
 }
 
 .paper-viewport::-webkit-scrollbar {
