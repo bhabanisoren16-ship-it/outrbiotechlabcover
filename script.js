@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
             group: '',
             section: '',
             submittedTo: '',
-            department: 'DEPARTMENT OF BIOTECHNOLOGY',
+            department: 'BIOTECHNOLOGY',
             university: 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH',
             address: 'Techno Campus, Ghatikia, Bhubaneswar, 751029'
         },
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
             group: '',
             section: '',
             submittedTo: '',
-            department: 'DEPARTMENT OF COMPUTER SCIENCE & ENGINEERING',
+            department: 'COMPUTER SCIENCE & ENGINEERING',
             university: 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH',
             address: 'Techno Campus, Ghatikia, Bhubaneswar, 751029'
         },
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
             group: '',
             section: '',
             submittedTo: '',
-            department: 'DEPARTMENT OF MECHANICAL ENGINEERING',
+            department: 'MECHANICAL ENGINEERING',
             university: 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH',
             address: 'Techno Campus, Ghatikia, Bhubaneswar, 751029'
         },
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
             group: '',
             section: '',
             submittedTo: '',
-            department: 'DEPARTMENT OF ELECTRICAL ENGINEERING',
+            department: 'ELECTRICAL ENGINEERING',
             university: 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH',
             address: 'Techno Campus, Ghatikia, Bhubaneswar, 751029'
         },
@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
             group: '',
             section: '',
             submittedTo: '',
-            department: 'DEPARTMENT OF CIVIL ENGINEERING',
+            department: 'CIVIL ENGINEERING',
             university: 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH',
             address: 'Techno Campus, Ghatikia, Bhubaneswar, 751029'
         },
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
             group: '',
             section: '',
             submittedTo: '',
-            department: 'DEPARTMENT OF INFORMATION TECHNOLOGY',
+            department: 'INFORMATION TECHNOLOGY',
             university: 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH',
             address: 'Techno Campus, Ghatikia, Bhubaneswar, 751029'
         }
@@ -217,7 +217,15 @@ document.addEventListener('DOMContentLoaded', () => {
             prevSubmittedTo.classList.add('hidden');
         }
 
-        prevDepartment.textContent = departmentInput.value.trim() || 'DEPARTMENT NAME';
+        const deptVal = departmentInput.value.trim();
+        let formattedDept = 'DEPARTMENT OF BIOTECHNOLOGY';
+        if (deptVal) {
+            const cleanDept = deptVal.replace(/^DEPARTMENT\s+OF\s+/i, '').replace(/^DEPARTMENT\s+/i, '').trim();
+            formattedDept = cleanDept ? `DEPARTMENT OF ${cleanDept.toUpperCase()}` : 'DEPARTMENT OF ';
+        } else {
+            formattedDept = 'DEPARTMENT OF ';
+        }
+        prevDepartment.textContent = formattedDept;
         prevUniversity.textContent = universityInput.value.trim() || 'UNIVERSITY NAME';
         prevAddress.textContent = addressInput.value.trim() || '';
 
@@ -319,7 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
         groupInput.value = '';
         sectionInput.value = '';
         submittedToInput.value = '';
-        departmentInput.value = '';
+        departmentInput.value = 'BIOTECHNOLOGY';
         universityInput.value = 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH';
         addressInput.value = 'Techno Campus, Ghatikia, Bhubaneswar, 751029';
         

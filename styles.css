@@ -392,6 +392,56 @@ body {
     color: #fefce8;
 }
 
+/* Input with Fixed Prefix */
+.input-prefix-group {
+    display: flex;
+    align-items: center;
+    background: rgba(14, 10, 14, 0.65);
+    border: 1px solid rgba(245, 158, 11, 0.22);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.input-prefix-group:focus-within {
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.28);
+    background: rgba(22, 14, 21, 0.95);
+}
+
+.input-prefix-group .input-prefix {
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 11px;
+    background: rgba(245, 158, 11, 0.08);
+    border-right: 1px solid rgba(245, 158, 11, 0.2);
+    color: var(--accent-gold);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.input-prefix-group input {
+    flex: 1;
+    min-width: 0;
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 9px 12px !important;
+    color: #fefce8 !important;
+    font-size: 0.85rem !important;
+    border-radius: 0 !important;
+}
+
+.input-prefix-group input:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: transparent !important;
+}
+
 .grid-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
