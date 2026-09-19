@@ -337,7 +337,8 @@ body {
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 5px;
+    min-width: 0;
 }
 
 .form-group label {
@@ -349,11 +350,14 @@ body {
 .form-group input,
 .form-group select,
 .form-group textarea {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
     background: rgba(14, 10, 14, 0.65);
     border: 1px solid rgba(245, 158, 11, 0.22);
     border-radius: var(--radius-sm);
-    padding: 9px 12px;
-    font-size: 0.85rem;
+    padding: 7px 10px;
+    font-size: 0.82rem;
     color: #fefce8;
     font-family: inherit;
     transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
@@ -400,6 +404,9 @@ body {
 .input-prefix-group {
     display: flex;
     align-items: center;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
     background: rgba(14, 10, 14, 0.65);
     border: 1px solid rgba(245, 158, 11, 0.22);
     border-radius: var(--radius-sm);
@@ -416,26 +423,29 @@ body {
 .input-prefix-group .input-prefix {
     display: inline-flex;
     align-items: center;
-    padding: 9px 12px;
+    padding: 7px 9px;
     background: rgba(255, 255, 255, 0.03);
     border-right: 1px solid rgba(255, 255, 255, 0.1);
     color: var(--text-secondary);
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     font-weight: 500;
     letter-spacing: 0.4px;
     white-space: nowrap;
     user-select: none;
+    flex-shrink: 0;
 }
 
 .input-prefix-group input {
     flex: 1;
     min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
     border: none !important;
     background: transparent !important;
     box-shadow: none !important;
-    padding: 9px 12px !important;
+    padding: 7px 9px !important;
     color: #fefce8 !important;
-    font-size: 0.85rem !important;
+    font-size: 0.82rem !important;
     border-radius: 0 !important;
 }
 
@@ -448,8 +458,10 @@ body {
 
 .grid-2 {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 8px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .file-upload-wrapper {
