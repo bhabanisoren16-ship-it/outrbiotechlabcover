@@ -245,7 +245,7 @@ body {
 
 /* Quick Presets Strip */
 .preset-strip {
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 8px;
 }
