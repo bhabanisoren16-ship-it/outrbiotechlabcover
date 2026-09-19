@@ -44,7 +44,7 @@
 
 body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background: linear-gradient(135deg, #004AAD 0%, #5DE0E6 100%) no-repeat fixed;
+    background: linear-gradient(90deg, #5DE0E6 0%, #004AAD 100%) no-repeat fixed;
     color: var(--text-main);
     min-height: 100vh;
     overflow-x: hidden;
@@ -568,8 +568,7 @@ body {
     align-items: flex-start;
     justify-content: center;
     padding: 40px;
-    background: linear-gradient(135deg, #004AAD 0%, #5DE0E6 100%);
-    background-attachment: fixed;
+    background: linear-gradient(90deg, #5DE0E6 0%, #004AAD 100%);
 }
 
 .paper-viewport::-webkit-scrollbar {
