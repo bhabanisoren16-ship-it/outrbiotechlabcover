@@ -708,7 +708,7 @@ body {
     text-transform: uppercase;
     color: #000;
     letter-spacing: 0.5px;
-    margin: 0 0 0.7cm 0; /* B.TECH → 3RD SEMESTER: ≈ 0.7 cm */
+    margin: 0 0 0.45cm 0; /* Reduced spacing between branch and semester: 0.45 cm */
     line-height: 1.2;
 }
 
