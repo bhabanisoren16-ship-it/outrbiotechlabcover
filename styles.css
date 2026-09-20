@@ -996,7 +996,7 @@ label[for="labNameInput"] {
     color: #000;
     letter-spacing: 0.6px;
     margin-top: 0;
-    margin-bottom: 0.6cm; /* Adjusted balanced space between department and college name: 0.6cm */
+    margin-bottom: 0.28cm; /* Reduced space between department and college name */
     line-height: 1.2;
 }
 
@@ -1008,7 +1008,7 @@ label[for="labNameInput"] {
     letter-spacing: 0.8px;
     line-height: 1.25;
     margin-top: 0;
-    margin-bottom: 0.18cm; /* Reduced gap between college name and address: 0.18 cm */
+    margin-bottom: 0.12cm; /* Reduced space between college name and address */
     max-width: 90%;
 }
 
