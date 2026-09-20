@@ -178,6 +178,41 @@ body::before {
     color: var(--text-muted);
 }
 
+.header-credit-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(99, 102, 241, 0.12);
+    border: 1px solid rgba(129, 140, 248, 0.30);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.76rem;
+    color: #cbd5e1;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    margin-left: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.header-credit-badge:hover {
+    background: rgba(99, 102, 241, 0.22);
+    border-color: #818cf8;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.header-credit-badge i {
+    color: #818cf8;
+    font-size: 0.85rem;
+}
+
+.header-credit-badge strong {
+    color: #ffffff;
+    font-weight: 700;
+}
+
 .header-actions {
     display: flex;
     align-items: center;
@@ -670,6 +705,73 @@ label[for="labNameInput"] {
 }
 
 /* ==========================================================================
+   Website Credits Card (Sidebar Footer - Desktop & Mobile)
+   ========================================================================== */
+
+.site-credit-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 14px 18px;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(14, 165, 233, 0.08));
+    border: 1px solid rgba(129, 140, 248, 0.28);
+    border-radius: var(--radius-md);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    margin-top: 8px;
+    margin-bottom: 8px;
+    transition: all 0.25s ease;
+}
+
+.site-credit-card:hover {
+    border-color: rgba(129, 140, 248, 0.50);
+    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.35), 0 0 16px rgba(99, 102, 241, 0.25);
+    transform: translateY(-1px);
+}
+
+.credit-badge-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4f46e5, #0ea5e9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 0.95rem;
+    box-shadow: 0 0 12px rgba(79, 70, 229, 0.55);
+    flex-shrink: 0;
+}
+
+.credit-badge-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.25;
+}
+
+.credit-label {
+    font-size: 0.70rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 600;
+}
+
+.credit-author {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.3px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(90deg, #ffffff, #c7d2fe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ==========================================================================
    Preview Area & A4 Sheet Styling
    ========================================================================== */
 
@@ -750,6 +852,46 @@ label[for="labNameInput"] {
 .paper-viewport::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.2);
     border-radius: 4px;
+}
+
+/* ==========================================================================
+   Live Preview Bottom Status & Credits Bar (Desktop & Mobile)
+   ========================================================================== */
+
+.preview-status-bar {
+    height: 40px;
+    flex-shrink: 0;
+    background: rgba(10, 14, 35, 0.50);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    z-index: 10;
+}
+
+.preview-status-bar .status-credit {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.80rem;
+    color: #cbd5e1;
+    letter-spacing: 0.3px;
+}
+
+.preview-status-bar .status-credit i {
+    color: #818cf8;
+    font-size: 0.85rem;
+}
+
+.preview-status-bar .status-credit strong {
+    color: #ffffff;
+    font-weight: 700;
+    background: linear-gradient(90deg, #ffffff, #a5b4fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 /* A4 Sheet Wrapper for responsive zoom and centering */
@@ -1193,6 +1335,10 @@ label[for="labNameInput"] {
         flex-shrink: 0;
     }
 
+    .header-credit-badge {
+        display: none !important;
+    }
+
     .mobile-nav-bar {
         display: flex;
         flex-shrink: 0;
@@ -1515,54 +1661,6 @@ label[for="labNameInput"] {
 }
 
 
-/* ==========================================================================
-   Website Author & Attribution Badges (Biotechnology 2025-29)
-   ========================================================================== */
-
-.header-credit-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 14px;
-    margin-left: 14px;
-    border-radius: 9999px;
-    background: rgba(99, 102, 241, 0.16);
-    border: 1px solid rgba(129, 140, 248, 0.35);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    font-size: 0.74rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    color: #e2e8f0;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
-    transition: all 0.25s ease;
-    user-select: none;
-}
-
-.header-credit-badge:hover {
-    background: rgba(99, 102, 241, 0.28);
-    border-color: rgba(165, 180, 252, 0.6);
-    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.35);
-    transform: translateY(-1px);
-}
-
-.header-credit-badge strong {
-    color: #ffffff;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    background: linear-gradient(135deg, #ffffff 0%, #c7d2fe 50%, #38bdf8 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-@media (max-width: 900px) {
-    .header-credit-badge {
-        display: none !important;
-    }
-}
-
 /* High Precision Print Settings */
 @media print {
     @page {
@@ -1586,7 +1684,9 @@ label[for="labNameInput"] {
     .toast,
     .mobile-nav-bar,
     .mobile-bottom-bar,
-    .header-credit-badge {
+    .site-credit-card,
+    .header-credit-badge,
+    .preview-status-bar {
         display: none !important;
     }
 
