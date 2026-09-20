@@ -478,13 +478,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const wrapper = document.createElement('div');
         wrapper.id = 'exportWrapper';
         wrapper.style.position = 'fixed';
-        wrapper.style.left = '-99999px';
-        wrapper.style.top = '-99999px';
+        wrapper.style.top = '150vh';
+        wrapper.style.left = '150vw';
         wrapper.style.width = '794px';
         wrapper.style.height = '1123px';
         wrapper.style.zIndex = '-99999';
-        wrapper.style.opacity = '0';
-        wrapper.style.visibility = 'hidden';
+        wrapper.style.opacity = '1';
+        wrapper.style.visibility = 'visible';
         wrapper.style.pointerEvents = 'none';
         wrapper.style.background = '#ffffff';
         wrapper.style.overflow = 'hidden';
@@ -552,6 +552,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     downloadPdfBtn.addEventListener('click', async () => {
         downloadPdfBtn.blur();
+        downloadPdfBtn.disabled = true;
+        const originalPdfHtml = downloadPdfBtn.innerHTML;
+        downloadPdfBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Generating...</span>';
         showToast('Generating ultra-high-resolution A4 PDF (384 DPI)...');
         
         if (document.fonts && document.fonts.ready) {
@@ -633,11 +636,17 @@ document.addEventListener('DOMContentLoaded', () => {
             if (document.body.contains(wrapper)) document.body.removeChild(wrapper);
             console.error('PDF export failed:', err);
             showToast('Error generating PDF. Try printing to PDF.');
+        } finally {
+            downloadPdfBtn.disabled = false;
+            downloadPdfBtn.innerHTML = originalPdfHtml;
         }
     });
 
     downloadPngBtn.addEventListener('click', async () => {
         downloadPngBtn.blur();
+        downloadPngBtn.disabled = true;
+        const originalPngHtml = downloadPngBtn.innerHTML;
+        downloadPngBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Rendering...</span>';
         showToast('Rendering ultra-high-resolution PNG image (384 DPI)...');
         
         if (document.fonts && document.fonts.ready) {
@@ -732,6 +741,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (document.body.contains(wrapper)) document.body.removeChild(wrapper);
             console.error('PNG export failed:', err);
             showToast('Failed to export PNG.');
+        } finally {
+            downloadPngBtn.disabled = false;
+            downloadPngBtn.innerHTML = originalPngHtml;
         }
     });
 
