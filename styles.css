@@ -914,7 +914,7 @@ label[for="labNameInput"] {
     text-transform: uppercase;
     color: #000;
     letter-spacing: 0.5px;
-    margin: 0 0 0.45cm 0; /* Space between SUBMITTED BY and student details */
+    margin: 0 0 0.18cm 0; /* Reduced space between SUBMITTED BY and student details */
     line-height: 1.2;
     text-align: center;
 }
@@ -922,7 +922,7 @@ label[for="labNameInput"] {
 /* Student Info Table - mathematically locks labels, colons and values in one order */
 .student-info-table {
     border-collapse: separate;
-    border-spacing: 0 0.38cm; /* Even, balanced spacing between student info rows */
+    border-spacing: 0 0.35cm; /* Even, balanced spacing between student info rows */
     margin: 0 auto;
     font-family: inherit;
 }
