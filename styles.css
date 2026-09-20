@@ -965,8 +965,8 @@ label[for="labNameInput"] {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: -0.15cm; /* Reduced space between GROUP and logo */
-    margin-bottom: 0.85cm; /* Balanced space: Logo bottom → DEPARTMENT OF */
+    margin-top: 0.10cm; /* Brought logo down for balanced vertical spacing */
+    margin-bottom: 0.70cm; /* Balanced space: Logo bottom → DEPARTMENT OF */
     min-height: auto;
 }
 
