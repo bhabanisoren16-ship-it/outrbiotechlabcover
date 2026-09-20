@@ -749,7 +749,7 @@ label[for="labNameInput"] {
     color: #000000;
     font-family: 'Times New Roman', Times, serif;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.1);
-    padding: 1.15cm !important; /* Outer border pushed inside from paper edge: 1.15 cm */
+    padding: 1.4cm !important; /* Outer border pushed inside from paper edge: 1.4 cm */
     box-sizing: border-box !important;
     user-select: none;
 }
@@ -1514,7 +1514,7 @@ label[for="labNameInput"] {
         max-height: 297mm !important;
         transform: scale(1) !important;
         box-shadow: none !important;
-        padding: 1.15cm !important;
+        padding: 1.4cm !important;
         margin: 0 auto !important;
         page-break-after: avoid !important;
         page-break-before: avoid !important;
