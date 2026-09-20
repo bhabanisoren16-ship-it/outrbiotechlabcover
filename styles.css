@@ -51,41 +51,53 @@ body {
     position: relative;
 
     /* ======================================================================
-       Automatic 4-Color Ambient Background System
-       Continuously cycles through 4 rich, distinct, academic & cyber palettes:
+       Automatic 6-Color Ambient Background System
+       Continuously cycles through 6 rich, distinct, academic & cyber palettes:
        1. Royal Sapphire Blue (OUTR Official Academic Heritage)
        2. Cosmic Amethyst Purple (Mystic Cyber Studio Elegance)
-        3. Electric Ocean Cyan (Luminous Cyber Azure & Technological Precision)
-        4. Electric Orchid Magenta (Vivid Cyber Neon & Modern Cosmic Luxury)
+       3. Electric Orchid Magenta (Vivid Cyber Neon & Modern Luxury)
+       4. Deep Cyber Indigo (Luminous Studio Violet & Signature Aesthetic)
+       5. Emerald Aurora Green (Technological Vitality & Precision)
+       6. Electric Ocean Cyan (Luminous Cyber Azure)
        ====================================================================== */
     background: linear-gradient(
         -45deg,
-        #0b164f 0%,
-        #1d4ed8 12%,
-        #3b0764 25%,
-        #7e22ce 37%,
-        #032742 50%,
-        #0ea5e9 62%,
-        #2d0536 75%,
-        #c026d3 87%,
-        #0b164f 100%
+        #070e38 0%,
+        #1e40af 8%,
+        #26053e 17%,
+        #6b21a8 25%,
+        #360338 33%,
+        #86198f 42%,
+        #131133 50%,
+        #4338ca 58%,
+        #011f18 67%,
+        #047857 75%,
+        #021c30 83%,
+        #0284c7 92%,
+        #070e38 100%
     ) fixed;
-    background-size: 400% 400%;
-    animation: autoColorShift 24s ease-in-out infinite;
+    background-size: 600% 600%;
+    animation: autoColorShift 48s ease-in-out infinite;
 }
 
 @keyframes autoColorShift {
     0% {
         background-position: 0% 50%;
     }
-    25% {
+    17% {
         background-position: 50% 100%;
+    }
+    33% {
+        background-position: 100% 100%;
     }
     50% {
         background-position: 100% 50%;
     }
-    75% {
+    67% {
         background-position: 50% 0%;
+    }
+    83% {
+        background-position: 0% 0%;
     }
     100% {
         background-position: 0% 50%;
@@ -749,7 +761,7 @@ label[for="labNameInput"] {
     color: #000000;
     font-family: 'Times New Roman', Times, serif;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.1);
-    padding: 1.4cm !important; /* Outer border pushed inside from paper edge: 1.4 cm */
+    padding: 1.6cm !important; /* Outer border pushed inside from paper edge: 1.6 cm */
     box-sizing: border-box !important;
     user-select: none;
 }
@@ -1138,6 +1150,10 @@ label[for="labNameInput"] {
 
 /* Tablet Portrait & Mobile Unified Continuous View (<= 900px) */
 @media (max-width: 900px) {
+    body {
+        background-attachment: scroll !important;
+    }
+
     .app-container {
         height: 100vh;
         height: 100dvh;
@@ -1514,7 +1530,7 @@ label[for="labNameInput"] {
         max-height: 297mm !important;
         transform: scale(1) !important;
         box-shadow: none !important;
-        padding: 1.4cm !important;
+        padding: 1.6cm !important;
         margin: 0 auto !important;
         page-break-after: avoid !important;
         page-break-before: avoid !important;
