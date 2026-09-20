@@ -995,30 +995,14 @@ label[for="labNameInput"] {
 }
 
 /* ==========================================================================
-   Toast Notification
+   Toast Notification (Hidden for seamless experience)
    ========================================================================== */
 
 .toast {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    background: #1c131a;
-    color: #fefce8;
-    padding: 12px 20px;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--accent-gold);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 0 15px rgba(245, 158, 11, 0.2);
-    font-size: 0.875rem;
-    font-weight: 500;
-    transform: translateY(100px);
-    opacity: 0;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: 1000;
-}
-
-.toast.show {
-    transform: translateY(0);
-    opacity: 1;
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
 }
 
 /* ==========================================================================
