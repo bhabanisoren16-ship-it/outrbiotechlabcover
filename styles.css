@@ -1530,7 +1530,10 @@ label[for="labNameInput"] {
     border: 1px solid rgba(129, 140, 248, 0.35);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    font-size: 0.78rem;
+    font-size: 0.74rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
     color: #e2e8f0;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
     transition: all 0.25s ease;
@@ -1552,7 +1555,9 @@ label[for="labNameInput"] {
 
 .header-credit-badge strong {
     color: #ffffff;
-    font-weight: 700;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
     background: linear-gradient(135deg, #ffffff 0%, #c7d2fe 50%, #38bdf8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -1578,6 +1583,7 @@ label[for="labNameInput"] {
     -webkit-backdrop-filter: blur(16px);
     box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    text-transform: uppercase;
 }
 
 .sidebar-credit-card:hover {
@@ -1605,27 +1611,31 @@ label[for="labNameInput"] {
     display: flex;
     flex-direction: column;
     gap: 2px;
+    text-transform: uppercase;
 }
 
 .credit-badge-title {
-    font-size: 0.72rem;
+    font-size: 0.70rem;
     text-transform: uppercase;
-    letter-spacing: 0.8px;
+    letter-spacing: 1.0px;
     color: #94a3b8;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .credit-badge-team {
-    font-size: 0.98rem;
-    font-weight: 700;
-    letter-spacing: 0.3px;
+    font-size: 0.96rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
     background: linear-gradient(135deg, #ffffff 0%, #c7d2fe 50%, #38bdf8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 .credit-badge-sub {
-    font-size: 0.70rem;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     color: #cbd5e1;
     opacity: 0.75;
 }
@@ -1644,10 +1654,20 @@ label[for="labNameInput"] {
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     color: #94a3b8;
-    font-size: 0.82rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
     user-select: none;
     transition: all 0.2s ease;
+}
+
+.paper-preview-credit strong {
+    color: #ffffff;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
 }
 
 .paper-preview-credit:hover {
