@@ -1640,50 +1640,6 @@ label[for="labNameInput"] {
     opacity: 0.75;
 }
 
-/* Paper Viewport Floating Credit */
-.paper-preview-credit {
-    margin-top: 24px;
-    margin-bottom: 20px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 18px;
-    border-radius: 9999px;
-    background: rgba(10, 14, 35, 0.60);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    color: #94a3b8;
-    font-size: 0.78rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
-    user-select: none;
-    transition: all 0.2s ease;
-}
-
-.paper-preview-credit strong {
-    color: #ffffff;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-}
-
-.paper-preview-credit:hover {
-    color: #e2e8f0;
-    border-color: rgba(129, 140, 248, 0.4);
-    background: rgba(10, 14, 35, 0.80);
-}
-
-.paper-preview-credit i {
-    color: #38bdf8;
-    font-size: 0.88rem;
-}
-
-.paper-preview-credit strong {
-    color: #ffffff;
-}
 
 @media (max-width: 900px) {
     .header-credit-badge {
@@ -1715,8 +1671,7 @@ label[for="labNameInput"] {
     .mobile-nav-bar,
     .mobile-bottom-bar,
     .header-credit-badge,
-    .sidebar-credit-card,
-    .paper-preview-credit {
+    .sidebar-credit-card {
         display: none !important;
     }
 
