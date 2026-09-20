@@ -44,11 +44,65 @@
 
 body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background: linear-gradient(90deg, #000000 0%, #3533cd 100%) no-repeat fixed;
     color: var(--text-main);
     min-height: 100vh;
     overflow-x: hidden;
     line-height: 1.5;
+    position: relative;
+
+    /* ======================================================================
+       Automatic 4-Color Ambient Background System
+       Continuously cycles through 4 rich, distinct, academic & cyber palettes:
+       1. Royal Sapphire Blue (OUTR Official Academic Heritage)
+       2. Cosmic Amethyst Purple (Mystic Cyber Studio Elegance)
+        3. Electric Ocean Cyan (Luminous Cyber Azure & Technological Precision)
+        4. Electric Orchid Magenta (Vivid Cyber Neon & Modern Cosmic Luxury)
+       ====================================================================== */
+    background: linear-gradient(
+        -45deg,
+        #0b164f 0%,
+        #1d4ed8 12%,
+        #3b0764 25%,
+        #7e22ce 37%,
+        #032742 50%,
+        #0ea5e9 62%,
+        #2d0536 75%,
+        #c026d3 87%,
+        #0b164f 100%
+    ) fixed;
+    background-size: 400% 400%;
+    animation: autoColorShift 24s ease-in-out infinite;
+}
+
+@keyframes autoColorShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    25% {
+        background-position: 50% 100%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    75% {
+        background-position: 50% 0%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Subtle Cyber Studio Grid Pattern Overlay */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
 }
 
 /* ==========================================================================
@@ -56,6 +110,8 @@ body {
    ========================================================================== */
 
 .app-container {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -1281,6 +1337,7 @@ body {
         overflow: hidden !important;
     }
 
+    body::before,
     .app-header,
     .sidebar,
     .preview-toolbar,

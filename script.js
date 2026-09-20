@@ -660,6 +660,20 @@ document.addEventListener('DOMContentLoaded', () => {
         // Safe fallback for restricted storage environments
     }
 
+    // ==========================================================================
+    // Mobile Theme-Color Synchronization
+    // Syncs mobile browser address bar color with the 24s 4-color CSS gradient
+    // ==========================================================================
+    const THEME_COLORS = ['#0b164f', '#3b0764', '#032742', '#2d0536'];
+    let themeIdx = 0;
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    if (metaTheme) {
+        setInterval(() => {
+            themeIdx = (themeIdx + 1) % THEME_COLORS.length;
+            metaTheme.setAttribute('content', THEME_COLORS[themeIdx]);
+        }, 6000);
+    }
+
     // Initialize fresh preview
     updatePreview();
 });
