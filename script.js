@@ -478,13 +478,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const wrapper = document.createElement('div');
         wrapper.id = 'exportWrapper';
         wrapper.style.position = 'fixed';
-        wrapper.style.left = '0';
-        wrapper.style.top = '0';
+        wrapper.style.left = '-99999px';
+        wrapper.style.top = '-99999px';
         wrapper.style.width = '794px';
         wrapper.style.height = '1123px';
         wrapper.style.zIndex = '-99999';
-        wrapper.style.opacity = '1';
-        wrapper.style.visibility = 'visible';
+        wrapper.style.opacity = '0';
+        wrapper.style.visibility = 'hidden';
         wrapper.style.pointerEvents = 'none';
         wrapper.style.background = '#ffffff';
         wrapper.style.overflow = 'hidden';
@@ -551,6 +551,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     downloadPdfBtn.addEventListener('click', async () => {
+        downloadPdfBtn.blur();
         showToast('Generating ultra-high-resolution A4 PDF (384 DPI)...');
         
         if (document.fonts && document.fonts.ready) {
@@ -577,8 +578,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 x: 0,
                 y: 0,
                 onclone: (clonedDoc) => {
+                    const clonedWrapper = clonedDoc.getElementById('exportWrapper');
+                    if (clonedWrapper) {
+                        clonedWrapper.style.position = 'absolute';
+                        clonedWrapper.style.left = '0';
+                        clonedWrapper.style.top = '0';
+                        clonedWrapper.style.opacity = '1';
+                        clonedWrapper.style.visibility = 'visible';
+                        clonedWrapper.style.zIndex = '99999';
+                    }
                     const clonedSheet = clonedDoc.getElementById('exportCoverSheet') || clonedDoc.getElementById('coverSheet');
                     if (clonedSheet) {
+                        clonedSheet.style.position = 'relative';
+                        clonedSheet.style.left = '0';
+                        clonedSheet.style.top = '0';
                         clonedSheet.style.transform = 'none';
                         clonedSheet.style.webkitTransform = 'none';
                         clonedSheet.style.boxShadow = 'none';
@@ -586,6 +599,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         clonedSheet.style.height = '1123px';
                         clonedSheet.style.padding = '1.6cm';
                         clonedSheet.style.boxSizing = 'border-box';
+                        clonedSheet.style.opacity = '1';
+                        clonedSheet.style.visibility = 'visible';
                     }
                     const clonedLogos = clonedDoc.querySelectorAll('#exportCoverSheet img, #coverSheet img, .university-logo');
                     clonedLogos.forEach(img => {
@@ -622,6 +637,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     downloadPngBtn.addEventListener('click', async () => {
+        downloadPngBtn.blur();
         showToast('Rendering ultra-high-resolution PNG image (384 DPI)...');
         
         if (document.fonts && document.fonts.ready) {
@@ -647,8 +663,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 x: 0,
                 y: 0,
                 onclone: (clonedDoc) => {
+                    const clonedWrapper = clonedDoc.getElementById('exportWrapper');
+                    if (clonedWrapper) {
+                        clonedWrapper.style.position = 'absolute';
+                        clonedWrapper.style.left = '0';
+                        clonedWrapper.style.top = '0';
+                        clonedWrapper.style.opacity = '1';
+                        clonedWrapper.style.visibility = 'visible';
+                        clonedWrapper.style.zIndex = '99999';
+                    }
                     const clonedSheet = clonedDoc.getElementById('exportCoverSheet') || clonedDoc.getElementById('coverSheet');
                     if (clonedSheet) {
+                        clonedSheet.style.position = 'relative';
+                        clonedSheet.style.left = '0';
+                        clonedSheet.style.top = '0';
                         clonedSheet.style.transform = 'none';
                         clonedSheet.style.webkitTransform = 'none';
                         clonedSheet.style.boxShadow = 'none';
@@ -656,6 +684,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         clonedSheet.style.height = '1123px';
                         clonedSheet.style.padding = '1.6cm';
                         clonedSheet.style.boxSizing = 'border-box';
+                        clonedSheet.style.opacity = '1';
+                        clonedSheet.style.visibility = 'visible';
                     }
                     const clonedLogos = clonedDoc.querySelectorAll('#exportCoverSheet img, #coverSheet img, .university-logo');
                     clonedLogos.forEach(img => {
