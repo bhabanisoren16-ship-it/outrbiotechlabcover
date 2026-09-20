@@ -181,10 +181,10 @@ body::before {
 .header-credit-badge {
     display: inline-flex;
     align-items: center;
-    gap: 7px;
+    justify-content: center;
     background: rgba(99, 102, 241, 0.12);
     border: 1px solid rgba(129, 140, 248, 0.30);
-    padding: 5px 12px;
+    padding: 6px 14px;
     border-radius: 20px;
     font-size: 0.73rem;
     color: #cbd5e1;
@@ -203,11 +203,6 @@ body::before {
     border-color: #818cf8;
     color: #ffffff;
     transform: translateY(-1px);
-}
-
-.header-credit-badge i {
-    color: #818cf8;
-    font-size: 0.85rem;
 }
 
 .header-credit-badge strong {
@@ -715,8 +710,8 @@ label[for="labNameInput"] {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    padding: 14px 18px;
+    text-align: center;
+    padding: 12px 18px;
     background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(14, 165, 233, 0.08));
     border: 1px solid rgba(129, 140, 248, 0.28);
     border-radius: var(--radius-md);
@@ -734,25 +729,11 @@ label[for="labNameInput"] {
     transform: translateY(-1px);
 }
 
-.credit-badge-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #4f46e5, #0ea5e9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ffffff;
-    font-size: 0.95rem;
-    box-shadow: 0 0 12px rgba(79, 70, 229, 0.55);
-    flex-shrink: 0;
-}
-
 .credit-badge-text {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    line-height: 1.25;
+    align-items: center;
+    line-height: 1.35;
 }
 
 .credit-label {
