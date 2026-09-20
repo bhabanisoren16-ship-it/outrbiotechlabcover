@@ -1634,6 +1634,21 @@ label[for="labNameInput"] {
     .header-credit-badge {
         display: none !important;
     }
+
+    .credit-badge-icon {
+        display: none !important;
+    }
+
+    .sidebar-credit-card {
+        justify-content: center;
+        text-align: center;
+        padding: 14px 16px;
+    }
+
+    .credit-badge-content {
+        align-items: center;
+        text-align: center;
+    }
 }
 
 /* High Precision Print Settings */
