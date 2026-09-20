@@ -937,8 +937,8 @@ label[for="labNameInput"] {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 0.6cm; /* With 0.6cm margin from last info-row = 1.2cm (GROUP → top of logo: ≈ 1.0–1.2 cm) */
-    margin-bottom: 0.5cm; /* Reduced space: Logo bottom → DEPARTMENT OF: 0.5 cm */
+    margin-top: 0.25cm; /* Pushed logo up: reduced distance from student info */
+    margin-bottom: 0.85cm; /* Balanced space: Logo bottom → DEPARTMENT OF */
     min-height: auto;
 }
 
