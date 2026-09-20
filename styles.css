@@ -854,46 +854,6 @@ label[for="labNameInput"] {
     border-radius: 4px;
 }
 
-/* ==========================================================================
-   Live Preview Bottom Status & Credits Bar (Desktop & Mobile)
-   ========================================================================== */
-
-.preview-status-bar {
-    height: 40px;
-    flex-shrink: 0;
-    background: rgba(10, 14, 35, 0.50);
-    backdrop-filter: blur(20px) saturate(160%);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 20px;
-    z-index: 10;
-}
-
-.preview-status-bar .status-credit {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.80rem;
-    color: #cbd5e1;
-    letter-spacing: 0.3px;
-}
-
-.preview-status-bar .status-credit i {
-    color: #818cf8;
-    font-size: 0.85rem;
-}
-
-.preview-status-bar .status-credit strong {
-    color: #ffffff;
-    font-weight: 700;
-    background: linear-gradient(90deg, #ffffff, #a5b4fc);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
 /* A4 Sheet Wrapper for responsive zoom and centering */
 .a4-sheet-wrapper {
     position: relative;
@@ -1685,8 +1645,7 @@ label[for="labNameInput"] {
     .mobile-nav-bar,
     .mobile-bottom-bar,
     .site-credit-card,
-    .header-credit-badge,
-    .preview-status-bar {
+    .header-credit-badge {
         display: none !important;
     }
 
