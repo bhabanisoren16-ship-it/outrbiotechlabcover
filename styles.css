@@ -1013,7 +1013,7 @@ label[for="labNameInput"] {
     color: #000;
     letter-spacing: 0.6px;
     margin-top: 0;
-    margin-bottom: 0.28cm; /* Reduced space between department and college name */
+    margin-bottom: 0.44cm; /* Balanced space between department and college name */
     line-height: 1.2;
 }
 
