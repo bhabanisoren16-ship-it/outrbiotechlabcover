@@ -185,7 +185,15 @@ document.addEventListener('DOMContentLoaded', () => {
         prevSubmittedByLabel.textContent = submittedByLabelInput.value.trim() || 'SUBMITTED BY :';
         
         const nameVal = studentNameInput.value.trim();
-        prevStudentName.textContent = nameVal ? (nameVal.toUpperCase().startsWith('NAME') ? nameVal : `NAME - ${nameVal}`) : 'NAME - ';
+        let formattedName = 'NAME: ';
+        if (nameVal) {
+            if (/^NAME\s*[-:]?\s*/i.test(nameVal)) {
+                formattedName = nameVal.replace(/^NAME\s*[-:]?\s*/i, 'NAME: ');
+            } else {
+                formattedName = `NAME: ${nameVal}`;
+            }
+        }
+        prevStudentName.textContent = formattedName;
         
         const regVal = regNoInput.value.trim();
         prevRegNo.textContent = regVal ? (regVal.toUpperCase().startsWith('REGD') ? regVal : `REGD NO.: ${regVal}`) : 'REGD NO.: ';
