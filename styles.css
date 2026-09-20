@@ -956,7 +956,7 @@ label[for="labNameInput"] {
     color: #000;
     letter-spacing: 0.6px;
     margin-top: 0;
-    margin-bottom: 0.35cm; /* Reduced space between department and college name: 0.35 cm */
+    margin-bottom: 0.6cm; /* Adjusted balanced space between department and college name: 0.6cm */
     line-height: 1.2;
 }
 
