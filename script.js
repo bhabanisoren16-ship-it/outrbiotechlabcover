@@ -503,15 +503,15 @@ document.addEventListener('DOMContentLoaded', () => {
             await document.fonts.ready;
         }
 
-        // Optimized high-performance capture (240 DPI, ~5.5 MP vs 14.3 MP)
-        // 10x faster execution while preserving razor-sharp academic print quality
+        // Full ultra-high resolution 384 DPI (3176 x 4492 px integer scaling)
+        // 100% uncompromised visual fidelity for precision A4 academic printing
         return await html2canvas(coverSheet, {
-            scale: 2.5,
+            scale: 4, // 384 DPI ultra-high definition
             useCORS: true,
             allowTaint: true,
             logging: false,
             backgroundColor: '#ffffff',
-            imageTimeout: 6000,
+            imageTimeout: 15000,
             width: 794,
             height: 1123,
             windowWidth: 1200,
@@ -601,18 +601,19 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const canvas = await generateA4Canvas();
 
-            // Hardware-accelerated high-definition JPEG encoding (super-fast, crisp text)
-            const imgData = canvas.toDataURL('image/jpeg', 0.96);
+            // 100% lossless PNG stream preserving maximum 384 DPI pixel fidelity
+            const imgData = canvas.toDataURL('image/png', 1.0);
             const jsPdfConstructor = (window.jspdf && window.jspdf.jsPDF) ? window.jspdf.jsPDF : window.jsPDF;
             const pdf = new jsPdfConstructor({
                 orientation: 'portrait',
                 unit: 'mm',
                 format: 'a4',
-                compress: true
+                compress: true,
+                floatPrecision: 16
             });
 
-            // Ultra-fast 1-page PDF embedding
-            pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
+            // Fast, lossless 1-page A4 PDF embedding (210mm x 297mm)
+            pdf.addImage(imgData, 'PNG', 0, 0, 210, 297, undefined, 'FAST');
             pdf.save(`${labFileName}_Cover_Page.pdf`);
 
             setTimeout(autoClearAfterDownload, 300);
@@ -636,7 +637,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const canvas = await generateA4Canvas();
 
-            // High-speed native Blob streaming
+            // Native Blob streaming for lossless 384 DPI PNG
             if (canvas.toBlob) {
                 canvas.toBlob((blob) => {
                     if (blob) {
@@ -647,19 +648,19 @@ document.addEventListener('DOMContentLoaded', () => {
                         document.body.appendChild(link);
                         link.click();
                         document.body.removeChild(link);
-                        setTimeout(() => URL.revokeObjectURL(blobUrl), 15000);
+                        setTimeout(() => URL.revokeObjectURL(blobUrl), 30000);
                     } else {
                         const link = document.createElement('a');
                         link.download = fileName;
-                        link.href = canvas.toDataURL('image/png');
+                        link.href = canvas.toDataURL('image/png', 1.0);
                         link.click();
                     }
                     setTimeout(autoClearAfterDownload, 300);
-                }, 'image/png');
+                }, 'image/png', 1.0);
             } else {
                 const link = document.createElement('a');
                 link.download = fileName;
-                link.href = canvas.toDataURL('image/png');
+                link.href = canvas.toDataURL('image/png', 1.0);
                 link.click();
                 setTimeout(autoClearAfterDownload, 300);
             }
