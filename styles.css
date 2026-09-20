@@ -186,13 +186,15 @@ body::before {
     border: 1px solid rgba(129, 140, 248, 0.30);
     padding: 5px 12px;
     border-radius: 20px;
-    font-size: 0.76rem;
+    font-size: 0.73rem;
     color: #cbd5e1;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     margin-left: 14px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     transition: all 0.2s ease;
 }
 
@@ -211,6 +213,7 @@ body::before {
 .header-credit-badge strong {
     color: #ffffff;
     font-weight: 700;
+    letter-spacing: 0.6px;
 }
 
 .header-actions {
@@ -761,14 +764,15 @@ label[for="labNameInput"] {
 }
 
 .credit-author {
-    font-size: 0.92rem;
+    font-size: 0.90rem;
     font-weight: 700;
     color: #ffffff;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.6px;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
     background: linear-gradient(90deg, #ffffff, #c7d2fe);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
 }
 
 /* ==========================================================================
