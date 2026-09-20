@@ -476,6 +476,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function createExportWrapper() {
         const wrapper = document.createElement('div');
+        wrapper.id = 'exportWrapper';
         wrapper.style.position = 'fixed';
         wrapper.style.left = '0';
         wrapper.style.top = '0';
@@ -489,18 +490,36 @@ document.addEventListener('DOMContentLoaded', () => {
         wrapper.style.overflow = 'hidden';
 
         const clone = coverSheet.cloneNode(true);
+        clone.id = 'exportCoverSheet';
         clone.style.position = 'relative';
         clone.style.left = '0';
         clone.style.top = '0';
         clone.style.transform = 'none';
+        clone.style.webkitTransform = 'none';
         clone.style.margin = '0';
         clone.style.boxShadow = 'none';
         clone.style.width = '794px';
+        clone.style.minWidth = '794px';
+        clone.style.maxWidth = '794px';
         clone.style.height = '1123px';
+        clone.style.minHeight = '1123px';
+        clone.style.maxHeight = '1123px';
         clone.style.backgroundColor = '#ffffff';
+        clone.style.padding = '1.6cm';
+        clone.style.boxSizing = 'border-box';
         clone.style.webkitFontSmoothing = 'antialiased';
         clone.style.mozOsxFontSmoothing = 'grayscale';
         clone.style.textRendering = 'geometricPrecision';
+
+        // Ensure logo inside clone maintains full 5.8cm size and maximum contrast
+        const logoInClone = clone.querySelector('.university-logo') || clone.querySelector('#prevLogo');
+        if (logoInClone) {
+            logoInClone.style.width = '5.8cm';
+            logoInClone.style.height = '5.8cm';
+            logoInClone.style.maxWidth = '5.8cm';
+            logoInClone.style.maxHeight = '5.8cm';
+            logoInClone.style.imageRendering = '-webkit-optimize-contrast';
+        }
 
         wrapper.appendChild(clone);
         document.body.appendChild(wrapper);
@@ -548,30 +567,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 allowTaint: true,
                 logging: false,
                 backgroundColor: '#ffffff',
-                imageTimeout: 0,
+                imageTimeout: 15000,
                 width: 794,
                 height: 1123,
-                windowWidth: 794,
-                windowHeight: 1123,
+                windowWidth: 1200, // Forces pure desktop rendering environment so mobile media queries never downsample export
+                windowHeight: 1600,
                 scrollX: 0,
                 scrollY: 0,
+                x: 0,
+                y: 0,
                 onclone: (clonedDoc) => {
-                    const clonedSheet = clonedDoc.getElementById('coverSheet');
+                    const clonedSheet = clonedDoc.getElementById('exportCoverSheet') || clonedDoc.getElementById('coverSheet');
                     if (clonedSheet) {
                         clonedSheet.style.transform = 'none';
+                        clonedSheet.style.webkitTransform = 'none';
                         clonedSheet.style.boxShadow = 'none';
+                        clonedSheet.style.width = '794px';
+                        clonedSheet.style.height = '1123px';
+                        clonedSheet.style.padding = '1.6cm';
+                        clonedSheet.style.boxSizing = 'border-box';
                     }
-                    const clonedLogo = clonedDoc.getElementById('prevLogo');
-                    if (clonedLogo) {
-                        clonedLogo.style.imageRendering = '-webkit-optimize-contrast';
-                    }
+                    const clonedLogos = clonedDoc.querySelectorAll('#exportCoverSheet img, #coverSheet img, .university-logo');
+                    clonedLogos.forEach(img => {
+                        img.style.imageRendering = '-webkit-optimize-contrast';
+                        img.style.imageRendering = 'crisp-edges';
+                    });
                 }
             });
 
             if (document.body.contains(wrapper)) document.body.removeChild(wrapper);
 
             // Lossless PNG stream preserving 100% pixel fidelity
-            const imgData = canvas.toDataURL('image/png');
+            const imgData = canvas.toDataURL('image/png', 1.0);
             const jsPdfConstructor = (window.jspdf && window.jspdf.jsPDF) ? window.jspdf.jsPDF : window.jsPDF;
             const pdf = new jsPdfConstructor({
                 orientation: 'portrait',
@@ -610,34 +637,67 @@ document.addEventListener('DOMContentLoaded', () => {
                 allowTaint: true,
                 logging: false,
                 backgroundColor: '#ffffff',
-                imageTimeout: 0,
+                imageTimeout: 15000,
                 width: 794,
                 height: 1123,
-                windowWidth: 794,
-                windowHeight: 1123,
+                windowWidth: 1200, // Forces pure desktop rendering environment so mobile media queries never downsample export
+                windowHeight: 1600,
                 scrollX: 0,
                 scrollY: 0,
+                x: 0,
+                y: 0,
                 onclone: (clonedDoc) => {
-                    const clonedSheet = clonedDoc.getElementById('coverSheet');
+                    const clonedSheet = clonedDoc.getElementById('exportCoverSheet') || clonedDoc.getElementById('coverSheet');
                     if (clonedSheet) {
                         clonedSheet.style.transform = 'none';
+                        clonedSheet.style.webkitTransform = 'none';
                         clonedSheet.style.boxShadow = 'none';
+                        clonedSheet.style.width = '794px';
+                        clonedSheet.style.height = '1123px';
+                        clonedSheet.style.padding = '1.6cm';
+                        clonedSheet.style.boxSizing = 'border-box';
                     }
-                    const clonedLogo = clonedDoc.getElementById('prevLogo');
-                    if (clonedLogo) {
-                        clonedLogo.style.imageRendering = '-webkit-optimize-contrast';
-                    }
+                    const clonedLogos = clonedDoc.querySelectorAll('#exportCoverSheet img, #coverSheet img, .university-logo');
+                    clonedLogos.forEach(img => {
+                        img.style.imageRendering = '-webkit-optimize-contrast';
+                        img.style.imageRendering = 'crisp-edges';
+                    });
                 }
             });
 
             if (document.body.contains(wrapper)) document.body.removeChild(wrapper);
-            const link = document.createElement('a');
             const labFileName = (labNameInput.value.trim() || 'OUTR_Lab').replace(/[^a-zA-Z0-9]/g, '_');
-            link.download = `${labFileName}_Cover_Page.png`;
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-            showToast('Ultra-high quality PNG downloaded! Details cleared for privacy.');
-            setTimeout(autoClearAfterDownload, 1200);
+            const fileName = `${labFileName}_Cover_Page.png`;
+
+            // Use native Blob on mobile and modern browsers to eliminate base64 memory limits and prevent downsampling
+            if (canvas.toBlob) {
+                canvas.toBlob((blob) => {
+                    if (blob) {
+                        const blobUrl = URL.createObjectURL(blob);
+                        const link = document.createElement('a');
+                        link.download = fileName;
+                        link.href = blobUrl;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        setTimeout(() => URL.revokeObjectURL(blobUrl), 60000);
+                    } else {
+                        const link = document.createElement('a');
+                        link.download = fileName;
+                        link.href = canvas.toDataURL('image/png', 1.0);
+                        link.click();
+                    }
+                    showToast('Ultra-high quality PNG downloaded! Details cleared for privacy.');
+                    setTimeout(autoClearAfterDownload, 1200);
+                }, 'image/png', 1.0);
+            } else {
+                const link = document.createElement('a');
+                link.download = fileName;
+                link.href = canvas.toDataURL('image/png', 1.0);
+                link.click();
+                showToast('Ultra-high quality PNG downloaded! Details cleared for privacy.');
+                setTimeout(autoClearAfterDownload, 1200);
+            }
         } catch (err) {
             if (document.body.contains(wrapper)) document.body.removeChild(wrapper);
             console.error('PNG export failed:', err);
