@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         prevDegreeBranch.textContent = formattedBranch;
 
-        prevSemester.textContent = semesterInput.value.trim();
+        prevSemester.textContent = semesterInput.value.trim() || '3RD SEMESTER';
 
         prevSubmittedByLabel.textContent = submittedByLabelInput.value.trim() || 'SUBMITTED BY :';
         
@@ -306,7 +306,14 @@ document.addEventListener('DOMContentLoaded', () => {
         labNameInput.value = preset.labName;
         docTypeInput.value = preset.docType;
         degreeBranchInput.value = preset.degreeBranch.replace(/^B\.?\s*TECH\s*/i, '').trim();
-        semesterInput.value = preset.semester;
+        if (preset.semester) {
+            let opt = Array.from(semesterInput.options).find(o => o.value.toUpperCase() === preset.semester.toUpperCase());
+            if (!opt) {
+                opt = new Option(preset.semester, preset.semester);
+                semesterInput.add(opt);
+            }
+            semesterInput.value = opt.value;
+        }
         submittedByLabelInput.value = preset.submittedByLabel || 'SUBMITTED BY :';
         if (preset.studentName) studentNameInput.value = preset.studentName;
         if (preset.regNo) regNoInput.value = preset.regNo;
@@ -342,7 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
         labNameInput.value = '';
         docTypeInput.value = 'LAB RECORD';
         degreeBranchInput.value = '';
-        semesterInput.value = '';
+        semesterInput.value = '3RD SEMESTER';
         submittedByLabelInput.value = 'SUBMITTED BY :';
         studentNameInput.value = '';
         regNoInput.value = '';

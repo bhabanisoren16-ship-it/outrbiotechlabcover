@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#3533cd">
     <title>OUTR Lab Cover Generator | Academic Cover Page Creator</title>
     <meta name="description" content="Generate high quality printable A4 lab cover pages for Odisha University of Technology and Research (OUTR). Instant PDF download and custom layout options.">
-    <link rel="stylesheet" href="styles.css?v=4.2">
+    <link rel="stylesheet" href="styles.css?v=4.3">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -116,17 +116,16 @@
                             </div>
                             <div class="form-group">
                                 <label for="semesterInput">Semester</label>
-                                <input type="text" id="semesterInput" list="semesterList" placeholder="3RD SEMESTER" value="">
-                                <datalist id="semesterList">
-                                    <option value="1ST SEMESTER">
-                                    <option value="2ND SEMESTER">
-                                    <option value="3RD SEMESTER">
-                                    <option value="4TH SEMESTER">
-                                    <option value="5TH SEMESTER">
-                                    <option value="6TH SEMESTER">
-                                    <option value="7TH SEMESTER">
-                                    <option value="8TH SEMESTER">
-                                </datalist>
+                                <select id="semesterInput">
+                                    <option value="1ST SEMESTER">1ST SEMESTER</option>
+                                    <option value="2ND SEMESTER">2ND SEMESTER</option>
+                                    <option value="3RD SEMESTER" selected>3RD SEMESTER</option>
+                                    <option value="4TH SEMESTER">4TH SEMESTER</option>
+                                    <option value="5TH SEMESTER">5TH SEMESTER</option>
+                                    <option value="6TH SEMESTER">6TH SEMESTER</option>
+                                    <option value="7TH SEMESTER">7TH SEMESTER</option>
+                                    <option value="8TH SEMESTER">8TH SEMESTER</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -332,6 +331,6 @@
         <div class="toast" id="toast">Cover page updated!</div>
     </div>
 
-    <script src="script.js?v=4.2"></script>
+    <script src="script.js?v=4.3"></script>
 </body>
 </html>
