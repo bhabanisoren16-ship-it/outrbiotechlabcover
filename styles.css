@@ -1515,6 +1515,162 @@ label[for="labNameInput"] {
 }
 
 
+/* ==========================================================================
+   Website Author & Attribution Badges (Biotechnology 2025-29)
+   ========================================================================== */
+
+.header-credit-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    margin-left: 14px;
+    border-radius: 9999px;
+    background: rgba(99, 102, 241, 0.16);
+    border: 1px solid rgba(129, 140, 248, 0.35);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    font-size: 0.78rem;
+    color: #e2e8f0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+    transition: all 0.25s ease;
+    user-select: none;
+}
+
+.header-credit-badge:hover {
+    background: rgba(99, 102, 241, 0.28);
+    border-color: rgba(165, 180, 252, 0.6);
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.35);
+    transform: translateY(-1px);
+}
+
+.header-credit-badge i {
+    color: #38bdf8;
+    font-size: 0.88rem;
+    animation: pulseIcon 3s ease-in-out infinite;
+}
+
+.header-credit-badge strong {
+    color: #ffffff;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ffffff 0%, #c7d2fe 50%, #38bdf8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@keyframes pulseIcon {
+    0%, 100% { transform: scale(1); opacity: 0.85; }
+    50% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.7)); }
+}
+
+/* Sidebar Credit Card */
+.sidebar-credit-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    padding: 14px 16px;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, rgba(20, 20, 60, 0.65) 0%, rgba(30, 25, 75, 0.55) 100%);
+    border: 1px solid rgba(129, 140, 248, 0.28);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sidebar-credit-card:hover {
+    border-color: rgba(129, 140, 248, 0.55);
+    box-shadow: 0 12px 30px -4px rgba(99, 102, 241, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.credit-badge-icon {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.40), rgba(56, 189, 248, 0.25));
+    border: 1px solid rgba(165, 180, 252, 0.4);
+    color: #67e8f9;
+    font-size: 1.15rem;
+    box-shadow: 0 0 14px rgba(99, 102, 241, 0.4);
+}
+
+.credit-badge-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.credit-badge-title {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #94a3b8;
+    font-weight: 600;
+}
+
+.credit-badge-team {
+    font-size: 0.98rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    background: linear-gradient(135deg, #ffffff 0%, #c7d2fe 50%, #38bdf8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.credit-badge-sub {
+    font-size: 0.70rem;
+    color: #cbd5e1;
+    opacity: 0.75;
+}
+
+/* Paper Viewport Floating Credit */
+.paper-preview-credit {
+    margin-top: 24px;
+    margin-bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: 9999px;
+    background: rgba(10, 14, 35, 0.60);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    color: #94a3b8;
+    font-size: 0.82rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    user-select: none;
+    transition: all 0.2s ease;
+}
+
+.paper-preview-credit:hover {
+    color: #e2e8f0;
+    border-color: rgba(129, 140, 248, 0.4);
+    background: rgba(10, 14, 35, 0.80);
+}
+
+.paper-preview-credit i {
+    color: #38bdf8;
+    font-size: 0.88rem;
+}
+
+.paper-preview-credit strong {
+    color: #ffffff;
+}
+
+@media (max-width: 900px) {
+    .header-credit-badge {
+        display: none !important;
+    }
+}
+
 /* High Precision Print Settings */
 @media print {
     @page {
@@ -1537,7 +1693,10 @@ label[for="labNameInput"] {
     .preview-toolbar,
     .toast,
     .mobile-nav-bar,
-    .mobile-bottom-bar {
+    .mobile-bottom-bar,
+    .header-credit-badge,
+    .sidebar-credit-card,
+    .paper-preview-credit {
         display: none !important;
     }
 
