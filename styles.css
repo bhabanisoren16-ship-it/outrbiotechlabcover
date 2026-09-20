@@ -1557,97 +1557,9 @@ label[for="labNameInput"] {
     -webkit-text-fill-color: transparent;
 }
 
-/* Sidebar Credit Card */
-.sidebar-credit-card {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-top: 14px;
-    margin-bottom: 6px;
-    padding: 14px 16px;
-    border-radius: var(--radius-md);
-    background: linear-gradient(135deg, rgba(20, 20, 60, 0.65) 0%, rgba(30, 25, 75, 0.55) 100%);
-    border: 1px solid rgba(129, 140, 248, 0.28);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    text-transform: uppercase;
-}
-
-.sidebar-credit-card:hover {
-    border-color: rgba(129, 140, 248, 0.55);
-    box-shadow: 0 12px 30px -4px rgba(99, 102, 241, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
-}
-
-.credit-badge-icon {
-    width: 42px;
-    height: 42px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.40), rgba(56, 189, 248, 0.25));
-    border: 1px solid rgba(165, 180, 252, 0.4);
-    color: #67e8f9;
-    font-size: 1.15rem;
-    box-shadow: 0 0 14px rgba(99, 102, 241, 0.4);
-}
-
-.credit-badge-content {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    text-transform: uppercase;
-}
-
-.credit-badge-title {
-    font-size: 0.70rem;
-    text-transform: uppercase;
-    letter-spacing: 1.0px;
-    color: #94a3b8;
-    font-weight: 700;
-}
-
-.credit-badge-team {
-    font-size: 0.96rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    background: linear-gradient(135deg, #ffffff 0%, #c7d2fe 50%, #38bdf8 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.credit-badge-sub {
-    font-size: 0.68rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: #cbd5e1;
-    opacity: 0.75;
-}
-
-
 @media (max-width: 900px) {
     .header-credit-badge {
         display: none !important;
-    }
-
-    .credit-badge-icon {
-        display: none !important;
-    }
-
-    .sidebar-credit-card {
-        justify-content: center;
-        text-align: center;
-        padding: 14px 16px;
-    }
-
-    .credit-badge-content {
-        align-items: center;
-        text-align: center;
     }
 }
 
@@ -1674,8 +1586,7 @@ label[for="labNameInput"] {
     .toast,
     .mobile-nav-bar,
     .mobile-bottom-bar,
-    .header-credit-badge,
-    .sidebar-credit-card {
+    .header-credit-badge {
         display: none !important;
     }
 
