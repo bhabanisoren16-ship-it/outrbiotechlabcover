@@ -471,61 +471,9 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileDownloadPdfBtn?.addEventListener('click', () => downloadPdfBtn.click());
 
     // ==========================================================================
-    // Export Handlers (PDF, PNG, Print)
+    // Export Handlers (PDF, PNG, Print) - Pure Seamless In-Memory Export
+    // Zero DOM pollution: live page is never touched, no ghost sheet flash
     // ==========================================================================
-
-    function createExportWrapper() {
-        const wrapper = document.createElement('div');
-        wrapper.id = 'exportWrapper';
-        wrapper.style.position = 'fixed';
-        wrapper.style.top = '150vh';
-        wrapper.style.left = '150vw';
-        wrapper.style.width = '794px';
-        wrapper.style.height = '1123px';
-        wrapper.style.zIndex = '-99999';
-        wrapper.style.opacity = '1';
-        wrapper.style.visibility = 'visible';
-        wrapper.style.pointerEvents = 'none';
-        wrapper.style.background = '#ffffff';
-        wrapper.style.overflow = 'hidden';
-
-        const clone = coverSheet.cloneNode(true);
-        clone.id = 'exportCoverSheet';
-        clone.style.position = 'relative';
-        clone.style.left = '0';
-        clone.style.top = '0';
-        clone.style.transform = 'none';
-        clone.style.webkitTransform = 'none';
-        clone.style.margin = '0';
-        clone.style.boxShadow = 'none';
-        clone.style.width = '794px';
-        clone.style.minWidth = '794px';
-        clone.style.maxWidth = '794px';
-        clone.style.height = '1123px';
-        clone.style.minHeight = '1123px';
-        clone.style.maxHeight = '1123px';
-        clone.style.backgroundColor = '#ffffff';
-        clone.style.padding = '1.6cm';
-        clone.style.boxSizing = 'border-box';
-        clone.style.webkitFontSmoothing = 'antialiased';
-        clone.style.mozOsxFontSmoothing = 'grayscale';
-        clone.style.textRendering = 'geometricPrecision';
-
-        // Ensure logo inside clone maintains full 5.8cm size and maximum contrast
-        const logoInClone = clone.querySelector('.university-logo') || clone.querySelector('#prevLogo');
-        if (logoInClone) {
-            logoInClone.style.width = '5.8cm';
-            logoInClone.style.height = '5.8cm';
-            logoInClone.style.maxWidth = '5.8cm';
-            logoInClone.style.maxHeight = '5.8cm';
-            logoInClone.style.imageRendering = '-webkit-optimize-contrast';
-        }
-
-        wrapper.appendChild(clone);
-        document.body.appendChild(wrapper);
-
-        return { wrapper, clone };
-    }
 
     function autoClearAfterDownload() {
         // Clear personal & student details
@@ -550,70 +498,113 @@ document.addEventListener('DOMContentLoaded', () => {
         updatePreview();
     }
 
+    async function generateA4Canvas() {
+        if (document.fonts && document.fonts.ready) {
+            await document.fonts.ready;
+        }
+
+        // Render directly from the live coverSheet element via html2canvas's isolated internal iframe
+        // ZERO elements are added or modified in the user's active viewport/document.body
+        return await html2canvas(coverSheet, {
+            scale: 4, // 384 DPI ultra-high definition (3176 x 4492 px integer scaling)
+            useCORS: true,
+            allowTaint: true,
+            logging: false,
+            backgroundColor: '#ffffff',
+            imageTimeout: 15000,
+            width: 794,
+            height: 1123,
+            windowWidth: 1200, // Isolated desktop viewport in cloned sandbox
+            windowHeight: 1600,
+            scrollX: 0,
+            scrollY: 0,
+            x: 0,
+            y: 0,
+            onclone: (clonedDoc) => {
+                // Remove all app chrome and surrounding navigation from the memory sandbox
+                const chromeSelectors = ['.app-header', '.mobile-nav-bar', '.sidebar', '.preview-toolbar', '.toast', '.mobile-bottom-bar', 'button'];
+                chromeSelectors.forEach(sel => {
+                    clonedDoc.querySelectorAll(sel).forEach(el => el.remove());
+                });
+
+                // Reset cloned body
+                if (clonedDoc.body) {
+                    clonedDoc.body.style.margin = '0';
+                    clonedDoc.body.style.padding = '0';
+                    clonedDoc.body.style.background = '#ffffff';
+                    clonedDoc.body.style.overflow = 'hidden';
+                }
+
+                // Reset parent containers in memory sandbox so no clipping occurs
+                const clonedViewport = clonedDoc.getElementById('paperViewport');
+                if (clonedViewport) {
+                    clonedViewport.style.padding = '0';
+                    clonedViewport.style.margin = '0';
+                    clonedViewport.style.width = '794px';
+                    clonedViewport.style.height = '1123px';
+                    clonedViewport.style.overflow = 'visible';
+                    clonedViewport.style.transform = 'none';
+                }
+
+                const clonedWrapper = clonedDoc.getElementById('sheetWrapper');
+                if (clonedWrapper) {
+                    clonedWrapper.style.width = '794px';
+                    clonedWrapper.style.height = '1123px';
+                    clonedWrapper.style.padding = '0';
+                    clonedWrapper.style.margin = '0';
+                    clonedWrapper.style.overflow = 'visible';
+                    clonedWrapper.style.transform = 'none';
+                    clonedWrapper.style.position = 'static';
+                }
+
+                // Reset cloned cover sheet to full unscaled 794px x 1123px standard A4 geometry
+                const clonedSheet = clonedDoc.getElementById('coverSheet');
+                if (clonedSheet) {
+                    clonedSheet.style.position = 'fixed';
+                    clonedSheet.style.left = '0';
+                    clonedSheet.style.top = '0';
+                    clonedSheet.style.transform = 'none';
+                    clonedSheet.style.webkitTransform = 'none';
+                    clonedSheet.style.boxShadow = 'none';
+                    clonedSheet.style.width = '794px';
+                    clonedSheet.style.minWidth = '794px';
+                    clonedSheet.style.maxWidth = '794px';
+                    clonedSheet.style.height = '1123px';
+                    clonedSheet.style.minHeight = '1123px';
+                    clonedSheet.style.maxHeight = '1123px';
+                    clonedSheet.style.padding = '1.6cm';
+                    clonedSheet.style.boxSizing = 'border-box';
+                    clonedSheet.style.margin = '0';
+                    clonedSheet.style.zIndex = '999999';
+                    clonedSheet.style.backgroundColor = '#ffffff';
+                    clonedSheet.style.opacity = '1';
+                    clonedSheet.style.visibility = 'visible';
+                    clonedSheet.style.webkitFontSmoothing = 'antialiased';
+                    clonedSheet.style.mozOsxFontSmoothing = 'grayscale';
+                    clonedSheet.style.textRendering = 'geometricPrecision';
+                }
+
+                // Maximize logo sharpness in cloned sandbox
+                const clonedLogos = clonedDoc.querySelectorAll('#coverSheet img, .university-logo');
+                clonedLogos.forEach(img => {
+                    img.style.imageRendering = '-webkit-optimize-contrast';
+                    img.style.imageRendering = 'crisp-edges';
+                });
+            }
+        });
+    }
+
     downloadPdfBtn.addEventListener('click', async () => {
         downloadPdfBtn.blur();
         downloadPdfBtn.disabled = true;
         const originalPdfHtml = downloadPdfBtn.innerHTML;
         downloadPdfBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Generating...</span>';
         showToast('Generating ultra-high-resolution A4 PDF (384 DPI)...');
-        
-        if (document.fonts && document.fonts.ready) {
-            await document.fonts.ready;
-        }
 
-        const { wrapper, clone } = createExportWrapper();
         const labFileName = (labNameInput.value.trim() || 'OUTR_Lab').replace(/[^a-zA-Z0-9]/g, '_');
 
         try {
-            const canvas = await html2canvas(clone, {
-                scale: 4, // 384 DPI ultra-high definition (3176 x 4492 px integer scaling)
-                useCORS: true,
-                allowTaint: true,
-                logging: false,
-                backgroundColor: '#ffffff',
-                imageTimeout: 15000,
-                width: 794,
-                height: 1123,
-                windowWidth: 1200, // Forces pure desktop rendering environment so mobile media queries never downsample export
-                windowHeight: 1600,
-                scrollX: 0,
-                scrollY: 0,
-                x: 0,
-                y: 0,
-                onclone: (clonedDoc) => {
-                    const clonedWrapper = clonedDoc.getElementById('exportWrapper');
-                    if (clonedWrapper) {
-                        clonedWrapper.style.position = 'absolute';
-                        clonedWrapper.style.left = '0';
-                        clonedWrapper.style.top = '0';
-                        clonedWrapper.style.opacity = '1';
-                        clonedWrapper.style.visibility = 'visible';
-                        clonedWrapper.style.zIndex = '99999';
-                    }
-                    const clonedSheet = clonedDoc.getElementById('exportCoverSheet') || clonedDoc.getElementById('coverSheet');
-                    if (clonedSheet) {
-                        clonedSheet.style.position = 'relative';
-                        clonedSheet.style.left = '0';
-                        clonedSheet.style.top = '0';
-                        clonedSheet.style.transform = 'none';
-                        clonedSheet.style.webkitTransform = 'none';
-                        clonedSheet.style.boxShadow = 'none';
-                        clonedSheet.style.width = '794px';
-                        clonedSheet.style.height = '1123px';
-                        clonedSheet.style.padding = '1.6cm';
-                        clonedSheet.style.boxSizing = 'border-box';
-                        clonedSheet.style.opacity = '1';
-                        clonedSheet.style.visibility = 'visible';
-                    }
-                    const clonedLogos = clonedDoc.querySelectorAll('#exportCoverSheet img, #coverSheet img, .university-logo');
-                    clonedLogos.forEach(img => {
-                        img.style.imageRendering = '-webkit-optimize-contrast';
-                        img.style.imageRendering = 'crisp-edges';
-                    });
-                }
-            });
-
-            if (document.body.contains(wrapper)) document.body.removeChild(wrapper);
+            const canvas = await generateA4Canvas();
 
             // Lossless PNG stream preserving 100% pixel fidelity
             const imgData = canvas.toDataURL('image/png', 1.0);
@@ -633,7 +624,6 @@ document.addEventListener('DOMContentLoaded', () => {
             showToast('Ultra-high quality PDF downloaded (1 page)! Details cleared for privacy.');
             setTimeout(autoClearAfterDownload, 1200);
         } catch (err) {
-            if (document.body.contains(wrapper)) document.body.removeChild(wrapper);
             console.error('PDF export failed:', err);
             showToast('Error generating PDF. Try printing to PDF.');
         } finally {
@@ -648,65 +638,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const originalPngHtml = downloadPngBtn.innerHTML;
         downloadPngBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Rendering...</span>';
         showToast('Rendering ultra-high-resolution PNG image (384 DPI)...');
-        
-        if (document.fonts && document.fonts.ready) {
-            await document.fonts.ready;
-        }
 
-        const { wrapper, clone } = createExportWrapper();
+        const labFileName = (labNameInput.value.trim() || 'OUTR_Lab').replace(/[^a-zA-Z0-9]/g, '_');
+        const fileName = `${labFileName}_Cover_Page.png`;
 
         try {
-            const canvas = await html2canvas(clone, {
-                scale: 4, // 384 DPI ultra-high definition (3176 x 4492 px integer scaling)
-                useCORS: true,
-                allowTaint: true,
-                logging: false,
-                backgroundColor: '#ffffff',
-                imageTimeout: 15000,
-                width: 794,
-                height: 1123,
-                windowWidth: 1200, // Forces pure desktop rendering environment so mobile media queries never downsample export
-                windowHeight: 1600,
-                scrollX: 0,
-                scrollY: 0,
-                x: 0,
-                y: 0,
-                onclone: (clonedDoc) => {
-                    const clonedWrapper = clonedDoc.getElementById('exportWrapper');
-                    if (clonedWrapper) {
-                        clonedWrapper.style.position = 'absolute';
-                        clonedWrapper.style.left = '0';
-                        clonedWrapper.style.top = '0';
-                        clonedWrapper.style.opacity = '1';
-                        clonedWrapper.style.visibility = 'visible';
-                        clonedWrapper.style.zIndex = '99999';
-                    }
-                    const clonedSheet = clonedDoc.getElementById('exportCoverSheet') || clonedDoc.getElementById('coverSheet');
-                    if (clonedSheet) {
-                        clonedSheet.style.position = 'relative';
-                        clonedSheet.style.left = '0';
-                        clonedSheet.style.top = '0';
-                        clonedSheet.style.transform = 'none';
-                        clonedSheet.style.webkitTransform = 'none';
-                        clonedSheet.style.boxShadow = 'none';
-                        clonedSheet.style.width = '794px';
-                        clonedSheet.style.height = '1123px';
-                        clonedSheet.style.padding = '1.6cm';
-                        clonedSheet.style.boxSizing = 'border-box';
-                        clonedSheet.style.opacity = '1';
-                        clonedSheet.style.visibility = 'visible';
-                    }
-                    const clonedLogos = clonedDoc.querySelectorAll('#exportCoverSheet img, #coverSheet img, .university-logo');
-                    clonedLogos.forEach(img => {
-                        img.style.imageRendering = '-webkit-optimize-contrast';
-                        img.style.imageRendering = 'crisp-edges';
-                    });
-                }
-            });
-
-            if (document.body.contains(wrapper)) document.body.removeChild(wrapper);
-            const labFileName = (labNameInput.value.trim() || 'OUTR_Lab').replace(/[^a-zA-Z0-9]/g, '_');
-            const fileName = `${labFileName}_Cover_Page.png`;
+            const canvas = await generateA4Canvas();
 
             // Use native Blob on mobile and modern browsers to eliminate base64 memory limits and prevent downsampling
             if (canvas.toBlob) {
@@ -738,7 +675,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(autoClearAfterDownload, 1200);
             }
         } catch (err) {
-            if (document.body.contains(wrapper)) document.body.removeChild(wrapper);
             console.error('PNG export failed:', err);
             showToast('Failed to export PNG.');
         } finally {
