@@ -32,11 +32,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const prevDegreeBranch = document.getElementById('prevDegreeBranch');
     const prevSemester = document.getElementById('prevSemester');
     const prevSubmittedByLabel = document.getElementById('prevSubmittedByLabel');
-    const prevStudentName = document.getElementById('prevStudentName');
-    const prevRegNo = document.getElementById('prevRegNo');
-    const prevGroup = document.getElementById('prevGroup');
-    const prevSection = document.getElementById('prevSection');
-    const prevSubmittedTo = document.getElementById('prevSubmittedTo');
+    const prevStudentNameVal = document.getElementById('prevStudentNameVal');
+    const prevRegNoVal = document.getElementById('prevRegNoVal');
+    const prevGroupVal = document.getElementById('prevGroupVal');
+    const prevSectionVal = document.getElementById('prevSectionVal');
+    const prevSubmittedToVal = document.getElementById('prevSubmittedToVal');
+    const prevSectionRow = document.getElementById('prevSectionRow');
+    const prevSubmittedToRow = document.getElementById('prevSubmittedToRow');
     const prevLogo = document.getElementById('prevLogo');
     const prevDepartment = document.getElementById('prevDepartment');
     const prevUniversity = document.getElementById('prevUniversity');
@@ -185,54 +187,33 @@ document.addEventListener('DOMContentLoaded', () => {
         prevSubmittedByLabel.textContent = submittedByLabelInput.value.trim() || 'SUBMITTED BY :';
         
         const nameVal = studentNameInput.value.trim();
-        let formattedName = 'NAME: ';
-        if (nameVal) {
-            if (/^NAME\s*[-:]?\s*/i.test(nameVal)) {
-                formattedName = nameVal.replace(/^NAME\s*[-:]?\s*/i, 'NAME: ');
-            } else {
-                formattedName = `NAME: ${nameVal}`;
-            }
-        }
-        prevStudentName.textContent = formattedName;
+        const cleanName = nameVal ? nameVal.replace(/^NAME\s*[-:]?\s*/i, '').trim() : '';
+        if (prevStudentNameVal) prevStudentNameVal.textContent = cleanName;
         
         const regVal = regNoInput.value.trim();
-        prevRegNo.textContent = regVal ? (regVal.toUpperCase().startsWith('REGD') ? regVal : `REGD NO.: ${regVal}`) : 'REGD NO.: ';
+        const cleanReg = regVal ? regVal.replace(/^REGD(\s*NO\.?)?\s*[-:]?\s*/i, '').trim() : '';
+        if (prevRegNoVal) prevRegNoVal.textContent = cleanReg;
         
         const groupVal = groupInput.value.trim();
-        let formattedGroup = 'GROUP: ';
-        if (groupVal) {
-            if (!groupVal.toUpperCase().startsWith('GROUP')) {
-                formattedGroup = `GROUP: ${groupVal}`;
-            } else if (/^GROUP\s*[A-Z0-9]/i.test(groupVal)) {
-                formattedGroup = groupVal.replace(/^GROUP\s*/i, 'GROUP: ');
-            } else {
-                formattedGroup = groupVal;
-            }
-        }
-        prevGroup.textContent = formattedGroup;
+        const cleanGroup = groupVal ? groupVal.replace(/^GROUP\s*[-:]?\s*/i, '').trim() : '';
+        if (prevGroupVal) prevGroupVal.textContent = cleanGroup;
 
         const sectionVal = sectionInput.value.trim();
         if (sectionVal) {
-            let formattedSection = sectionVal;
-            if (!sectionVal.toUpperCase().startsWith('SECTION')) {
-                formattedSection = `SECTION: ${sectionVal}`;
-            } else if (/^SECTION\s*[A-Z0-9]/i.test(sectionVal)) {
-                formattedSection = sectionVal.replace(/^SECTION\s*/i, 'SECTION: ');
-            } else {
-                formattedSection = sectionVal;
-            }
-            prevSection.textContent = formattedSection;
-            prevSection.classList.remove('hidden');
+            const cleanSection = sectionVal.replace(/^SECTION\s*[-:]?\s*/i, '').trim();
+            if (prevSectionVal) prevSectionVal.textContent = cleanSection;
+            prevSectionRow?.classList.remove('hidden');
         } else {
-            prevSection.classList.add('hidden');
+            prevSectionRow?.classList.add('hidden');
         }
 
         const subToVal = submittedToInput.value.trim();
         if (subToVal) {
-            prevSubmittedTo.textContent = subToVal.toUpperCase().startsWith('SUBMITTED TO') ? subToVal : `SUBMITTED TO: ${subToVal}`;
-            prevSubmittedTo.classList.remove('hidden');
+            const cleanSubTo = subToVal.replace(/^SUBMITTED\s+TO\s*[-:]?\s*/i, '').trim();
+            if (prevSubmittedToVal) prevSubmittedToVal.textContent = cleanSubTo;
+            prevSubmittedToRow?.classList.remove('hidden');
         } else {
-            prevSubmittedTo.classList.add('hidden');
+            prevSubmittedToRow?.classList.add('hidden');
         }
 
         const deptVal = departmentInput.value.trim();

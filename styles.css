@@ -899,7 +899,7 @@ label[for="labNameInput"] {
     min-height: 1.2em;
 }
 
-/* Student Info Section (Centered Block matching photo) */
+/* Student Info Section (Centered Block with Perfectly Aligned Rows) */
 .student-info-section {
     display: flex;
     flex-direction: column;
@@ -914,22 +914,50 @@ label[for="labNameInput"] {
     text-transform: uppercase;
     color: #000;
     letter-spacing: 0.5px;
-    margin: 0 0 0.4cm 0; /* Reduced space between student info lines: 0.4 cm */
+    margin: 0 0 0.45cm 0; /* Space between SUBMITTED BY and student details */
     line-height: 1.2;
+    text-align: center;
 }
 
-.info-row {
+/* Student Info Table - mathematically locks labels, colons and values in one order */
+.student-info-table {
+    border-collapse: separate;
+    border-spacing: 0 0.38cm; /* Even, balanced spacing between student info rows */
+    margin: 0 auto;
+    font-family: inherit;
+}
+
+.student-info-table tr.hidden {
+    display: none !important;
+}
+
+.student-info-table td {
+    padding: 0;
     font-size: 18px;
     font-weight: 700;
     text-transform: uppercase;
     color: #000;
     letter-spacing: 0.5px;
-    margin: 0 0 0.4cm 0; /* Reduced space between student info lines: 0.4 cm */
     line-height: 1.2;
+    vertical-align: baseline;
 }
 
-.info-row.hidden {
-    display: none;
+.student-info-table .info-label {
+    text-align: left;
+    white-space: nowrap;
+    padding-right: 0.2cm;
+}
+
+.student-info-table .info-colon {
+    text-align: center;
+    white-space: nowrap;
+    padding-right: 0.3cm;
+    width: 10px;
+}
+
+.student-info-table .info-value {
+    text-align: left;
+    white-space: nowrap;
 }
 
 /* Center Logo Container */
