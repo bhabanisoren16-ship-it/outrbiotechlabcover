@@ -1118,15 +1118,15 @@ textarea[readonly] {
 }
 
 .university-name {
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 700;
     text-transform: uppercase;
     color: #000;
-    letter-spacing: 0.8px;
+    letter-spacing: 0.9px;
     line-height: 1.25;
     margin-top: 0;
-    margin-bottom: 0.12cm; /* Reduced space between college name and address */
-    max-width: 90%;
+    margin-bottom: 0.30cm; /* Increased space between college name and address */
+    max-width: 95%;
 }
 
 .campus-address {
