@@ -234,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
         pageBorder.className = `page-border ${borderStyleSelect.value}`;
         coverSheet.style.fontFamily = fontFamilySelect.value;
         
-        const logoSize = parseInt(logoScaleInput.value, 10) || 220;
+        const logoSize = parseInt(logoScaleInput.value, 10) || 240;
         prevLogo.style.setProperty('width', `${logoSize}px`, 'important');
         prevLogo.style.setProperty('height', `${logoSize}px`, 'important');
         prevLogo.style.setProperty('max-width', `${logoSize}px`, 'important');

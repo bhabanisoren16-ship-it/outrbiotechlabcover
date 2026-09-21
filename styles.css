@@ -1088,10 +1088,10 @@ textarea[readonly] {
 }
 
 .university-logo {
-    width: 5.8cm !important; /* Logo size: increased to ≈ 5.8 × 5.8 cm */
-    height: 5.8cm !important;
-    max-width: 5.8cm !important;
-    max-height: 5.8cm !important;
+    width: 6.35cm !important; /* Logo size: increased to ≈ 6.35 × 6.35 cm (240px) */
+    height: 6.35cm !important;
+    max-width: 6.35cm !important;
+    max-height: 6.35cm !important;
     object-fit: contain;
     display: block;
 }
