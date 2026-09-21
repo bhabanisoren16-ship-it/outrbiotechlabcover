@@ -1214,7 +1214,7 @@ textarea[readonly] {
 }
 
 .mobile-bottom-bar {
-    display: none;
+    display: none !important;
     position: sticky;
     bottom: 0;
     left: 0;
@@ -1390,9 +1390,7 @@ textarea[readonly] {
     }
 
     .mobile-bottom-bar {
-        order: 99;
-        display: flex;
-        flex-shrink: 0;
+        display: none !important;
     }
 
     .mobile-back-btn {
