@@ -980,7 +980,7 @@ textarea[readonly] {
     text-transform: uppercase;
     color: #000;
     letter-spacing: 0.6px;
-    margin: 0 0 0.6cm 0; /* LAB NAME → RECORD: ≈ 0.6 cm */
+    margin: 0 0 0.38cm 0; /* LAB NAME → RECORD: reduced to ≈ 0.38 cm */
     line-height: 1.2;
     min-height: 1.2em;
 }
