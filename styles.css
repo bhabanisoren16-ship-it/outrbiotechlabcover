@@ -571,23 +571,28 @@ label[for="labNameInput"] {
 }
 
 .form-group input[readonly],
-.form-group textarea[readonly] {
+.form-group textarea[readonly],
+input[readonly],
+textarea[readonly] {
     background: rgba(255, 255, 255, 0.03);
     border-color: rgba(255, 255, 255, 0.10);
     color: #94a3b8;
-    cursor: default;
+    cursor: not-allowed;
     user-select: none;
     letter-spacing: 0.4px;
     resize: none;
     box-shadow: none;
 }
 
+.form-group input[readonly]:hover,
+.form-group textarea[readonly]:hover,
 .form-group input[readonly]:focus,
 .form-group textarea[readonly]:focus {
     outline: none;
     border-color: rgba(255, 255, 255, 0.15);
     box-shadow: none;
     background: rgba(255, 255, 255, 0.04);
+    cursor: not-allowed;
 }
 
 .form-group select option {
