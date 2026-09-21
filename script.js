@@ -370,9 +370,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
 
     function setZoom(scale) {
-        // Expand zoom bounds to support mobile screen widths down to 320px
-        currentZoom = Math.min(Math.max(0.2, scale), 1.8);
-        coverSheet.style.transform = `scale(${currentZoom})`;
+        // Expand zoom bounds to support mobile screen widths down to 320px up to 200%
+        currentZoom = Math.min(Math.max(0.2, scale), 2.0);
+        if ('zoom' in coverSheet.style) {
+            coverSheet.style.zoom = currentZoom;
+            coverSheet.style.transform = 'none';
+            coverSheet.style.webkitTransform = 'none';
+        } else {
+            coverSheet.style.transform = `scale(${currentZoom})`;
+            coverSheet.style.webkitTransform = `scale(${currentZoom})`;
+        }
         if (sheetWrapper) {
             sheetWrapper.style.width = `${Math.round(794 * currentZoom)}px`;
             sheetWrapper.style.height = `${Math.round(1123 * currentZoom)}px`;
@@ -492,10 +499,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Determine optimal scale:
-        // Desktop: 3x integer scaling (~300 DPI - standard high-definition academic print quality)
-        // Mobile: 2.2x scaling (~215 DPI - ultra-crisp on phones/tablets, 75% faster rendering)
+        // Desktop: 4.0x scale (384 DPI - 3176x4492 - ultra-high definition letter sharpness under zoom)
+        // Mobile: 3.5x scale (336 DPI - 2779x3930 - strictly within mobile 4096px canvas limit while exceeding 300 DPI print quality)
         const isMobile = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        const exportScale = customScale || (isMobile ? 2.2 : 3.0);
+        const exportScale = customScale || (isMobile ? 3.5 : 4.0);
 
         return await html2canvas(coverSheet, {
             scale: exportScale,
@@ -528,6 +535,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const clonedViewport = clonedDoc.getElementById('paperViewport');
                 if (clonedViewport) {
+                    clonedViewport.style.zoom = '1';
                     clonedViewport.style.padding = '0';
                     clonedViewport.style.margin = '0';
                     clonedViewport.style.width = '794px';
@@ -538,6 +546,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const clonedWrapper = clonedDoc.getElementById('sheetWrapper');
                 if (clonedWrapper) {
+                    clonedWrapper.style.zoom = '1';
                     clonedWrapper.style.width = '794px';
                     clonedWrapper.style.height = '1123px';
                     clonedWrapper.style.padding = '0';
@@ -549,6 +558,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const clonedSheet = clonedDoc.getElementById('coverSheet');
                 if (clonedSheet) {
+                    clonedSheet.style.zoom = '1';
                     clonedSheet.style.position = 'fixed';
                     clonedSheet.style.left = '0';
                     clonedSheet.style.top = '0';
@@ -589,16 +599,15 @@ document.addEventListener('DOMContentLoaded', () => {
         downloadPdfBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Downloading...</span>';
 
         // Yield to browser UI thread so the spinner paints immediately
-        await new Promise(resolve => setTimeout(resolve, 25));
+        await new Promise(resolve => setTimeout(resolve, 30));
 
         const labFileName = (labNameInput.value.trim() || 'OUTR_Lab').replace(/[^a-zA-Z0-9]/g, '_');
 
         try {
             const canvas = await generateA4Canvas();
 
-            // High-fidelity JPEG (quality 0.96) with SIMD acceleration for instant PDF creation
-            // Maintains 100% crisp typography and logo clarity without 4-second PNG serialization freeze
-            const imgData = canvas.toDataURL('image/jpeg', 0.96);
+            // Lossless PNG stream embedding for crystal-clear letter quality under zoom
+            const imgData = canvas.toDataURL('image/png', 1.0);
             const jsPdfConstructor = (window.jspdf && window.jspdf.jsPDF) ? window.jspdf.jsPDF : window.jsPDF;
             const pdf = new jsPdfConstructor({
                 orientation: 'portrait',
@@ -609,7 +618,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             // Fast, crystal-clear 1-page A4 PDF embedding (210mm x 297mm)
-            pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
+            pdf.addImage(imgData, 'PNG', 0, 0, 210, 297, undefined, 'FAST');
             pdf.save(`${labFileName}_Cover_Page.pdf`);
 
             setTimeout(autoClearAfterDownload, 300);

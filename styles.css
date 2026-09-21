@@ -873,14 +873,17 @@ textarea[readonly] {
     top: 0;
     left: 0;
     transform-origin: top left;
-    transition: transform 0.15s ease-out;
+    transition: width 0.15s ease-out, height 0.15s ease-out;
     background-color: #ffffff;
     color: #000000;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Times New Roman', Tinos, Times, serif;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.1);
     padding: 1.4cm !important; /* Outer border pushed from paper edge: 1.4 cm */
     box-sizing: border-box !important;
     user-select: none;
+    text-rendering: geometricPrecision;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* Page Border Frame Styles */
@@ -963,6 +966,9 @@ textarea[readonly] {
 .cover-content {
     text-align: center;
     width: 100%;
+    text-rendering: geometricPrecision;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* Header Typography */
