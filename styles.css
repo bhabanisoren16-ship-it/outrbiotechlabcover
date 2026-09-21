@@ -729,6 +729,14 @@ label[for="labNameInput"] {
     transform: translateY(-1px);
 }
 
+.mobile-only-credit {
+    display: none !important;
+}
+
+.desktop-only-credit {
+    display: flex;
+}
+
 .credit-badge-text {
     display: flex;
     flex-direction: column;
@@ -1349,7 +1357,21 @@ label[for="labNameInput"] {
         border-bottom: 1px solid rgba(255, 255, 255, 0.12);
     }
 
+    /* Attribution card appears at top in mobile view only */
+    .mobile-only-credit {
+        display: flex !important;
+        margin: 8px 14px 4px 14px;
+        padding: 8px 14px;
+        border-radius: var(--radius-sm);
+        flex-shrink: 0;
+    }
+
+    .desktop-only-credit {
+        display: none !important;
+    }
+
     .mobile-bottom-bar {
+        order: 99;
         display: flex;
         flex-shrink: 0;
     }
@@ -1444,6 +1466,22 @@ label[for="labNameInput"] {
         padding: 6px 11px;
         font-size: 0.8rem;
         font-weight: 700;
+    }
+
+    /* Mobile Attribution Card */
+    .mobile-only-credit {
+        margin: 6px 10px 2px 10px;
+        padding: 7px 12px;
+    }
+
+    .credit-label {
+        font-size: 0.64rem;
+        letter-spacing: 0.6px;
+    }
+
+    .credit-author {
+        font-size: 0.84rem;
+        letter-spacing: 0.5px;
     }
 
     /* Mobile Form Cards & Typography: Crisp, Bold & No Glow */
