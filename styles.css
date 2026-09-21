@@ -739,7 +739,7 @@ textarea[readonly] {
 }
 
 .desktop-only-credit {
-    display: flex;
+    display: none !important;
 }
 
 .credit-badge-text {
