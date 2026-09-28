@@ -10,7 +10,7 @@
     <meta property="og:url" content="https://outrbiotechlabcover.vercel.app/">
     <meta property="og:title" content="OUTR Lab Cover Generator | Academic Cover Page Studio">
     <meta property="og:description" content="Generate high quality printable A4 lab cover pages for Odisha University of Technology and Research (OUTR). Instant PDF download and custom layout options.">
-    <link rel="stylesheet" href="styles.css?v=8.0">
+    <link rel="stylesheet" href="styles.css?v=8.1">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -300,33 +300,28 @@
                                 <!-- Middle Student Info Section -->
                                 <div class="student-info-section" id="studentInfoSection">
                                     <div class="submitted-by-label" id="prevSubmittedByLabel">SUBMITTED BY :</div>
-                                    <table class="student-info-table" id="studentInfoTable">
-                                        <tr class="info-row" id="prevStudentNameRow">
-                                            <td class="info-label">NAME</td>
-                                            <td class="info-colon">:</td>
-                                            <td class="info-value" id="prevStudentNameVal"></td>
-                                        </tr>
-                                        <tr class="info-row" id="prevRegNoRow">
-                                            <td class="info-label">REGD NO.</td>
-                                            <td class="info-colon">:</td>
-                                            <td class="info-value" id="prevRegNoVal"></td>
-                                        </tr>
-                                        <tr class="info-row" id="prevGroupRow">
-                                            <td class="info-label">GROUP</td>
-                                            <td class="info-colon">:</td>
-                                            <td class="info-value" id="prevGroupVal"></td>
-                                        </tr>
-                                        <tr class="info-row hidden" id="prevSectionRow">
-                                            <td class="info-label">SECTION</td>
-                                            <td class="info-colon">:</td>
-                                            <td class="info-value" id="prevSectionVal"></td>
-                                        </tr>
-                                        <tr class="info-row hidden" id="prevSubmittedToRow">
-                                            <td class="info-label">SUBMITTED TO</td>
-                                            <td class="info-colon">:</td>
-                                            <td class="info-value" id="prevSubmittedToVal"></td>
-                                        </tr>
-                                    </table>
+                                    <div class="student-info-block" id="studentInfoBlock">
+                                        <div class="info-row" id="prevStudentNameRow">
+                                            <span class="info-label">NAME :</span>
+                                            <span class="info-value" id="prevStudentNameVal"></span>
+                                        </div>
+                                        <div class="info-row" id="prevRegNoRow">
+                                            <span class="info-label">REGD NO. :</span>
+                                            <span class="info-value" id="prevRegNoVal"></span>
+                                        </div>
+                                        <div class="info-row" id="prevGroupRow">
+                                            <span class="info-label">GROUP :</span>
+                                            <span class="info-value" id="prevGroupVal"></span>
+                                        </div>
+                                        <div class="info-row hidden" id="prevSectionRow">
+                                            <span class="info-label">SECTION :</span>
+                                            <span class="info-value" id="prevSectionVal"></span>
+                                        </div>
+                                        <div class="info-row hidden" id="prevSubmittedToRow">
+                                            <span class="info-label">SUBMITTED TO :</span>
+                                            <span class="info-value" id="prevSubmittedToVal"></span>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <!-- Center Logo -->
@@ -352,6 +347,6 @@
         <div class="toast" id="toast">Cover page updated!</div>
     </div>
 
-    <script src="script.js?v=8.0"></script>
+    <script src="script.js?v=8.1"></script>
 </body>
 </html>

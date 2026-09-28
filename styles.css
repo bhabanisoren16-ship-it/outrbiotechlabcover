@@ -1022,7 +1022,7 @@ textarea[readonly] {
     min-height: 1.2em;
 }
 
-/* Student Info Section (Centered Block with Perfectly Aligned Rows) */
+/* Student Info Section (Natural Row Flow Layout - Colons not aligned in one column) */
 .student-info-section {
     display: flex;
     flex-direction: column;
@@ -1042,45 +1042,41 @@ textarea[readonly] {
     text-align: center;
 }
 
-/* Student Info Table - mathematically locks labels, colons and values in one order */
-.student-info-table {
-    border-collapse: separate;
-    border-spacing: 0 0.35cm; /* Even, balanced spacing between student info rows */
+.student-info-block {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
     margin: 0 auto;
-    font-family: inherit;
 }
 
-.student-info-table tr.hidden {
-    display: none !important;
-}
-
-.student-info-table td {
-    padding: 0;
+.info-row {
     font-size: 18px;
     font-weight: 700;
     text-transform: uppercase;
     color: #000;
     letter-spacing: 0.5px;
     line-height: 1.2;
-    vertical-align: baseline;
+    margin-bottom: 0.35cm;
+    white-space: nowrap;
 }
 
-.student-info-table .info-label {
-    text-align: left;
-    white-space: nowrap;
-    padding-right: 0.2cm;
+.info-row:last-child {
+    margin-bottom: 0;
 }
 
-.student-info-table .info-colon {
-    text-align: center;
-    white-space: nowrap;
-    padding-right: 0.3cm;
-    width: 10px;
+.info-row.hidden {
+    display: none !important;
 }
 
-.student-info-table .info-value {
-    text-align: left;
-    white-space: nowrap;
+.info-row .info-label {
+    font-weight: 700;
+    color: #000;
+    margin-right: 6px;
+}
+
+.info-row .info-value {
+    font-weight: 700;
+    color: #000;
 }
 
 /* Center Logo Container */
