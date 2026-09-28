@@ -1043,9 +1043,10 @@ textarea[readonly] {
 }
 
 .student-info-block {
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -1058,6 +1059,7 @@ textarea[readonly] {
     line-height: 1.2;
     margin-bottom: 0.35cm;
     white-space: nowrap;
+    text-align: center;
 }
 
 .info-row:last-child {
