@@ -292,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
         prevLogo.src = DEFAULT_LOGO_SRC;
         logoUploadInput.value = '';
         document.getElementById('logoUploadStatus').innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> Upload custom logo`;
-        showToast('Logo reset to default OUTR seal!');
+        showToast('Logo reset to default seal!');
     });
 
     // ==========================================================================
@@ -601,7 +601,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Yield to browser UI thread so the spinner paints immediately
         await new Promise(resolve => setTimeout(resolve, 30));
 
-        const labFileName = (labNameInput.value.trim() || 'OUTR_Lab').replace(/[^a-zA-Z0-9]/g, '_');
+        const labFileName = (labNameInput.value.trim() || 'Lab').replace(/[^a-zA-Z0-9]/g, '_');
 
         try {
             const canvas = await generateA4Canvas();
@@ -639,7 +639,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Yield to browser UI thread so the spinner paints immediately
         await new Promise(resolve => setTimeout(resolve, 25));
 
-        const labFileName = (labNameInput.value.trim() || 'OUTR_Lab').replace(/[^a-zA-Z0-9]/g, '_');
+        const labFileName = (labNameInput.value.trim() || 'Lab').replace(/[^a-zA-Z0-9]/g, '_');
         const fileName = `${labFileName}_Cover_Page.png`;
 
         try {
