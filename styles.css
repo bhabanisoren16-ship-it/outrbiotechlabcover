@@ -1057,7 +1057,7 @@ textarea[readonly] {
     color: #000;
     letter-spacing: 0.5px;
     line-height: 1.2;
-    margin-bottom: 0.35cm;
+    margin-bottom: 0.20cm;
     white-space: nowrap;
     text-align: center;
 }
@@ -1073,7 +1073,7 @@ textarea[readonly] {
 .info-row .info-label {
     font-weight: 700;
     color: #000;
-    margin-right: 6px;
+    margin-right: 4px;
 }
 
 .info-row .info-value {
