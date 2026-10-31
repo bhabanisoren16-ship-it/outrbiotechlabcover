@@ -33,6 +33,23 @@ Visit the official production site:
 
 ---
 
+## 🔐 Admin Portal
+
+The platform includes an administrative control portal for academic coordinators and faculty to manage university profiles, departments, pre-configured lab courses, document types, and export telemetry:
+
+- **Portal URL**: [http://localhost:3000/admin.html](http://localhost:3000/admin.html) (or click the **Admin** button in the header)
+- **Default Username**: `admin`
+- **Default Password**: `outr@admin2025` *(changeable in the portal)*
+- **Key Capabilities**:
+  - 📊 **Telemetry & Analytics**: Real-time tracking of total PDF and PNG covers exported.
+  - 🏫 **Institutional Profile**: Centralized control over University Name, Campus Address, Degree prefix, and Batch Attribution.
+  - 📚 **Departments & Labs Manager**: Add, edit, and organize OUTR engineering branches with standard pre-configured lab subjects.
+  - 📑 **Document Types & Semesters**: Configure academic document classifications (`LAB RECORD`, `ASSIGNMENT`, `PROJECT REPORT`, `SEMINAR`).
+  - 🔒 **Hardened Security**: Salted SHA-256 client-side cryptographic hashing, brute-force lockout (5 attempts triggers 60s cooldown), and session expiration.
+  - 💾 **Data Backup & Restore**: Download complete configuration as portable JSON and restore across environments or reset to OUTR factory defaults.
+
+---
+
 ## 💻 Local Development
 
 Run locally without external dependencies:

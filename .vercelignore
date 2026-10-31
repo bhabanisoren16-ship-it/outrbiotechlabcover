@@ -1,0 +1,19 @@
+# Server and internal scripts
+serve.js
+
+# Environment variables and secrets
+.env*
+*.env
+*.pem
+*.key
+*.cert
+
+# Version control and development metadata
+.git
+.github
+.gitignore
+*.log
+package.json
+package-lock.json
+README.md
+

@@ -1,6 +1,6 @@
 /* ==========================================================================
    OUTR LAB COVER GENERATOR - JAVASCRIPT ENGINE
-   Real-time Preview, Presets, Image Upload & PDF/PNG Export
+   Real-time Preview & PDF/PNG Export
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -14,19 +14,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const regNoInput = document.getElementById('regNoInput');
     const groupInput = document.getElementById('groupInput');
     const sectionInput = document.getElementById('sectionInput');
-    const submittedToInput = document.getElementById('submittedToInput');
     const departmentInput = document.getElementById('departmentInput');
     const universityInput = document.getElementById('universityInput');
     const addressInput = document.getElementById('addressInput');
-    const borderStyleSelect = document.getElementById('borderStyleSelect');
-    const fontFamilySelect = document.getElementById('fontFamilySelect');
-    const logoScaleInput = document.getElementById('logoScaleInput');
-    const logoUploadInput = document.getElementById('logoUploadInput');
-    const resetLogoBtn = document.getElementById('resetLogoBtn');
 
     // DOM Elements - Preview Canvas
     const coverSheet = document.getElementById('coverSheet');
-    const pageBorder = document.getElementById('pageBorder');
     const prevLabName = document.getElementById('prevLabName');
     const prevDocType = document.getElementById('prevDocType');
     const prevDegreeBranch = document.getElementById('prevDegreeBranch');
@@ -36,10 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const prevRegNoVal = document.getElementById('prevRegNoVal');
     const prevGroupVal = document.getElementById('prevGroupVal');
     const prevSectionVal = document.getElementById('prevSectionVal');
-    const prevSubmittedToVal = document.getElementById('prevSubmittedToVal');
     const prevSectionRow = document.getElementById('prevSectionRow');
-    const prevSubmittedToRow = document.getElementById('prevSubmittedToRow');
-    const prevLogo = document.getElementById('prevLogo');
     const prevDepartment = document.getElementById('prevDepartment');
     const prevUniversity = document.getElementById('prevUniversity');
     const prevAddress = document.getElementById('prevAddress');
@@ -49,7 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const downloadPngBtn = document.getElementById('downloadPngBtn');
     const printBtn = document.getElementById('printBtn');
     const resetBtn = document.getElementById('resetBtn');
-    const toast = document.getElementById('toast');
+    const coverForm = document.getElementById('coverForm');
+    if (coverForm) {
+        coverForm.addEventListener('submit', (e) => e.preventDefault());
+    }
 
     // Zoom Controls & Responsive Elements
     const paperViewport = document.getElementById('paperViewport');
@@ -60,108 +53,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const zoomLevelEl = document.getElementById('zoomLevel');
     const tabFormBtn = document.getElementById('tabFormBtn');
     const tabPreviewBtn = document.getElementById('tabPreviewBtn');
-    const mobilePreviewSwitchBtn = document.getElementById('mobilePreviewSwitchBtn');
     const mobileBackToFormBtn = document.getElementById('mobileBackToFormBtn');
-    const mobileDownloadPdfBtn = document.getElementById('mobileDownloadPdfBtn');
     const sidebar = document.getElementById('sidebar');
     const previewArea = document.getElementById('previewArea');
 
     let currentZoom = 1.0;
-    const DEFAULT_LOGO_SRC = 'assets/outr-logo.png';
-
-    // Presets Database
-    const PRESETS = {
-        photo: {
-            labName: 'BIOCHEMISTRY LAB',
-            docType: 'LAB RECORD',
-            degreeBranch: 'B.TECH BIOTECHNOLOGY',
-            semester: '3RD SEMESTER',
-            submittedByLabel: 'SUBMITTED BY :',
-            studentName: '',
-            regNo: '',
-            group: '',
-            section: '',
-            submittedTo: '',
-            department: 'BIOTECHNOLOGY',
-            university: 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH',
-            address: 'Techno Campus, Ghatikia, Bhubaneswar, 751029'
-        },
-        cse: {
-            labName: 'DATA STRUCTURES & ALGORITHMS LAB',
-            docType: 'LAB RECORD',
-            degreeBranch: 'B.TECH COMPUTER SCIENCE & ENGINEERING',
-            semester: '3RD SEMESTER',
-            submittedByLabel: 'SUBMITTED BY :',
-            studentName: '',
-            regNo: '',
-            group: '',
-            section: '',
-            submittedTo: '',
-            department: 'COMPUTER SCIENCE & ENGINEERING',
-            university: 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH',
-            address: 'Techno Campus, Ghatikia, Bhubaneswar, 751029'
-        },
-        mech: {
-            labName: 'FLUID MECHANICS LAB',
-            docType: 'LAB RECORD',
-            degreeBranch: 'B.TECH MECHANICAL ENGINEERING',
-            semester: '4TH SEMESTER',
-            submittedByLabel: 'SUBMITTED BY :',
-            studentName: '',
-            regNo: '',
-            group: '',
-            section: '',
-            submittedTo: '',
-            department: 'MECHANICAL ENGINEERING',
-            university: 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH',
-            address: 'Techno Campus, Ghatikia, Bhubaneswar, 751029'
-        },
-        ee: {
-            labName: 'POWER ELECTRONICS LAB',
-            docType: 'LAB RECORD',
-            degreeBranch: 'B.TECH ELECTRICAL ENGINEERING',
-            semester: '5TH SEMESTER',
-            submittedByLabel: 'SUBMITTED BY :',
-            studentName: '',
-            regNo: '',
-            group: '',
-            section: '',
-            submittedTo: '',
-            department: 'ELECTRICAL ENGINEERING',
-            university: 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH',
-            address: 'Techno Campus, Ghatikia, Bhubaneswar, 751029'
-        },
-        civil: {
-            labName: 'GEOTECHNICAL ENGINEERING LAB',
-            docType: 'LAB RECORD',
-            degreeBranch: 'B.TECH CIVIL ENGINEERING',
-            semester: '5TH SEMESTER',
-            submittedByLabel: 'SUBMITTED BY :',
-            studentName: '',
-            regNo: '',
-            group: '',
-            section: '',
-            submittedTo: '',
-            department: 'CIVIL ENGINEERING',
-            university: 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH',
-            address: 'Techno Campus, Ghatikia, Bhubaneswar, 751029'
-        },
-        it: {
-            labName: 'DATABASE MANAGEMENT SYSTEMS LAB',
-            docType: 'LAB RECORD',
-            degreeBranch: 'B.TECH INFORMATION TECHNOLOGY',
-            semester: '4TH SEMESTER',
-            submittedByLabel: 'SUBMITTED BY :',
-            studentName: '',
-            regNo: '',
-            group: '',
-            section: '',
-            submittedTo: '',
-            department: 'INFORMATION TECHNOLOGY',
-            university: 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH',
-            address: 'Techno Campus, Ghatikia, Bhubaneswar, 751029'
-        }
-    };
 
     // ==========================================================================
     // Real-time Preview Synchronization
@@ -207,15 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
             prevSectionRow?.classList.add('hidden');
         }
 
-        const subToVal = submittedToInput.value.trim();
-        if (subToVal) {
-            const cleanSubTo = subToVal.replace(/^SUBMITTED\s+TO\s*[-:]?\s*/i, '').trim();
-            if (prevSubmittedToVal) prevSubmittedToVal.textContent = cleanSubTo;
-            prevSubmittedToRow?.classList.remove('hidden');
-        } else {
-            prevSubmittedToRow?.classList.add('hidden');
-        }
-
         const deptVal = departmentInput.value.trim();
         let formattedDept = 'DEPARTMENT OF';
         if (deptVal && deptVal.toUpperCase() !== 'BRANCH NAME') {
@@ -229,24 +116,13 @@ document.addEventListener('DOMContentLoaded', () => {
         prevDepartment.textContent = formattedDept;
         prevUniversity.textContent = universityInput.value.trim() || 'UNIVERSITY NAME';
         prevAddress.textContent = addressInput.value.trim() || '';
-
-        // Sync Styling
-        pageBorder.className = `page-border ${borderStyleSelect.value}`;
-        coverSheet.style.fontFamily = fontFamilySelect.value;
-        
-        const logoSize = parseInt(logoScaleInput.value, 10) || 240;
-        prevLogo.style.setProperty('width', `${logoSize}px`, 'important');
-        prevLogo.style.setProperty('height', `${logoSize}px`, 'important');
-        prevLogo.style.setProperty('max-width', `${logoSize}px`, 'important');
-        prevLogo.style.setProperty('max-height', `${logoSize}px`, 'important');
     }
 
     // Attach Input Event Listeners
     const inputs = [
         labNameInput, docTypeInput, degreeBranchInput, semesterInput,
         submittedByLabelInput, studentNameInput, regNoInput, groupInput, sectionInput,
-        submittedToInput, departmentInput, universityInput, addressInput,
-        borderStyleSelect, fontFamilySelect, logoScaleInput
+        departmentInput, universityInput, addressInput
     ];
 
     inputs.forEach(input => {
@@ -274,77 +150,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Custom Logo Upload Handler
-    logoUploadInput.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (event) => {
-                prevLogo.src = event.target.result;
-                document.getElementById('logoUploadStatus').innerHTML = `<i class="fa-solid fa-check"></i> ${file.name}`;
-                showToast('Custom logo uploaded!');
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-
-    resetLogoBtn.addEventListener('click', () => {
-        prevLogo.src = DEFAULT_LOGO_SRC;
-        logoUploadInput.value = '';
-        document.getElementById('logoUploadStatus').innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> Upload custom logo`;
-        showToast('Logo reset to default seal!');
-    });
-
-    // ==========================================================================
-    // Presets & Form Management
-    // ==========================================================================
-
-    function applyPreset(presetKey) {
-        const preset = PRESETS[presetKey];
-        if (!preset) return;
-
-        labNameInput.value = preset.labName;
-        docTypeInput.value = preset.docType;
-        degreeBranchInput.value = preset.degreeBranch.replace(/^B\.?\s*TECH\s*/i, '').trim();
-        if (preset.semester) {
-            let opt = Array.from(semesterInput.options).find(o => o.value.toUpperCase() === preset.semester.toUpperCase());
-            if (!opt) {
-                opt = new Option(preset.semester, preset.semester);
-                semesterInput.add(opt);
-            }
-            semesterInput.value = opt.value;
-        }
-        submittedByLabelInput.value = preset.submittedByLabel || 'SUBMITTED BY :';
-        if (preset.studentName) studentNameInput.value = preset.studentName;
-        if (preset.regNo) regNoInput.value = preset.regNo;
-        if (preset.group) groupInput.value = preset.group;
-        if (preset.section) sectionInput.value = preset.section;
-        submittedToInput.value = preset.submittedTo || '';
-        departmentInput.value = preset.department;
-        departmentEditedManually = true;
-        universityInput.value = preset.university;
-        addressInput.value = preset.address;
-
-        // Update active chip UI
-        document.querySelectorAll('.preset-chips .chip').forEach(chip => {
-            if (chip.getAttribute('data-preset') === presetKey) {
-                chip.classList.add('active');
-            } else {
-                chip.classList.remove('active');
-            }
-        });
-
-        updatePreview();
-        showToast(`Applied ${presetKey.toUpperCase()} Preset`);
-    }
-
-    document.querySelectorAll('.preset-chips .chip').forEach(chip => {
-        chip.addEventListener('click', () => {
-            const key = chip.getAttribute('data-preset');
-            applyPreset(key);
-        });
-    });
-
     resetBtn.addEventListener('click', () => {
         labNameInput.value = '';
         docTypeInput.value = 'LAB RECORD';
@@ -355,14 +160,13 @@ document.addEventListener('DOMContentLoaded', () => {
         regNoInput.value = '';
         groupInput.value = '';
         sectionInput.value = '';
-        submittedToInput.value = '';
         departmentInput.value = '';
         departmentEditedManually = false;
         universityInput.value = 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH';
         addressInput.value = 'Techno Campus, Ghatikia, Bhubaneswar, 751029';
         
+        applyAdminConfiguration();
         updatePreview();
-        showToast('Form reset to blank');
     });
 
     // ==========================================================================
@@ -370,7 +174,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
 
     function setZoom(scale) {
-        // Expand zoom bounds to support mobile screen widths down to 320px up to 200%
         currentZoom = Math.min(Math.max(0.2, scale), 2.0);
         if ('zoom' in coverSheet.style) {
             coverSheet.style.zoom = currentZoom;
@@ -461,9 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     tabFormBtn?.addEventListener('click', () => switchMobileTab('form'));
     tabPreviewBtn?.addEventListener('click', () => switchMobileTab('preview'));
-    mobilePreviewSwitchBtn?.addEventListener('click', () => switchMobileTab('preview'));
     mobileBackToFormBtn?.addEventListener('click', () => switchMobileTab('form'));
-    mobileDownloadPdfBtn?.addEventListener('click', () => downloadPdfBtn.click());
 
     // ==========================================================================
     // Export Handlers (PDF, PNG, Print) - Pure Seamless In-Memory Export
@@ -476,19 +277,14 @@ document.addEventListener('DOMContentLoaded', () => {
         regNoInput.value = '';
         groupInput.value = '';
         sectionInput.value = '';
-        submittedToInput.value = '';
-        
-        // Reset logo if custom logo was uploaded
-        prevLogo.src = DEFAULT_LOGO_SRC;
-        logoUploadInput.value = '';
-        const uploadStatusEl = document.getElementById('logoUploadStatus');
-        if (uploadStatusEl) {
-            uploadStatusEl.innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> Upload custom logo`;
-        }
 
         // Clear local storage data for privacy so details aren't shared
-        localStorage.removeItem('outr_cover_data');
-        
+        try {
+            localStorage.removeItem('outr_cover_data');
+        } catch (e) {
+            // Safe fallback for restricted storage environments
+        }
+
         // Refresh preview
         updatePreview();
     }
@@ -498,9 +294,6 @@ document.addEventListener('DOMContentLoaded', () => {
             await document.fonts.ready;
         }
 
-        // Determine optimal scale:
-        // Desktop: 4.0x scale (384 DPI - 3176x4492 - ultra-high definition letter sharpness under zoom)
-        // Mobile: 3.5x scale (336 DPI - 2779x3930 - strictly within mobile 4096px canvas limit while exceeding 300 DPI print quality)
         const isMobile = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         const exportScale = customScale || (isMobile ? 3.5 : 4.0);
 
@@ -521,7 +314,7 @@ document.addEventListener('DOMContentLoaded', () => {
             y: 0,
             onclone: (clonedDoc) => {
                 // Remove all app chrome from cloned sandbox
-                const chromeSelectors = ['.app-header', '.mobile-nav-bar', '.sidebar', '.preview-toolbar', '.toast', '.mobile-bottom-bar', 'button'];
+                const chromeSelectors = ['.app-header', '.mobile-nav-bar', '.sidebar', '.preview-toolbar', 'button'];
                 chromeSelectors.forEach(sel => {
                     clonedDoc.querySelectorAll(sel).forEach(el => el.remove());
                 });
@@ -592,21 +385,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    function getSafeFileName() {
+        const raw = labNameInput.value.trim() || 'Lab';
+        const sanitized = raw.replace(/[^a-zA-Z0-9_-]/g, '_').replace(/_+/g, '_').slice(0, 50);
+        return (sanitized || 'Lab') + '_Cover_Page';
+    }
+
     downloadPdfBtn.addEventListener('click', async () => {
         downloadPdfBtn.blur();
         downloadPdfBtn.disabled = true;
         const originalPdfHtml = downloadPdfBtn.innerHTML;
         downloadPdfBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Downloading...</span>';
 
-        // Yield to browser UI thread so the spinner paints immediately
         await new Promise(resolve => setTimeout(resolve, 30));
 
-        const labFileName = (labNameInput.value.trim() || 'Lab').replace(/[^a-zA-Z0-9]/g, '_');
+        const baseFileName = getSafeFileName();
 
         try {
             const canvas = await generateA4Canvas();
 
-            // Lossless PNG stream embedding for crystal-clear letter quality under zoom
             const imgData = canvas.toDataURL('image/png', 1.0);
             const jsPdfConstructor = (window.jspdf && window.jspdf.jsPDF) ? window.jspdf.jsPDF : window.jsPDF;
             const pdf = new jsPdfConstructor({
@@ -617,9 +414,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 floatPrecision: 16
             });
 
-            // Fast, crystal-clear 1-page A4 PDF embedding (210mm x 297mm)
             pdf.addImage(imgData, 'PNG', 0, 0, 210, 297, undefined, 'FAST');
-            pdf.save(`${labFileName}_Cover_Page.pdf`);
+            pdf.save(`${baseFileName}.pdf`);
+            recordExportAnalytics('pdf');
 
             setTimeout(autoClearAfterDownload, 300);
         } catch (err) {
@@ -636,16 +433,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const originalPngHtml = downloadPngBtn.innerHTML;
         downloadPngBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Downloading...</span>';
 
-        // Yield to browser UI thread so the spinner paints immediately
         await new Promise(resolve => setTimeout(resolve, 25));
 
-        const labFileName = (labNameInput.value.trim() || 'Lab').replace(/[^a-zA-Z0-9]/g, '_');
-        const fileName = `${labFileName}_Cover_Page.png`;
+        const fileName = `${getSafeFileName()}.png`;
 
         try {
             const canvas = await generateA4Canvas();
 
-            // Native Blob streaming for lossless high-definition PNG
             if (canvas.toBlob) {
                 canvas.toBlob((blob) => {
                     if (blob) {
@@ -656,6 +450,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         document.body.appendChild(link);
                         link.click();
                         document.body.removeChild(link);
+                        recordExportAnalytics('png');
                         setTimeout(() => URL.revokeObjectURL(blobUrl), 30000);
                     } else {
                         const link = document.createElement('a');
@@ -684,15 +479,6 @@ document.addEventListener('DOMContentLoaded', () => {
         window.print();
     });
 
-    // ==========================================================================
-    // Helpers & Local Storage
-    // ==========================================================================
-
-    function showToast(message) {
-        // Pop-ups completely disabled for seamless, uninterrupted user experience
-        return;
-    }
-
     // Always clear storage so every visitor starts completely fresh without previous changes
     try {
         localStorage.removeItem('outr_cover_data');
@@ -713,6 +499,311 @@ document.addEventListener('DOMContentLoaded', () => {
             metaTheme.setAttribute('content', THEME_COLORS[themeIdx]);
         }, 6000);
     }
+
+    // ==========================================================================
+    // Admin Portal Integration (Dynamic Profiles & Telemetry)
+    // ==========================================================================
+    function applyAdminConfiguration() {
+        try {
+            const raw = localStorage.getItem('outr_admin_config');
+            if (!raw) return;
+            const config = JSON.parse(raw);
+
+            if (config.universityName) {
+                universityInput.value = config.universityName;
+            }
+            if (config.campusAddress) {
+                addressInput.value = config.campusAddress;
+            }
+            if (config.defaultDocType) {
+                docTypeInput.value = config.defaultDocType;
+            }
+            if (config.degreePrefix) {
+                const prefixSpan = document.querySelector('.input-prefix');
+                if (prefixSpan) prefixSpan.textContent = config.degreePrefix;
+            }
+            if (config.batchCredit) {
+                const creditBadges = document.querySelectorAll('.header-credit-badge strong, .credit-author');
+                creditBadges.forEach(el => {
+                    el.textContent = config.batchCredit;
+                });
+            }
+
+            // Populate datalists for Branch & Lab Name auto-completion
+            const branchDataList = document.getElementById('adminBranchList');
+            const labDataList = document.getElementById('adminLabList');
+            if (config.departments && branchDataList && labDataList) {
+                branchDataList.replaceChildren();
+                labDataList.replaceChildren();
+                config.departments.forEach(dept => {
+                    const opt = document.createElement('option');
+                    opt.value = dept.branch;
+                    branchDataList.appendChild(opt);
+
+                    if (dept.labs) {
+                        dept.labs.forEach(lab => {
+                            const labOpt = document.createElement('option');
+                            labOpt.value = lab.toUpperCase();
+                            labDataList.appendChild(labOpt);
+                        });
+                    }
+                });
+            }
+        } catch (e) {
+            console.error('Failed to apply admin config:', e);
+        }
+    }
+
+    function recordExportAnalytics(type) {
+        try {
+            const raw = localStorage.getItem('outr_admin_stats');
+            const stats = raw ? JSON.parse(raw) : { totalPdf: 0, totalPng: 0, totalCovers: 0 };
+            if (type === 'pdf') {
+                stats.totalPdf = (stats.totalPdf || 0) + 1;
+            } else if (type === 'png') {
+                stats.totalPng = (stats.totalPng || 0) + 1;
+            }
+            stats.totalCovers = (stats.totalCovers || 0) + 1;
+            localStorage.setItem('outr_admin_stats', JSON.stringify(stats));
+        } catch {
+            // fallback
+        }
+    }
+
+    // ==========================================================================
+    // Embedded Admin Portal Modal Engine
+    // ==========================================================================
+    const DEFAULT_ADMIN_CONFIG = {
+        universityName: 'ODISHA UNIVERSITY OF TECHNOLOGY AND RESEARCH',
+        campusAddress: 'Techno Campus, Ghatikia, Bhubaneswar, 751029',
+        degreePrefix: 'B.TECH',
+        defaultDocType: 'LAB RECORD',
+        batchCredit: 'BIOTECHNOLOGY 2025–29',
+        departments: [
+            { code: 'BT', name: 'BIOTECHNOLOGY', branch: 'BIOTECHNOLOGY', labs: ['Biochemistry Lab', 'Microbiology Lab', 'Bioprocess Engineering Lab', 'Molecular Biology Lab', 'Immunotechnology Lab'] },
+            { code: 'CSE', name: 'COMPUTER SCIENCE & ENGINEERING', branch: 'COMPUTER SCIENCE & ENGINEERING', labs: ['Data Structures Lab', 'Design & Analysis of Algorithms Lab', 'Database Management Systems Lab', 'Operating Systems Lab', 'Computer Networks Lab'] },
+            { code: 'IT', name: 'INFORMATION TECHNOLOGY', branch: 'INFORMATION TECHNOLOGY', labs: ['Object Oriented Programming Lab', 'Web Technologies Lab', 'Software Engineering Lab', 'Cloud Computing Lab'] },
+            { code: 'MECH', name: 'MECHANICAL ENGINEERING', branch: 'MECHANICAL ENGINEERING', labs: ['Fluid Mechanics Lab', 'Heat Transfer Lab', 'Manufacturing Process Lab', 'Kinematics & Dynamics Lab'] },
+            { code: 'EE', name: 'ELECTRICAL ENGINEERING', branch: 'ELECTRICAL ENGINEERING', labs: ['Electrical Machines Lab', 'Power Electronics Lab', 'Control Systems Lab', 'Circuits & Networks Lab'] },
+            { code: 'CIVIL', name: 'CIVIL ENGINEERING', branch: 'CIVIL ENGINEERING', labs: ['Surveying Lab', 'Geotechnical Engineering Lab', 'Concrete Technology Lab', 'Hydraulics & Water Resources Lab'] },
+            { code: 'EIE', name: 'ELECTRONICS & INSTRUMENTATION ENGINEERING', branch: 'ELECTRONICS & INSTRUMENTATION ENGINEERING', labs: ['Transducers & Sensors Lab', 'Industrial Instrumentation Lab', 'Digital Signal Processing Lab', 'Analog Electronics Lab'] },
+            { code: 'TE', name: 'TEXTILE ENGINEERING', branch: 'TEXTILE ENGINEERING', labs: ['Yarn Manufacturing Lab', 'Fabric Manufacturing Lab', 'Textile Chemical Processing Lab', 'Fabric Testing Lab'] }
+        ]
+    };
+
+    const adminPortalBtn = document.getElementById('adminPortalBtn');
+    const adminModalOverlay = document.getElementById('adminModalOverlay');
+    const adminModalCloseBtn = document.getElementById('adminModalCloseBtn');
+    const adminModalCancelBtn = document.getElementById('adminModalCancelBtn');
+    const adminModalSaveBtn = document.getElementById('adminModalSaveBtn');
+    const adminModalTabs = document.querySelectorAll('.admin-modal-tab');
+    const adminModalTabContents = document.querySelectorAll('.admin-modal-tab-content');
+
+    let modalWorkingConfig = null;
+
+    function getAdminConfig() {
+        try {
+            const raw = localStorage.getItem('outr_admin_config');
+            if (raw) return { ...DEFAULT_ADMIN_CONFIG, ...JSON.parse(raw) };
+        } catch {}
+        return JSON.parse(JSON.stringify(DEFAULT_ADMIN_CONFIG));
+    }
+
+    function openAdminModal() {
+        if (!adminModalOverlay) return;
+        modalWorkingConfig = getAdminConfig();
+
+        const univInput = document.getElementById('modalUnivName');
+        const campusInput = document.getElementById('modalCampusAddr');
+        const degInput = document.getElementById('modalDegreePrefix');
+        const docInput = document.getElementById('modalDefaultDoc');
+        const creditInput = document.getElementById('modalBatchCredit');
+
+        if (univInput) univInput.value = modalWorkingConfig.universityName || '';
+        if (campusInput) campusInput.value = modalWorkingConfig.campusAddress || '';
+        if (degInput) degInput.value = modalWorkingConfig.degreePrefix || 'B.TECH';
+        if (docInput) docInput.value = modalWorkingConfig.defaultDocType || 'LAB RECORD';
+        if (creditInput) creditInput.value = modalWorkingConfig.batchCredit || 'BIOTECHNOLOGY 2025–29';
+
+        renderModalDeptList();
+        refreshModalStats();
+
+        adminModalTabs.forEach((tab, i) => tab.classList.toggle('active', i === 0));
+        adminModalTabContents.forEach((content, i) => content.classList.toggle('active', i === 0));
+
+        adminModalOverlay.classList.remove('hidden');
+    }
+
+    function closeAdminModal() {
+        if (adminModalOverlay) {
+            adminModalOverlay.classList.add('hidden');
+        }
+    }
+
+    function renderModalDeptList() {
+        const container = document.getElementById('modalDeptList');
+        if (!container) return;
+        container.innerHTML = '';
+        const depts = (modalWorkingConfig && modalWorkingConfig.departments) || [];
+
+        if (depts.length === 0) {
+            container.innerHTML = '<span style="color:#94a3b8; font-size:0.8rem; padding:8px 0;">No departments added yet.</span>';
+            return;
+        }
+
+        depts.forEach((dept, idx) => {
+            const item = document.createElement('div');
+            item.className = 'modal-dept-item';
+            const labsCount = dept.labs ? dept.labs.length : 0;
+            item.innerHTML = `
+                <div class="modal-dept-info">
+                    <strong>[${dept.code}] ${dept.name}</strong>
+                    <span>B.TECH ${dept.branch} (${labsCount} labs)</span>
+                </div>
+                <button type="button" class="btn btn-outline modal-delete-dept" data-idx="${idx}" style="padding:4px 8px; font-size:0.75rem; color:#fda4af; border-color:rgba(244,63,94,0.3);" title="Delete department">
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
+            `;
+            container.appendChild(item);
+        });
+
+        container.querySelectorAll('.modal-delete-dept').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const idx = parseInt(btn.getAttribute('data-idx'), 10);
+                if (modalWorkingConfig && modalWorkingConfig.departments) {
+                    modalWorkingConfig.departments.splice(idx, 1);
+                    renderModalDeptList();
+                }
+            });
+        });
+    }
+
+    function refreshModalStats() {
+        try {
+            const raw = localStorage.getItem('outr_admin_stats');
+            const stats = raw ? JSON.parse(raw) : { totalPdf: 0, totalPng: 0, totalCovers: 0 };
+            const total = stats.totalCovers || ((stats.totalPdf || 0) + (stats.totalPng || 0));
+            const totalEl = document.getElementById('modalStatTotal');
+            const pdfEl = document.getElementById('modalStatPdf');
+            const pngEl = document.getElementById('modalStatPng');
+            if (totalEl) totalEl.textContent = total.toLocaleString();
+            if (pdfEl) pdfEl.textContent = (stats.totalPdf || 0).toLocaleString();
+            if (pngEl) pngEl.textContent = (stats.totalPng || 0).toLocaleString();
+        } catch {}
+    }
+
+    // Modal Trigger
+    adminPortalBtn?.addEventListener('click', (e) => {
+        e.preventDefault();
+        openAdminModal();
+    });
+
+    adminModalCloseBtn?.addEventListener('click', closeAdminModal);
+    adminModalCancelBtn?.addEventListener('click', closeAdminModal);
+
+    adminModalOverlay?.addEventListener('click', (e) => {
+        if (e.target === adminModalOverlay) {
+            closeAdminModal();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && adminModalOverlay && !adminModalOverlay.classList.contains('hidden')) {
+            closeAdminModal();
+        }
+    });
+
+    adminModalTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const tabKey = tab.getAttribute('data-modaltab');
+            adminModalTabs.forEach(t => t.classList.remove('active'));
+            adminModalTabContents.forEach(c => c.classList.remove('active'));
+            tab.classList.add('active');
+            const targetContent = document.getElementById(`modalTab-${tabKey}`);
+            if (targetContent) targetContent.classList.add('active');
+        });
+    });
+
+    document.getElementById('modalAddDeptBtn')?.addEventListener('click', () => {
+        const codeInput = document.getElementById('modalNewDeptCode');
+        const nameInput = document.getElementById('modalNewDeptName');
+        const labsInput = document.getElementById('modalNewDeptLabs');
+        const code = codeInput ? codeInput.value.trim().toUpperCase() : '';
+        const name = nameInput ? nameInput.value.trim().toUpperCase() : '';
+        const labs = labsInput ? labsInput.value.split(',').map(s => s.trim()).filter(Boolean) : [];
+
+        if (!code || !name) {
+            alert('Please provide department code and name.');
+            return;
+        }
+
+        if (!modalWorkingConfig) modalWorkingConfig = getAdminConfig();
+        if (!modalWorkingConfig.departments) modalWorkingConfig.departments = [];
+        modalWorkingConfig.departments.push({ code, name, branch: name, labs });
+        if (codeInput) codeInput.value = '';
+        if (nameInput) nameInput.value = '';
+        if (labsInput) labsInput.value = '';
+        renderModalDeptList();
+    });
+
+    document.getElementById('modalResetStatsBtn')?.addEventListener('click', () => {
+        if (confirm('Reset generation counters to 0?')) {
+            try {
+                localStorage.setItem('outr_admin_stats', JSON.stringify({ totalPdf: 0, totalPng: 0, totalCovers: 0 }));
+            } catch {}
+            refreshModalStats();
+        }
+    });
+
+    document.getElementById('modalExportBackupBtn')?.addEventListener('click', () => {
+        const cfg = getAdminConfig();
+        const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(cfg, null, 2));
+        const a = document.createElement('a');
+        a.setAttribute('href', dataStr);
+        a.setAttribute('download', `outr_admin_config_${new Date().toISOString().slice(0, 10)}.json`);
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    });
+
+    document.getElementById('modalFactoryResetBtn')?.addEventListener('click', () => {
+        if (confirm('Reset all institutional settings and departments to OUTR factory defaults?')) {
+            try {
+                localStorage.setItem('outr_admin_config', JSON.stringify(DEFAULT_ADMIN_CONFIG));
+            } catch {}
+            applyAdminConfiguration();
+            updatePreview();
+            openAdminModal();
+        }
+    });
+
+    adminModalSaveBtn?.addEventListener('click', () => {
+        if (!modalWorkingConfig) modalWorkingConfig = getAdminConfig();
+        const univInput = document.getElementById('modalUnivName');
+        const campusInput = document.getElementById('modalCampusAddr');
+        const degInput = document.getElementById('modalDegreePrefix');
+        const docInput = document.getElementById('modalDefaultDoc');
+        const creditInput = document.getElementById('modalBatchCredit');
+
+        if (univInput) modalWorkingConfig.universityName = univInput.value.trim().toUpperCase();
+        if (campusInput) modalWorkingConfig.campusAddress = campusInput.value.trim();
+        if (degInput) modalWorkingConfig.degreePrefix = degInput.value.trim().toUpperCase();
+        if (docInput) modalWorkingConfig.defaultDocType = docInput.value.trim().toUpperCase();
+        if (creditInput) modalWorkingConfig.batchCredit = creditInput.value.trim();
+
+        try {
+            localStorage.setItem('outr_admin_config', JSON.stringify(modalWorkingConfig));
+        } catch (err) {
+            console.error('Failed to save admin config:', err);
+        }
+
+        applyAdminConfiguration();
+        updatePreview();
+        closeAdminModal();
+    });
+
+    // Apply any configured admin profile
+    applyAdminConfiguration();
 
     // Initialize fresh preview
     updatePreview();

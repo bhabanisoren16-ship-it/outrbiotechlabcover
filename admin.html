@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1e1b4b">
+    <title>Admin Portal | OUTR Lab Cover Studio</title>
+    <link rel="canonical" href="https://outrbiotechlabcover.vercel.app/admin.html">
+    <link rel="stylesheet" href="admin.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+<body>
+    <!-- Screen 1: Admin Authentication Gate (Optional Lock) -->
+    <div class="auth-wrapper hidden" id="authScreen">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="auth-logo-badge">
+                    <img src="assets/outr-logo.png" alt="University Seal" class="auth-logo">
+                </div>
+                <h2>Admin Console</h2>
+                <p>Restricted access for academic coordinators and faculty</p>
+            </div>
+
+            <div class="alert-banner hidden" id="authAlert">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span id="authAlertText">Invalid credentials</span>
+            </div>
+
+            <form class="auth-form" id="loginForm">
+                <div class="form-group">
+                    <label for="usernameInput">Admin Username</label>
+                    <div class="input-with-icon">
+                        <i class="fa-solid fa-user-shield"></i>
+                        <input type="text" id="usernameInput" value="admin" placeholder="Enter username" autocomplete="username" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="passwordInput">Password</label>
+                    <div class="input-with-icon">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="passwordInput" placeholder="Enter password" autocomplete="current-password" required>
+                        <button type="button" class="btn-eye" id="togglePasswordBtn" title="Toggle password visibility">
+                            <i class="fa-solid fa-eye" id="passwordEyeIcon"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-help-text">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>Default: <strong>admin</strong> / <strong>outr@admin2025</strong></span>
+                    <button type="button" id="fillDefaultBtn" style="color: var(--accent-gold); cursor: pointer; text-decoration: underline; background: none; border: none; font-size: 0.775rem; margin-left: auto;">(Auto-fill)</button>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block" id="loginSubmitBtn">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                    <span>Authenticate</span>
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                <a href="index.html" class="back-link">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Return to Lab Cover Studio</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen 2: Admin Dashboard Console -->
+    <div class="admin-wrapper" id="adminConsoleScreen">
+        <!-- Top App Bar -->
+        <header class="admin-header">
+            <div class="header-brand">
+                <img src="assets/outr-logo.png" alt="OUTR Logo" class="admin-brand-logo">
+                <div class="brand-titles">
+                    <h1>OUTR <span>Admin Portal</span></h1>
+                    <span class="badge-tag">Academic Studio Control</span>
+                </div>
+            </div>
+
+            <div class="header-right">
+                <div class="admin-user-pill">
+                    <i class="fa-solid fa-shield-cat"></i>
+                    <span id="activeUserLabel">Admin (Faculty)</span>
+                    <span class="online-indicator" title="Session Active"></span>
+                </div>
+
+                <a href="index.html" class="btn btn-outline" target="_blank" rel="noopener" title="Open student cover studio in new tab">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    <span class="desktop-only">Cover Studio</span>
+                </a>
+
+                <button type="button" class="btn btn-danger" id="logoutBtn" title="Sign out of administrative session">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span class="desktop-only">Sign Out</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Body -->
+        <div class="admin-layout">
+            <!-- Sidebar Navigation -->
+            <aside class="admin-sidebar">
+                <nav class="sidebar-nav">
+                    <button type="button" class="nav-item active" data-tab="dashboard">
+                        <i class="fa-solid fa-chart-pie"></i>
+                        <span>Dashboard</span>
+                    </button>
+                    <button type="button" class="nav-item" data-tab="institution">
+                        <i class="fa-solid fa-building-columns"></i>
+                        <span>Institutional Profile</span>
+                    </button>
+                    <button type="button" class="nav-item" data-tab="departments">
+                        <i class="fa-solid fa-book-bookmark"></i>
+                        <span>Departments & Labs</span>
+                    </button>
+                    <button type="button" class="nav-item" data-tab="documents">
+                        <i class="fa-solid fa-file-lines"></i>
+                        <span>Document Types</span>
+                    </button>
+                    <button type="button" class="nav-item" data-tab="security">
+                        <i class="fa-solid fa-key"></i>
+                        <span>Security & Password</span>
+                    </button>
+                    <button type="button" class="nav-item" data-tab="backup">
+                        <i class="fa-solid fa-database"></i>
+                        <span>Backup & Data</span>
+                    </button>
+                </nav>
+
+                <div class="sidebar-footer">
+                    <div class="system-status-card">
+                        <div class="status-indicator">
+                            <span class="status-dot"></span>
+                            <span>System Healthy</span>
+                        </div>
+                        <small>v8.5 Production</small>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Workspace Panels -->
+            <main class="admin-main">
+                <!-- Panel 1: Dashboard -->
+                <section class="panel-section active" id="panel-dashboard">
+                    <div class="section-title">
+                        <h2>System Overview</h2>
+                        <p>Real-time telemetry and cover page generation metrics</p>
+                    </div>
+
+                    <!-- KPI Cards Grid -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon icon-purple">
+                                <i class="fa-solid fa-file-circle-check"></i>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-label">Total Covers Generated</span>
+                                <h3 class="stat-value" id="kpiTotalCovers">0</h3>
+                                <span class="stat-sub">PDF & PNG Exports</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon icon-blue">
+                                <i class="fa-solid fa-file-pdf"></i>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-label">PDF Downloads</span>
+                                <h3 class="stat-value" id="kpiPdfDownloads">0</h3>
+                                <span class="stat-sub">300 DPI High-Res Prints</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon icon-amber">
+                                <i class="fa-solid fa-file-image"></i>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-label">Image Downloads</span>
+                                <h3 class="stat-value" id="kpiPngDownloads">0</h3>
+                                <span class="stat-sub">Lossless A4 Canvas</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon icon-emerald">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-label">Configured Departments</span>
+                                <h3 class="stat-value" id="kpiTotalDepts">8</h3>
+                                <span class="stat-sub">Active OUTR Engineering Branches</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Action Shortcuts -->
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-bolt"></i> Quick Operations</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="quick-actions-row">
+                                <button type="button" class="btn btn-secondary action-goto-depts">
+                                    <i class="fa-solid fa-plus"></i>
+                                    <span>Add Department / Lab</span>
+                                </button>
+                                <button type="button" class="btn btn-secondary action-goto-institution">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                    <span>Edit University Profile</span>
+                                </button>
+                                <button type="button" class="btn btn-secondary action-export-backup">
+                                    <i class="fa-solid fa-download"></i>
+                                    <span>Export Configuration</span>
+                                </button>
+                                <button type="button" class="btn btn-secondary action-reset-stats">
+                                    <i class="fa-solid fa-rotate"></i>
+                                    <span>Reset Counters</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Administrative Activity Log -->
+                    <div class="card mt-4">
+                        <div class="card-header flex-between">
+                            <h3><i class="fa-solid fa-clock-rotate-left"></i> Security & Activity Audit Log</h3>
+                            <button type="button" class="btn-link" id="clearLogBtn">Clear Log</button>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Timestamp</th>
+                                            <th>Event</th>
+                                            <th>User</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="activityLogBody">
+                                        <!-- Rendered dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Panel 2: Institutional Profile -->
+                <section class="panel-section" id="panel-institution">
+                    <div class="section-title">
+                        <h2>Institutional Profile</h2>
+                        <p>Configure university credentials, address, and batch attribution</p>
+                    </div>
+
+                    <div class="card">
+                        <form id="institutionForm">
+                            <div class="form-group">
+                                <label for="instUniversityName">Official University Name</label>
+                                <input type="text" id="instUniversityName" class="form-input" required>
+                                <span class="field-hint">Appears in uppercase on the bottom footer of all A4 lab cover pages</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="instCampusAddress">Official Campus Address</label>
+                                <input type="text" id="instCampusAddress" class="form-input" required>
+                                <span class="field-hint">Campus address line displayed below university name</span>
+                            </div>
+
+                            <div class="grid-2">
+                                <div class="form-group">
+                                    <label for="instDegreePrefix">Degree Program</label>
+                                    <input type="text" id="instDegreePrefix" class="form-input" value="B.TECH" required>
+                                    <span class="field-hint">e.g. B.TECH, M.TECH, MCA</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="instDefaultDocType">Default Document Title</label>
+                                    <input type="text" id="instDefaultDocType" class="form-input" value="LAB RECORD" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="instBatchCredit">Developer & Department Attribution Text</label>
+                                <input type="text" id="instBatchCredit" class="form-input" value="BIOTECHNOLOGY 2025–29" required>
+                                <span class="field-hint">Credits badge displayed in top header navigation and mobile bar</span>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa-solid fa-floppy-disk"></i>
+                                    <span>Save Institutional Profile</span>
+                                </button>
+                                <button type="button" class="btn btn-secondary action-restore-institution">
+                                    <i class="fa-solid fa-arrow-rotate-left"></i>
+                                    <span>Reset to OUTR Defaults</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Panel 3: Departments & Labs Manager -->
+                <section class="panel-section" id="panel-departments">
+                    <div class="section-title flex-between">
+                        <div>
+                            <h2>Departments & Academic Labs</h2>
+                            <p>Manage supported departments, branch names, and pre-configured lab subjects</p>
+                        </div>
+                        <button type="button" class="btn btn-primary" id="addDeptModalBtn">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Add Department</span>
+                        </button>
+                    </div>
+
+                    <div class="card">
+                        <div class="table-responsive">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>Department Name</th>
+                                        <th>Degree & Branch</th>
+                                        <th>Standard Labs</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="departmentsTableBody">
+                                    <!-- Rendered dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Panel 4: Document Types & Format -->
+                <section class="panel-section" id="panel-documents">
+                    <div class="section-title">
+                        <h2>Document Formats & Academic Semesters</h2>
+                        <p>Configure permitted academic document formats and semesters</p>
+                    </div>
+
+                    <div class="grid-2">
+                        <!-- Document Types List -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-file-contract"></i> Standard Document Types</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="tag-input-container">
+                                    <div class="tag-chips-wrap" id="docTypeChipsContainer">
+                                        <!-- Chips rendered dynamically -->
+                                    </div>
+                                    <div class="add-tag-row">
+                                        <input type="text" id="newDocTypeInput" placeholder="Add document type (e.g. SEMINAR)">
+                                        <button type="button" class="btn btn-secondary btn-sm" id="addDocTypeBtn">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Semesters List -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-calendar-days"></i> Academic Semesters</h3>
+                            </div>
+                            <div class="card-body">
+                                <ul class="semester-checklist" id="semesterList">
+                                    <!-- Rendered dynamically -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Panel 5: Security & Password -->
+                <section class="panel-section" id="panel-security">
+                    <div class="section-title">
+                        <h2>Security & Authentication</h2>
+                        <p>Update administrative credentials and configure security limits</p>
+                    </div>
+
+                    <div class="grid-2">
+                        <!-- Password Update Card -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-shield-halved"></i> Update Admin Password</h3>
+                            </div>
+                            <div class="card-body">
+                                <form id="changePasswordForm">
+                                    <div class="form-group">
+                                        <label for="currentPasswordInput">Current Password</label>
+                                        <input type="password" id="currentPasswordInput" class="form-input" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="newPasswordInput">New Password</label>
+                                        <input type="password" id="newPasswordInput" class="form-input" minlength="8" required>
+                                        <span class="field-hint">Minimum 8 characters with at least one number or symbol</span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="confirmPasswordInput">Confirm New Password</label>
+                                        <input type="password" id="confirmPasswordInput" class="form-input" minlength="8" required>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fa-solid fa-check"></i>
+                                        <span>Update Password</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Session Security Settings -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-user-lock"></i> Session & Brute Force Defense</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="sessionTimeoutSelect">Session Inactivity Timeout</label>
+                                    <select id="sessionTimeoutSelect" class="form-input">
+                                        <option value="15">15 Minutes</option>
+                                        <option value="30" selected>30 Minutes (Recommended)</option>
+                                        <option value="60">1 Hour</option>
+                                        <option value="120">2 Hours</option>
+                                    </select>
+                                </div>
+
+                                <div class="security-info-box">
+                                    <h4><i class="fa-solid fa-lock"></i> Built-in Defenses</h4>
+                                    <ul>
+                                        <li>Client-side SHA-256 salted hashing.</li>
+                                        <li>Brute-force protection: 5 attempts triggers a 60-second cooldown lock.</li>
+                                        <li>Isolated session storage lifecycle.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Panel 6: Backup & Data Management -->
+                <section class="panel-section" id="panel-backup">
+                    <div class="section-title">
+                        <h2>Data Management & Backup</h2>
+                        <p>Export portal state, restore profiles, and reset factory defaults</p>
+                    </div>
+
+                    <div class="grid-2">
+                        <!-- Export Card -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-file-export"></i> Export Configuration</h3>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-muted mb-3">Download a portable JSON snapshot of all institutional settings, configured departments, and lab courses.</p>
+                                <button type="button" class="btn btn-primary" id="exportConfigBtn">
+                                    <i class="fa-solid fa-download"></i>
+                                    <span>Download JSON Backup</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Import Card -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-file-import"></i> Restore from Backup</h3>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-muted mb-3">Upload a previously saved configuration file to immediately restore departments and settings.</p>
+                                <div class="import-upload-zone">
+                                    <input type="file" id="importConfigFile" accept="application/json" class="file-input-hidden">
+                                    <button type="button" class="btn btn-secondary" id="triggerImportBtn">
+                                        <i class="fa-solid fa-upload"></i>
+                                        <span>Select Backup JSON File</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card card-danger mt-4">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-triangle-exclamation"></i> Danger Zone</h3>
+                        </div>
+                        <div class="card-body flex-between">
+                            <div>
+                                <h4>Reset All Configuration to OUTR Factory Defaults</h4>
+                                <p class="text-muted">Clears all custom departments, addresses, and document types and returns to original template.</p>
+                            </div>
+                            <button type="button" class="btn btn-danger" id="factoryResetBtn">
+                                <i class="fa-solid fa-trash-can"></i>
+                                <span>Reset to Defaults</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal: Add / Edit Department -->
+    <div class="modal-backdrop hidden" id="deptModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="deptModalTitle">Add Department</h3>
+                <button type="button" class="btn-close" id="closeDeptModalBtn">&times;</button>
+            </div>
+            <form id="deptForm">
+                <input type="hidden" id="deptIndexInput" value="-1">
+                <div class="form-group">
+                    <label for="deptCodeInput">Department Code (Short)</label>
+                    <input type="text" id="deptCodeInput" placeholder="e.g. BT, CSE, MECH" required>
+                </div>
+                <div class="form-group">
+                    <label for="deptNameInput">Department Name</label>
+                    <input type="text" id="deptNameInput" placeholder="e.g. BIOTECHNOLOGY" required>
+                    <span class="field-hint">Appears as: DEPARTMENT OF [NAME]</span>
+                </div>
+                <div class="form-group">
+                    <label for="deptBranchInput">Branch Title</label>
+                    <input type="text" id="deptBranchInput" placeholder="e.g. BIOTECHNOLOGY" required>
+                    <span class="field-hint">Appears as: B.TECH [BRANCH]</span>
+                </div>
+                <div class="form-group">
+                    <label for="deptLabsInput">Associated Standard Labs (comma-separated)</label>
+                    <textarea id="deptLabsInput" rows="3" placeholder="e.g. Biochemistry Lab, Microbiology Lab, Bioprocess Engineering Lab"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelDeptModalBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="saveDeptModalBtn">Save Department</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="admin-toast hidden" id="adminToast">
+        <i class="fa-solid fa-circle-check" id="toastIcon"></i>
+        <span id="toastMsg">Operation successful</span>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
+
