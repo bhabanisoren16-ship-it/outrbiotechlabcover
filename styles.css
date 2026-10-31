@@ -563,7 +563,7 @@ textarea[readonly] {
     background: rgba(0, 0, 0, 0.16);
     border: 1px solid rgba(255, 255, 255, 0.10);
     color: rgba(255, 255, 255, 0.65);
-    cursor: default;
+    cursor: not-allowed !important;
     user-select: none;
     letter-spacing: 0.5px;
     font-weight: 600;
@@ -574,12 +574,16 @@ textarea[readonly] {
 .form-group input[readonly]:hover,
 .form-group textarea[readonly]:hover,
 .form-group input[readonly]:focus,
-.form-group textarea[readonly]:focus {
+.form-group textarea[readonly]:focus,
+input[readonly]:hover,
+input[readonly]:focus,
+textarea[readonly]:hover,
+textarea[readonly]:focus {
     outline: none;
     border-color: rgba(255, 255, 255, 0.20);
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25);
     background: rgba(0, 0, 0, 0.22);
-    cursor: default;
+    cursor: not-allowed !important;
     transform: none;
 }
 
@@ -1544,10 +1548,13 @@ textarea[readonly] {
     }
 
     .form-group input[readonly],
-    .form-group textarea[readonly] {
+    .form-group textarea[readonly],
+    input[readonly],
+    textarea[readonly] {
         background: rgba(0, 0, 0, 0.16);
         border: 1px solid rgba(255, 255, 255, 0.10);
         color: rgba(255, 255, 255, 0.65);
+        cursor: not-allowed !important;
     }
 
     .input-prefix-group {
