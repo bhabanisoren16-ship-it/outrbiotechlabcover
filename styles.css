@@ -1479,6 +1479,9 @@ textarea[readonly]:focus {
     }
 
     .card-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
         background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.06) 100%);
         border: 1px solid rgba(255, 255, 255, 0.24);
         border-radius: 9px;
@@ -1490,6 +1493,7 @@ textarea[readonly]:focus {
         color: #ffffff;
         font-size: 1.05rem;
         filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.65));
+        flex-shrink: 0 !important;
     }
 
     .card-title h3 {
@@ -1561,26 +1565,67 @@ textarea[readonly]:focus {
         background: rgba(0, 0, 0, 0.25);
         border: 1px solid rgba(255, 255, 255, 0.16);
         border-radius: 8px;
+        overflow: hidden;
     }
 
     .input-prefix-group .input-prefix {
-        padding: 10px 12px;
-        font-size: 0.82rem;
+        padding: 8px 10px;
+        font-size: 0.76rem;
         font-weight: 700;
         background: linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.08) 100%);
         border-right: 1px solid rgba(255, 255, 255, 0.16);
         color: #ffffff;
+        flex-shrink: 0;
     }
 
     .input-prefix-group input {
-        font-size: 16px !important;
+        font-size: 15px !important;
         font-weight: 600 !important;
         background: transparent !important;
+        padding: 8px 10px !important;
+        min-width: 0 !important;
+        width: 100% !important;
+    }
+
+    /* Mobile Branch & Semester Optimized Sizing */
+    .grid-branch-semester {
+        grid-template-columns: minmax(0, 1.62fr) minmax(0, 1fr) !important;
+        gap: 8px !important;
+    }
+
+    .branch-prefix-group .input-prefix {
+        padding: 8px 7px !important;
+        font-size: 0.74rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.3px;
+        flex-shrink: 0 !important;
+    }
+
+    .branch-prefix-group input {
+        padding: 8px 7px !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        min-width: 0 !important;
+        width: 100% !important;
+    }
+
+    .branch-prefix-group input::placeholder {
+        font-size: 0.78rem !important;
+        color: rgba(255, 255, 255, 0.55);
+        letter-spacing: 0.2px;
+    }
+
+    .semester-col select {
+        padding: 8px 6px !important;
+        padding-right: 22px !important;
+        font-size: 13.5px !important;
+        background-position: right 6px center !important;
     }
 
     .grid-2 {
-        grid-template-columns: 1fr;
-        gap: 12px;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 8px;
     }
 
     .preview-toolbar {
