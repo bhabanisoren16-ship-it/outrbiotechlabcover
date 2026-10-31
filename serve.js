@@ -93,8 +93,6 @@ const server = http.createServer((req, res) => {
 
     if (decodedPath === '/' || decodedPath === '') {
         decodedPath = '/index.html';
-    } else if (decodedPath === '/admin' || decodedPath === '/admin/') {
-        decodedPath = '/admin.html';
     } else if (!path.extname(decodedPath)) {
         decodedPath = decodedPath.replace(/\/+$/, '') + '.html';
     }
