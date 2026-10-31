@@ -372,51 +372,64 @@ body::before {
 }
 
 .form-card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    background: linear-gradient(145deg, rgba(20, 26, 56, 0.60) 0%, rgba(10, 14, 34, 0.72) 100%);
+    backdrop-filter: blur(24px) saturate(190%);
+    -webkit-backdrop-filter: blur(24px) saturate(190%);
     border: 1px solid rgba(255, 255, 255, 0.16);
-    border-radius: var(--radius-md);
+    border-radius: 14px;
     padding: 16px;
     display: flex;
     flex-direction: column;
     gap: 12px;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     box-shadow: 
-        0 8px 32px 0 rgba(0, 0, 0, 0.28),
-        inset 0 1px 0 0 rgba(255, 255, 255, 0.18);
+        0 12px 32px -4px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.22),
+        0 0 0 1px rgba(99, 102, 241, 0.12);
 }
 
 .form-card:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.28);
+    background: linear-gradient(145deg, rgba(24, 32, 68, 0.65) 0%, rgba(12, 17, 40, 0.78) 100%);
+    border-color: rgba(147, 157, 255, 0.35);
     box-shadow: 
-        0 12px 36px 0 rgba(0, 0, 0, 0.38),
-        inset 0 1px 0 0 rgba(255, 255, 255, 0.28);
-    transform: translateY(-1px);
+        0 16px 40px -4px rgba(0, 0, 0, 0.55),
+        inset 0 1px 0 rgba(255, 255, 255, 0.32),
+        0 0 24px rgba(99, 102, 241, 0.22);
+    transform: translateY(-1.5px);
+}
+
+.form-card:focus-within {
+    border-color: rgba(129, 140, 248, 0.55);
+    box-shadow: 
+        0 16px 44px -4px rgba(0, 0, 0, 0.60),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35),
+        0 0 25px rgba(99, 102, 241, 0.28);
 }
 
 .card-title {
     display: flex;
     align-items: center;
-    gap: 9px;
-    padding: 8px 12px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: var(--radius-sm);
+    gap: 10px;
+    padding: 9px 13px;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.28) 0%, rgba(139, 92, 246, 0.16) 100%);
+    border: 1px solid rgba(165, 180, 252, 0.32);
+    border-radius: 9px;
     margin-bottom: 4px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.28);
 }
 
 .card-title i {
-    color: #818cf8;
-    font-size: 1rem;
+    color: #a5b4fc;
+    font-size: 1.05rem;
+    filter: drop-shadow(0 0 8px rgba(129, 140, 248, 0.7));
 }
 
 .card-title h3 {
     font-size: 0.95rem;
     font-weight: 800;
     color: #ffffff;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.4px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .form-group {
@@ -427,13 +440,14 @@ body::before {
 }
 
 .form-group label {
-    font-size: 0.80rem;
+    font-size: 0.76rem;
     font-weight: 700;
-    color: #ffffff;
-    letter-spacing: 0.2px;
+    color: #cbd5e1;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 5px;
 }
 
 /* Specially Highlighted Name Fields: Extra Bold & Clean (No Glow) */
@@ -478,22 +492,24 @@ label[for="labNameInput"] {
     width: 100%;
     min-width: 0;
     box-sizing: border-box;
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: var(--radius-sm);
-    padding: 8px 11px;
-    font-size: 0.84rem;
+    background: rgba(8, 12, 28, 0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-size: 0.86rem;
+    font-weight: 600;
     color: #ffffff;
     font-family: inherit;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.05);
-    transition: all 0.2s ease;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35), 0 1px 0 rgba(255, 255, 255, 0.06);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-    color: rgba(226, 232, 240, 0.42);
+    color: rgba(148, 163, 184, 0.55);
+    font-weight: 500;
 }
 
 .form-group select {
@@ -511,17 +527,19 @@ label[for="labNameInput"] {
 .form-group input:hover,
 .form-group select:hover,
 .form-group textarea:hover {
-    background-color: rgba(255, 255, 255, 0.09);
-    border-color: rgba(255, 255, 255, 0.25);
+    background-color: rgba(12, 17, 38, 0.85);
+    border-color: rgba(165, 180, 252, 0.38);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25), 0 0 12px rgba(99, 102, 241, 0.18);
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    background-color: rgba(255, 255, 255, 0.14);
+    background-color: rgba(15, 22, 50, 0.94);
     border-color: #818cf8;
-    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.45), inset 0 1px 3px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.32), 0 0 16px rgba(99, 102, 241, 0.30), inset 0 1px 2px rgba(0, 0, 0, 0.2);
+    transform: translateY(-0.5px);
 }
 
 .form-group select:hover,
@@ -537,14 +555,15 @@ label[for="labNameInput"] {
 .form-group textarea[readonly],
 input[readonly],
 textarea[readonly] {
-    background: rgba(255, 255, 255, 0.03);
-    border-color: rgba(255, 255, 255, 0.10);
+    background: rgba(12, 16, 38, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     color: #94a3b8;
-    cursor: not-allowed;
+    cursor: default;
     user-select: none;
-    letter-spacing: 0.4px;
+    letter-spacing: 0.5px;
+    font-weight: 600;
     resize: none;
-    box-shadow: none;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .form-group input[readonly]:hover,
@@ -552,14 +571,15 @@ textarea[readonly] {
 .form-group input[readonly]:focus,
 .form-group textarea[readonly]:focus {
     outline: none;
-    border-color: rgba(255, 255, 255, 0.15);
-    box-shadow: none;
-    background: rgba(255, 255, 255, 0.04);
-    cursor: not-allowed;
+    border-color: rgba(165, 180, 252, 0.25);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    background: rgba(14, 20, 46, 0.65);
+    cursor: default;
+    transform: none;
 }
 
 .form-group select option {
-    background: #0f172a;
+    background: #0b0f24;
     color: #f8fafc;
 }
 
@@ -570,36 +590,38 @@ textarea[readonly] {
     width: 100%;
     min-width: 0;
     box-sizing: border-box;
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: var(--radius-sm);
+    background: rgba(8, 12, 28, 0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 8px;
     overflow: hidden;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.05);
-    transition: all 0.2s ease;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35), 0 1px 0 rgba(255, 255, 255, 0.06);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .input-prefix-group:hover {
-    background: rgba(255, 255, 255, 0.09);
-    border-color: rgba(255, 255, 255, 0.25);
+    background: rgba(12, 17, 38, 0.85);
+    border-color: rgba(165, 180, 252, 0.38);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25), 0 0 12px rgba(99, 102, 241, 0.18);
 }
 
 .input-prefix-group:focus-within {
     border-color: #818cf8;
-    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.45), inset 0 1px 3px rgba(0, 0, 0, 0.15);
-    background: rgba(255, 255, 255, 0.14);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.32), 0 0 16px rgba(99, 102, 241, 0.30), inset 0 1px 2px rgba(0, 0, 0, 0.2);
+    background: rgba(15, 22, 50, 0.94);
+    transform: translateY(-0.5px);
 }
 
 .input-prefix-group .input-prefix {
     display: inline-flex;
     align-items: center;
-    padding: 8px 10px;
-    background: rgba(99, 102, 241, 0.22);
-    border-right: 1px solid rgba(255, 255, 255, 0.14);
+    padding: 9px 12px;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.30) 0%, rgba(139, 92, 246, 0.18) 100%);
+    border-right: 1px solid rgba(255, 255, 255, 0.16);
     color: #e0e7ff;
-    font-size: 0.78rem;
-    font-weight: 600;
+    font-size: 0.80rem;
+    font-weight: 700;
     letter-spacing: 0.4px;
     white-space: nowrap;
     user-select: none;
@@ -614,10 +636,12 @@ textarea[readonly] {
     border: none !important;
     background: transparent !important;
     box-shadow: none !important;
-    padding: 8px 10px !important;
+    padding: 9px 12px !important;
     color: #ffffff !important;
-    font-size: 0.84rem !important;
+    font-size: 0.86rem !important;
+    font-weight: 600;
     border-radius: 0 !important;
+    transform: none !important;
 }
 
 .input-prefix-group input:focus {
@@ -1408,34 +1432,57 @@ textarea[readonly] {
         letter-spacing: 0.6px;
     }
 
-    /* Mobile Form Cards & Typography: Crisp, Bold & No Glow */
+    /* Mobile Form Cards & Typography: Aesthetic Cyber-Glassmorphism */
     .form-card {
         padding: 14px;
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(20px) saturate(170%);
-        -webkit-backdrop-filter: blur(20px) saturate(170%);
-        border: 1px solid rgba(255, 255, 255, 0.16);
+        background: linear-gradient(145deg, rgba(22, 28, 62, 0.72) 0%, rgba(10, 14, 34, 0.85) 100%);
+        backdrop-filter: blur(24px) saturate(190%);
+        -webkit-backdrop-filter: blur(24px) saturate(190%);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 14px;
+        box-shadow: 
+            0 12px 30px -4px rgba(0, 0, 0, 0.50),
+            inset 0 1px 0 rgba(255, 255, 255, 0.22),
+            0 0 0 1px rgba(99, 102, 241, 0.12);
+    }
+
+    .card-title {
+        background: linear-gradient(135deg, rgba(99, 102, 241, 0.30) 0%, rgba(139, 92, 246, 0.18) 100%);
+        border: 1px solid rgba(165, 180, 252, 0.32);
+        border-radius: 9px;
+        padding: 9px 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.28);
+    }
+
+    .card-title i {
+        color: #a5b4fc;
+        font-size: 1.05rem;
+        filter: drop-shadow(0 0 8px rgba(129, 140, 248, 0.75));
     }
 
     .card-title h3 {
         font-size: 0.95rem;
         font-weight: 800;
         color: #ffffff;
+        letter-spacing: 0.4px;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
     }
 
     .form-group label {
-        font-size: 0.82rem;
+        font-size: 0.78rem;
         font-weight: 700;
-        color: #ffffff;
+        color: #cbd5e1;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
     }
 
-    /* Highlighted Name Fields on Mobile: Extra Bold */
+    /* Highlighted Name Fields on Mobile */
     label[for="studentNameInput"],
     label[for="labNameInput"] {
-        font-size: 0.86rem;
+        font-size: 0.80rem;
         font-weight: 800;
-        color: #ffffff;
-        letter-spacing: 0.3px;
+        color: #e0e7ff;
+        letter-spacing: 0.6px;
     }
 
     #studentNameInput,
@@ -1443,14 +1490,15 @@ textarea[readonly] {
         font-weight: 700;
         font-size: 16px;
         color: #ffffff;
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.26);
+        background: rgba(8, 12, 28, 0.78);
+        border: 1px solid rgba(165, 180, 252, 0.36);
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35), 0 0 10px rgba(99, 102, 241, 0.15);
     }
 
     #studentNameInput::placeholder,
     #labNameInput::placeholder {
-        font-weight: 700;
-        color: rgba(255, 255, 255, 0.60);
+        font-weight: 600;
+        color: rgba(148, 163, 184, 0.60);
     }
 
     /* Touch targets & preventing iOS Safari automatic zoom on focus */
@@ -1459,19 +1507,38 @@ textarea[readonly] {
     .form-group textarea {
         font-size: 16px;
         padding: 10px 12px;
-        font-weight: 700;
+        font-weight: 600;
         color: #ffffff;
+        background: rgba(8, 12, 28, 0.75);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 8px;
+    }
+
+    .form-group input[readonly],
+    .form-group textarea[readonly] {
+        background: rgba(12, 16, 38, 0.60);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: #94a3b8;
+    }
+
+    .input-prefix-group {
+        background: rgba(8, 12, 28, 0.75);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 8px;
     }
 
     .input-prefix-group .input-prefix {
         padding: 10px 12px;
         font-size: 0.82rem;
         font-weight: 700;
+        background: linear-gradient(135deg, rgba(99, 102, 241, 0.32) 0%, rgba(139, 92, 246, 0.20) 100%);
+        border-right: 1px solid rgba(255, 255, 255, 0.16);
     }
 
     .input-prefix-group input {
         font-size: 16px !important;
-        font-weight: 700 !important;
+        font-weight: 600 !important;
+        background: transparent !important;
     }
 
     .grid-2 {
