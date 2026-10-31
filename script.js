@@ -174,11 +174,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function setZoom(scale) {
         currentZoom = Math.min(Math.max(0.2, scale), 2.0);
-        if ('zoom' in coverSheet.style) {
+        const isMobile = window.innerWidth <= 900;
+
+        if (!isMobile && 'zoom' in coverSheet.style) {
             coverSheet.style.zoom = currentZoom;
             coverSheet.style.transform = 'none';
             coverSheet.style.webkitTransform = 'none';
         } else {
+            coverSheet.style.zoom = '1';
+            coverSheet.style.transformOrigin = 'top left';
             coverSheet.style.transform = `scale(${currentZoom})`;
             coverSheet.style.webkitTransform = `scale(${currentZoom})`;
         }
@@ -186,18 +190,20 @@ document.addEventListener('DOMContentLoaded', () => {
             sheetWrapper.style.width = `${Math.round(794 * currentZoom)}px`;
             sheetWrapper.style.height = `${Math.round(1123 * currentZoom)}px`;
         }
-        zoomLevelEl.textContent = `${Math.round(currentZoom * 100)}%`;
+        if (zoomLevelEl) {
+            zoomLevelEl.textContent = `${Math.round(currentZoom * 100)}%`;
+        }
     }
 
     function autoFit() {
-        if (!paperViewport) return;
+        if (!paperViewport || !coverSheet) return;
         const isMobile = window.innerWidth <= 900;
         let vpWidth = paperViewport.clientWidth;
         if (!vpWidth || vpWidth <= 0) {
             vpWidth = window.innerWidth;
         }
-        const padding = isMobile ? 16 : 80;
-        const availableWidth = Math.max(260, vpWidth - padding);
+        const padding = isMobile ? (window.innerWidth <= 480 ? 16 : 24) : 80;
+        const availableWidth = Math.max(220, vpWidth - padding);
         const sheetWidth = 794;
         const autoScale = Math.min(1.0, Math.max(0.2, availableWidth / sheetWidth));
         setZoom(autoScale);
@@ -207,15 +213,18 @@ document.addEventListener('DOMContentLoaded', () => {
     zoomOutBtn.addEventListener('click', () => setZoom(currentZoom - 0.1));
     zoomFitBtn.addEventListener('click', autoFit);
 
-    // Responsive window resize re-fit (debounced)
+    // Responsive window resize & orientation re-fit
     let resizeTimeout;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(autoFit, 150);
+        resizeTimeout = setTimeout(autoFit, 100);
+    });
+    window.addEventListener('orientationchange', () => {
+        setTimeout(autoFit, 200);
     });
 
     // Auto fit initial view on load
-    setTimeout(autoFit, 200);
+    setTimeout(autoFit, 150);
 
     // ==========================================================================
     // Mobile View Navigation (Smooth Scroll between Form & Preview)
@@ -228,10 +237,16 @@ document.addEventListener('DOMContentLoaded', () => {
             tabFormBtn?.classList.remove('active');
             tabPreviewBtn?.classList.add('active');
             if (window.innerWidth <= 900) {
-                previewArea?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                if (workspace && previewArea) {
+                    const previewTop = previewArea.offsetTop;
+                    workspace.scrollTo({ top: previewTop, behavior: 'smooth' });
+                } else {
+                    previewArea?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
             }
             requestAnimationFrame(() => {
-                setTimeout(autoFit, 40);
+                autoFit();
+                setTimeout(autoFit, 120);
             });
         } else {
             tabPreviewBtn?.classList.remove('active');

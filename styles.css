@@ -1287,7 +1287,18 @@ textarea[readonly] {
         height: auto;
         min-height: 480px;
         padding: 16px 8px 40px 8px;
-        overflow: visible;
+        overflow-x: hidden;
+        overflow-y: visible;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .a4-sheet-wrapper {
+        margin: 0 auto;
+        max-width: 100%;
     }
 }
 
@@ -1322,6 +1333,7 @@ textarea[readonly] {
     .app-header {
         height: 56px;
         padding: 0 10px;
+        overflow: hidden;
     }
 
     .brand-logo img {
@@ -1340,6 +1352,8 @@ textarea[readonly] {
 
     .header-actions {
         gap: 5px;
+        flex-shrink: 0;
+        flex-wrap: nowrap;
     }
 
     /* Secondary buttons become compact square icon buttons to save space */
@@ -1515,6 +1529,33 @@ textarea[readonly] {
 
 /* Ultra Compact Phones (<= 380px) */
 @media (max-width: 380px) {
+    .app-header {
+        padding: 0 6px;
+    }
+
+    .brand {
+        gap: 6px;
+    }
+
+    .brand-text h1 {
+        font-size: 0.92rem;
+    }
+
+    .header-actions {
+        gap: 4px;
+    }
+
+    .header-actions .btn:not(.btn-success) {
+        width: 32px;
+        height: 32px;
+        padding: 4px;
+    }
+
+    .header-actions .btn-success {
+        padding: 5px 8px;
+        font-size: 0.75rem;
+    }
+
     .header-actions .btn-success span {
         font-size: 0.75rem;
         font-weight: 700;
@@ -1528,6 +1569,10 @@ textarea[readonly] {
 
     .preview-info {
         display: none;
+    }
+
+    .paper-viewport {
+        padding: 12px 4px 36px 4px;
     }
 }
 
