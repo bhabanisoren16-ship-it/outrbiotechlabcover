@@ -663,6 +663,29 @@ textarea[readonly] {
     box-sizing: border-box;
 }
 
+/* Optimized Asymmetric Layout for Branch & Semester to prevent text truncation */
+.grid-branch-semester {
+    grid-template-columns: minmax(0, 1.62fr) minmax(0, 1fr);
+    gap: 8px;
+}
+
+.branch-prefix-group .input-prefix {
+    padding: 8px 9px;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.branch-prefix-group input {
+    padding: 8px 9px !important;
+    font-size: 0.82rem !important;
+}
+
+.semester-col select {
+    padding-left: 9px !important;
+    padding-right: 28px !important;
+    font-size: 0.82rem !important;
+}
+
 /* ==========================================================================
    Website Credits Card (Sidebar Footer - Desktop & Mobile)
    ========================================================================== */
