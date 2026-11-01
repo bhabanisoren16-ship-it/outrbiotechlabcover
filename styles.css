@@ -323,8 +323,7 @@ body::before {
 
 /* Sidebar Controls */
 .sidebar {
-    width: 520px;
-    flex-shrink: 0;
+    width: 440px;
     background: rgba(10, 14, 35, 0.38);
     backdrop-filter: blur(24px) saturate(160%);
     -webkit-backdrop-filter: blur(24px) saturate(160%);
@@ -1217,20 +1216,11 @@ textarea[readonly]:focus {
     color: #fff;
 }
 
-/* Compact Desktop (1101px - 1280px) */
-@media (max-width: 1280px) and (min-width: 901px) {
+/* Tablet Landscape & Compact Desktop (<= 1100px) */
+@media (max-width: 1100px) {
     .sidebar {
-        width: 480px;
-        flex-shrink: 0;
-    }
-}
-
-/* Tablet Landscape & Small Desktop (<= 1100px) */
-@media (max-width: 1100px) and (min-width: 901px) {
-    .sidebar {
-        width: 420px;
-        min-width: 380px;
-        flex-shrink: 0;
+        width: 380px;
+        min-width: 350px;
     }
     .app-header {
         padding: 0 16px;
