@@ -216,7 +216,8 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             // Desktop (> 900px): Scale to fit BOTH width and height perfectly within viewport
             if (!vpWidth || vpWidth <= 0) {
-                vpWidth = Math.max(300, window.innerWidth - 440);
+                const sbWidth = sidebar ? sidebar.offsetWidth : 520;
+                vpWidth = Math.max(300, window.innerWidth - sbWidth);
             }
             if (!vpHeight || vpHeight <= 0) {
                 vpHeight = Math.max(300, window.innerHeight - 112);
