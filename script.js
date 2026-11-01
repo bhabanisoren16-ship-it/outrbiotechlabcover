@@ -198,58 +198,15 @@ document.addEventListener('DOMContentLoaded', () => {
     function autoFit() {
         if (!paperViewport || !coverSheet) return;
         const isMobile = window.innerWidth <= 900;
-        const sheetWidth = 794;
-        const sheetHeight = 1123;
-
         let vpWidth = paperViewport.clientWidth;
-        let vpHeight = paperViewport.clientHeight;
-
-        if (isMobile) {
-            // Mobile (<= 900px): Scale to fit viewport width so text remains clear & legible
-            if (!vpWidth || vpWidth <= 0) {
-                vpWidth = window.innerWidth;
-            }
-            const padding = window.innerWidth <= 480 ? 16 : 24;
-            const availableWidth = Math.max(200, vpWidth - padding);
-            const autoScale = Math.min(1.0, Math.max(0.2, availableWidth / sheetWidth));
-            setZoom(autoScale);
-        } else {
-            // Desktop (> 900px): Scale to fit BOTH width and height perfectly within viewport
-            if (!vpWidth || vpWidth <= 0) {
-                vpWidth = Math.max(300, window.innerWidth - 440);
-            }
-            if (!vpHeight || vpHeight <= 0) {
-                vpHeight = Math.max(300, window.innerHeight - 112);
-            }
-
-            // Read computed padding of paperViewport to calculate exact visible canvas
-            let padX = 40;
-            let padY = 48;
-            if (window.getComputedStyle) {
-                const comp = window.getComputedStyle(paperViewport);
-                const pl = parseFloat(comp.paddingLeft) || 20;
-                const pr = parseFloat(comp.paddingRight) || 20;
-                const pt = parseFloat(comp.paddingTop) || 24;
-                const pb = parseFloat(comp.paddingBottom) || 24;
-                padX = pl + pr;
-                padY = pt + pb;
-            }
-
-            // Safety cushion (16px) to comfortably accommodate paper shadow and avoid scrollbars
-            const availableWidth = Math.max(200, vpWidth - padX - 16);
-            const availableHeight = Math.max(200, vpHeight - padY - 16);
-
-            const scaleX = availableWidth / sheetWidth;
-            const scaleY = availableHeight / sheetHeight;
-
-            // Fit completely within both dimensions; do not upscale beyond 1.0 on load
-            const autoScale = Math.min(scaleX, scaleY, 1.0);
-            setZoom(Math.max(0.2, autoScale));
-
-            // Ensure viewport scroll is smoothly centered at top
-            paperViewport.scrollTop = 0;
-            paperViewport.scrollLeft = 0;
+        if (!vpWidth || vpWidth <= 0) {
+            vpWidth = window.innerWidth;
         }
+        const padding = isMobile ? (window.innerWidth <= 480 ? 16 : 24) : 80;
+        const availableWidth = Math.max(220, vpWidth - padding);
+        const sheetWidth = 794;
+        const autoScale = Math.min(1.0, Math.max(0.2, availableWidth / sheetWidth));
+        setZoom(autoScale);
     }
 
     zoomInBtn.addEventListener('click', () => setZoom(currentZoom + 0.1));
@@ -266,15 +223,8 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(autoFit, 200);
     });
 
-    // Auto fit initial view on load across layout phases
-    autoFit();
-    setTimeout(autoFit, 60);
-    setTimeout(autoFit, 200);
-    setTimeout(autoFit, 500);
-    window.addEventListener('load', autoFit);
-    if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(() => setTimeout(autoFit, 50));
-    }
+    // Auto fit initial view on load
+    setTimeout(autoFit, 150);
 
     // ==========================================================================
     // Mobile View Navigation (Smooth Scroll between Form & Preview)
