@@ -108,17 +108,9 @@ body {
     }
 }
 
-/* Subtle Cyber Studio Grid Pattern Overlay */
+/* Subtle Cyber Studio Grid Pattern Overlay (Disabled to remove background grid lines) */
 body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-    background-size: 40px 40px;
-    pointer-events: none;
-    z-index: 0;
+    display: none !important;
 }
 
 /* ==========================================================================
@@ -140,7 +132,7 @@ body::before {
     background: rgba(10, 14, 35, 0.40);
     backdrop-filter: blur(20px) saturate(160%);
     -webkit-backdrop-filter: blur(20px) saturate(160%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: none;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -325,9 +317,7 @@ body::before {
 .sidebar {
     width: 520px;
     flex-shrink: 0;
-    background: rgba(10, 14, 35, 0.38);
-    backdrop-filter: blur(24px) saturate(160%);
-    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    background: transparent;
     border-right: none;
     display: flex;
     flex-direction: column;
@@ -349,7 +339,7 @@ body::before {
     align-items: center;
     justify-content: space-between;
     padding-bottom: 12px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    border-bottom: none;
 }
 
 .sidebar-header h2 {
@@ -780,7 +770,7 @@ textarea[readonly]:focus {
     background: rgba(10, 14, 35, 0.35);
     backdrop-filter: blur(20px) saturate(160%);
     -webkit-backdrop-filter: blur(20px) saturate(160%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: none;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1151,7 +1141,7 @@ textarea[readonly]:focus {
     background: rgba(10, 14, 35, 0.45);
     backdrop-filter: blur(20px) saturate(160%);
     -webkit-backdrop-filter: blur(20px) saturate(160%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: none;
     padding: 8px 12px;
     gap: 8px;
     z-index: 90;
@@ -1289,13 +1279,11 @@ textarea[readonly]:focus {
         min-height: auto;
         height: auto;
         border-right: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+        border-bottom: none;
         padding: 16px 14px 20px 14px;
         overflow: visible;
         display: block !important;
-        background: rgba(10, 14, 35, 0.38);
-        backdrop-filter: blur(20px) saturate(160%);
-        -webkit-backdrop-filter: blur(20px) saturate(160%);
+        background: transparent;
     }
 
     .sidebar.mobile-hidden {
@@ -1326,7 +1314,7 @@ textarea[readonly]:focus {
         background: rgba(10, 14, 35, 0.40);
         backdrop-filter: blur(20px) saturate(160%);
         -webkit-backdrop-filter: blur(20px) saturate(160%);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        border-bottom: none;
     }
 
     /* Attribution card appears at top in mobile view only */
